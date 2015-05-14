@@ -1,0 +1,1931 @@
+ BlacksFork
+
+ Timestamp is 5411b72b (Thu Sep 11 08:52:27 2014)
+
+ Preferred load address is 00400000
+
+ Start         Length     Name                   Class
+ 0001:00000000 00117dd2H .text                   CODE
+ 0002:00000000 0000019cH .idata$5                DATA
+ 0002:000001a0 00022ba8H .rdata                  DATA
+ 0002:00022d48 0000003cH .idata$2                DATA
+ 0002:00022d84 00000014H .idata$3                DATA
+ 0002:00022d98 0000019cH .idata$4                DATA
+ 0002:00022f34 000007aeH .idata$6                DATA
+ 0002:000236e2 00000000H .edata                  DATA
+ 0003:00000000 00000004H .CRT$XCA                DATA
+ 0003:00000004 00000000H .CRT$XCU                DATA
+ 0003:00000004 00000004H .CRT$XCZ                DATA
+ 0003:00000008 00000004H .CRT$XIA                DATA
+ 0003:0000000c 00000008H .CRT$XIC                DATA
+ 0003:00000014 00000004H .CRT$XIZ                DATA
+ 0003:00000018 00000004H .CRT$XPA                DATA
+ 0003:0000001c 0000000cH .CRT$XPX                DATA
+ 0003:00000028 00000004H .CRT$XPZ                DATA
+ 0003:0000002c 00000004H .CRT$XTA                DATA
+ 0003:00000030 00000004H .CRT$XTZ                DATA
+ 0003:00000040 00486de0H .data                   DATA
+ 0003:00486e20 02dd1ea8H .bss                    DATA
+
+  Address         Publics by Value              Rva+Base     Lib:Object
+
+ 0001:00000000       _lndclc_                   00404000 f   BlacksFork.OBJ
+ 0001:00000686       _errorfunc_                00404686 f   BlacksFork.OBJ
+ 0001:00000700       _paramdim_                 00404700 f   BUDGET.obj
+ 0001:00000707       _commo_                    00404707 f   BUDGET.obj
+ 0001:0000070e       _subvars_                  0040470e f   BUDGET.obj
+ 0001:00000715       _printstuff_               00404715 f   BUDGET.obj
+ 0001:0000071c       _f90sqlvariables_          0040471c f   BUDGET.obj
+ 0001:00000723       _MAIN__                    00404723 f   BUDGET.obj
+ 0001:000527a3       _inq_                      004567a3 f   BUDGET.obj
+ 0001:0005282f       _iou_                      0045682f f   BUDGET.obj
+ 0001:000528bc       _cby_                      004568bc f   BUDGET.obj
+ 0001:00052949       _cgw_                      00456949 f   BUDGET.obj
+ 0001:000529d6       _upc_                      004569d6 f   BUDGET.obj
+ 0001:00052a63       _rck_                      00456a63 f   BUDGET.obj
+ 0001:00053641       _errprt_                   00457641 f   BUDGET.obj
+ 0001:00053d32       _getpat_                   00457d32 f   BUDGET.obj
+ 0001:00054030       _justem_                   00458030 f   BUDGET.obj
+ 0001:000544ad       _nonull_                   004584ad f   BUDGET.obj
+ 0001:00054724       _prntit_                   00458724 f   BUDGET.obj
+ 0001:00054aaa       _round_                    00458aaa f   BUDGET.obj
+ 0001:00054bc8       _alltrim_                  00458bc8 f   BUDGET.obj
+ 0001:0005510b       _justext_                  0045910b f   BUDGET.obj
+ 0001:000552bc       _strcomp_                  004592bc f   BUDGET.obj
+ 0001:00055872       _initializeaccessvars_     00459872 f   BUDGET.obj
+ 0001:00055a95       _swap_                     00459a95 f   BUDGET.obj
+ 0001:00055b34       _writecrop_                00459b34 f   BUDGET.obj
+ 0001:00055d55       _storemonvar_              00459d55 f   BUDGET.obj
+ 0001:0005762b       _storemonvarxi_            0045b62b f   BUDGET.obj
+ 0001:00058dc6       _storemon_                 0045cdc6 f   BUDGET.obj
+ 0001:00059d1f       _justright_                0045dd1f f   BUDGET.obj
+ 0001:0005a04e       _nocomma_                  0045e04e f   BUDGET.obj
+ 0001:0005a2b0       _fsql_data_                0045e2b0 f   AccessSubs.OBJ
+ 0001:0005a2b7       _accessread_               0045e2b7 f   AccessSubs.OBJ
+ 0001:0005bca7       _showdiags_                0045fca7 f   AccessSubs.OBJ
+ 0001:0005bef9       _accessupdate_             0045fef9 f   AccessSubs.OBJ
+ 0001:0005f35a       _accesswrite_              0046335a f   AccessSubs.OBJ
+ 0001:00061198       _accessexecute_            00465198 f   AccessSubs.OBJ
+ 0001:00061622       _accessexedsn_             00465622 f   AccessSubs.OBJ
+ 0001:00061b10       _arsub_                    00465b10 f   ARSUB.OBJ
+ 0001:00061b83       _ardel_                    00465b83 f   ARSUB.OBJ
+ 0001:00061bf8       _arlim_                    00465bf8 f   ARSUB.OBJ
+ 0001:000699de       _munsub_                   0046d9de f   ARSUB.OBJ
+ 0001:0006d4d3       _wetlnd_                   004714d3 f   ARSUB.OBJ
+ 0001:0006d962       _wetdmd_                   00471962 f   ARSUB.OBJ
+ 0001:0006da77       _reini_                    00471a77 f   ARSUB.OBJ
+ 0001:0006dad2       _readd_                    00471ad2 f   ARSUB.OBJ
+ 0001:0006e4bc       _avclc_                    004724bc f   ARSUB.OBJ
+ 0001:000705d5       _arbak_                    004745d5 f   ARSUB.OBJ
+ 0001:00070f92       _munbak_                   00474f92 f   ARSUB.OBJ
+ 0001:000717d4       _rsbak_                    004757d4 f   ARSUB.OBJ
+ 0001:0007340a       _rsout_                    0047740a f   ARSUB.OBJ
+ 0001:0007360f       _resrel_                   0047760f f   ARSUB.OBJ
+ 0001:000742b1       _ardem_                    004782b1 f   ARSUB.OBJ
+ 0001:00074784       _dmdmd_                    00478784 f   ARSUB.OBJ
+ 0001:00074898       _solve_                    00478898 f   ARSUB.OBJ
+ 0001:00074bb0       _flowdr_                   00478bb0 f   BUDSUB.OBJ
+ 0001:0007554f       _headin_                   0047954f f   BUDSUB.OBJ
+ 0001:0007572b       _seep_                     0047972b f   BUDSUB.OBJ
+ 0001:00076188       _plmlpt_                   0047a188 f   BUDSUB.OBJ
+ 0001:000764f1       _pltlpt_                   0047a4f1 f   BUDSUB.OBJ
+ 0001:000768c6       _pltmpt_                   0047a8c6 f   BUDSUB.OBJ
+ 0001:00076c6f       _pltpts_                   0047ac6f f   BUDSUB.OBJ
+ 0001:000770e9       _printr_                   0047b0e9 f   BUDSUB.OBJ
+ 0001:000ab7b6       _prntqi_                   004af7b6 f   BUDSUB.OBJ
+ 0001:000ac05c       _race_                     004b005c f   BUDSUB.OBJ
+ 0001:000acea0       _resr_                     004b0ea0 f   BUDSUB.OBJ
+ 0001:000ad62f       _resrr_                    004b162f f   BUDSUB.OBJ
+ 0001:000ad818       _resv_                     004b1818 f   BUDSUB.OBJ
+ 0001:000afb10       _rtflo_                    004b3b10 f   BUDSUB.OBJ
+ 0001:000b01f7       _sort_                     004b41f7 f   BUDSUB.OBJ
+ 0001:000b0612       _getqin_                   004b4612 f   BUDSUB.OBJ
+ 0001:000b28c4       _readfile_                 004b68c4 f   BUDSUB.OBJ
+ 0001:000b9452       _crpuse_                   004bd452 f   BUDSUB.OBJ
+ 0001:000b9884       _lndprt_                   004bd884 f   BUDSUB.OBJ
+ 0001:000ba808       _fzer_                     004be808 f   BUDSUB.OBJ
+ 0001:000ba8c5       _izer_                     004be8c5 f   BUDSUB.OBJ
+ 0001:000ba97a       _tprin_                    004be97a f   BUDSUB.OBJ
+ 0001:000baf00       _faver_                    004bef00 f   BUDSUB.OBJ
+ 0001:000bb0c8       _uline_                    004bf0c8 f   BUDSUB.OBJ
+ 0001:000bb2ec       _sprin_                    004bf2ec f   BUDSUB.OBJ
+ 0001:000bc4a6       _addin_                    004c04a6 f   BUDSUB.OBJ
+ 0001:000bc7f5       _frost_                    004c07f5 f   BUDSUB.OBJ
+ 0001:000bc945       _aver2_                    004c0945 f   BUDSUB.OBJ
+ 0001:000bcc47       _arrang_                   004c0c47 f   BUDSUB.OBJ
+ 0001:000bcf9b       _qricalc_                  004c0f9b f   BUDSUB.OBJ
+ 0001:000bd17a       _allt_                     004c117a f   BUDSUB.OBJ
+ 0001:000bd768       _leftadj_                  004c1768 f   BUDSUB.OBJ
+ 0001:000bdd7c       _brent_                    004c1d7c f   BUDSUB.OBJ
+ 0001:000bea4d       _simul_                    004c2a4d f   BUDSUB.OBJ
+ 0001:000c1ca8       _centerit_                 004c5ca8 f   BUDSUB.OBJ
+ 0001:000c206c       _f90sqldisconnect_         004c606c f   f90sql:f90SQLLF95.dll
+ 0001:000c2072       _f90sqlfreehandle_         004c6072 f   f90sql:f90SQLLF95.dll
+ 0001:000c2078       _f90sqlfetch_              004c6078 f   f90sql:f90SQLLF95.dll
+ 0001:000c207e       _f90sqlbindcolsmllint_     004c607e f   f90sql:f90SQLLF95.dll
+ 0001:000c2084       _f90sqlbindcolstr_         004c6084 f   f90sql:f90SQLLF95.dll
+ 0001:000c208a       _f90sqlbindcolint_         004c608a f   f90sql:f90SQLLF95.dll
+ 0001:000c2090       _f90sqlexecute_            004c6090 f   f90sql:f90SQLLF95.dll
+ 0001:000c2096       _f90sqlpreparestr_         004c6096 f   f90sql:f90SQLLF95.dll
+ 0001:000c209c       _f90sqldriverconnectstr_   004c609c f   f90sql:f90SQLLF95.dll
+ 0001:000c20a2       _f90sqlsetenvattrint_      004c60a2 f   f90sql:f90SQLLF95.dll
+ 0001:000c20a8       _f90sqlallochandle_        004c60a8 f   f90sql:f90SQLLF95.dll
+ 0001:000c20ae       _f90sqlbindcoltimestmp_    004c60ae f   f90sql:f90SQLLF95.dll
+ 0001:000c20b4       _f90sqlbindcoldouble_      004c60b4 f   f90sql:f90SQLLF95.dll
+ 0001:000c20ba       _f90sqlexecdirectstr_      004c60ba f   f90sql:f90SQLLF95.dll
+ 0001:000c20c0       _f90sqlgetdiagrecstr_      004c60c0 f   f90sql:f90SQLLF95.dll
+ 0001:000c20c6       _f90sqlbindparameterint_   004c60c6 f   f90sql:f90SQLLF95.dll
+ 0001:000c20cc       _f90sqlbindparametertimestmp_ 004c60cc f   f90sql:f90SQLLF95.dll
+ 0001:000c20d2       _f90sqlbindparameterstr_   004c60d2 f   f90sql:f90SQLLF95.dll
+ 0001:000c20d8       _f90sqlbindparameterdouble_ 004c60d8 f   f90sql:f90SQLLF95.dll
+ 0001:000c20de       _f90sqlsetconnectattint_   004c60de f   f90sql:f90SQLLF95.dll
+ 0001:000c20e4       _f90sqlconnectstr_         004c60e4 f   f90sql:f90SQLLF95.dll
+ 0001:000c20f0       _f_dnint                   004c60f0 f   fj90f:jwe_fdni.obj
+ 0001:000c2200       _l_charnb                  004c6200 f   fj90f:jwe_fcnb.obj
+ 0001:000c2260       _f_trim                    004c6260 f   fj90f:jwe_ftrm.obj
+ 0001:000c22b0       _f_index                   004c62b0 f   fj90f:jwe_fidx.obj
+ 0001:000c2320       _f_indexa                  004c6320 f   fj90f:jwe_fidx.obj
+ 0001:000c2400       _f_indexj                  004c6400 f   fj90f:jwe_fidx.obj
+ 0001:000c24a0       _f_indxaj                  004c64a0 f   fj90f:jwe_fidx.obj
+ 0001:000c25e0       _f_lntrm                   004c65e0 f   fj90f:jwe_fltm.obj
+ 0001:000c2600       _f_lntrmj                  004c6600 f   fj90f:jwe_fltm.obj
+ 0001:000c2640       _f_lgea                    004c6640 f   fj90f:jwe_flge.obj
+ 0001:000c2680       _f_lgea8                   004c6680 f   fj90f:jwe_flge.obj
+ 0001:000c26e0       _f_llea                    004c66e0 f   fj90f:jwe_flle.obj
+ 0001:000c2720       _f_llea8                   004c6720 f   fj90f:jwe_flle.obj
+ 0001:000c2780       _f_datim                   004c6780 f   fj90f:jwe_fdat.obj
+ 0001:000c2db0       _f_scmov                   004c6db0 f   fj90f:jwe_fcmv.obj
+ 0001:000c2e10       _f_cmove                   004c6e10 f   fj90f:jwe_fcmv.obj
+ 0001:000c2e70       _f_ccomp                   004c6e70 f   fj90f:jwe_fccm.obj
+ 0001:000c2f10       _jwe_fasc                  004c6f10 f   fj90f:jwe_fasc.obj
+ 0001:000c3420       _g_dlog10                  004c7420 f   fj90g:jwe_gdl1.obj
+ 0001:000c3540       _g_arxi                    004c7540 f   fj90g:jwe_grxi.obj
+ 0001:000c37c0       _g_adxi                    004c77c0 f   fj90g:jwe_gdxi.obj
+ 0001:000c3a10       _g_adxd                    004c7a10 f   fj90g:jwe_gdxd.obj
+ 0001:000c3ef0       _jwe_gpwd                  004c7ef0 f   fj90g:jwe_gdxd.obj
+ 0001:000c4150       _jwe_debg                  004c8150 f   fj90i:jwe_debg.obj
+ 0001:000c4c30       _jwe_xadt                  004c8c30 f   fj90i:jwe_xadt.obj
+ 0001:000c4e10       _jwe_xddt                  004c8e10 f   fj90i:jwe_xadt.obj
+ 0001:000c5050       _l_getcl                   004c9050 f   fj90i:jwe_sgcl.obj
+ 0001:000c50a0       _jwe_sgcl                  004c90a0 f   fj90i:jwe_sgcl.obj
+ 0001:000c5200       _jwe_iinf                  004c9200 f   fj90i:jwe_iinf.obj
+ 0001:000c5ca0       _jwe_ilst                  004c9ca0 f   fj90i:jwe_ilst.obj
+ 0001:000c6260       _jwe_isfm                  004ca260 f   fj90i:jwe_isfm.obj
+ 0001:000c6af0       _jwe_iocf                  004caaf0 f   fj90i:jwe_iocf.obj
+ 0001:000c92c0       _jwe_ifac                  004cd2c0 f   fj90i:jwe_iocf.obj
+ 0001:000c94d0       _jwe_xopt                  004cd4d0 f   fj90i:jwe_xopt.obj
+ 0001:000ca490       _jwe_xcop                  004ce490 f   fj90i:jwe_xopt.obj
+ 0001:000ca6f0       _jwe_xrcp                  004ce6f0 f   fj90i:jwe_xopt.obj
+ 0001:000ca700       _jwe_xstp                  004ce700 f   fj90i:jwe_xstp.obj
+ 0001:000ca850       _jwe_xalc                  004ce850 f   fj90i:jwe_xalc.obj
+ 0001:000cacb0       _jwe_x_alloc_trace         004cecb0 f   fj90i:jwe_xalc.obj
+ 0001:000cade0       _jwe_xdal                  004cede0 f   fj90i:jwe_xdal.obj
+ 0001:000cb190       _jwe_xpau                  004cf190 f   fj90i:jwe_xpau.obj
+ 0001:000cb490       _jwe_xilc                  004cf490 f   fj90i:jwe_xilc.obj
+ 0001:000cb4d0       _jwe_xint                  004cf4d0 f   fj90i:jwe_xint.obj
+ 0001:000cb550       _jwe_dsha                  004cf550 f   fj90i:jwe_dsha.obj
+ 0001:000cb780       _jwe_dren                  004cf780 f   fj90i:jwe_dren.obj
+ 0001:000cb8e0       _jwe_dpme                  004cf8e0 f   fj90i:jwe_dpme.obj
+ 0001:000cb9b0       _jwe_ddou                  004cf9b0 f   fj90i:jwe_ddou.obj
+ 0001:000cbb40       _jwe_ddoa                  004cfb40 f   fj90i:jwe_ddoa.obj
+ 0001:000cbd20       _jwe_dpck                  004cfd20 f   fj90i:jwe_dpck.obj
+ 0001:000cbdb0       _jwe_dudf                  004cfdb0 f   fj90i:jwe_dudf.obj
+ 0001:000cbef0       _jwe_dudd                  004cfef0 f   fj90i:jwe_dudf.obj
+ 0001:000cc650       _jwe_duda                  004d0650 f   fj90i:jwe_dudf.obj
+ 0001:000cc920       _jwe_dudc                  004d0920 f   fj90i:jwe_dudf.obj
+ 0001:000cd090       _jwe_dude                  004d1090 f   fj90i:jwe_dudf.obj
+ 0001:000cd2e0       _jwe_dudn                  004d12e0 f   fj90i:jwe_dudf.obj
+ 0001:000cd5c0       _jwe_dedc                  004d15c0 f   fj90i:jwe_dudf.obj
+ 0001:000cd630       _jwe_dvec                  004d1630 f   fj90i:jwe_dudf.obj
+ 0001:000cd9a0       _jwe_dsck                  004d19a0 f   fj90i:jwe_dsck.obj
+ 0001:000ce5d0       _jwe_dsce                  004d25d0 f   fj90i:jwe_dsck.obj
+ 0001:000cea80       _jwe_duis                  004d2a80 f   fj90i:jwe_duis.obj
+ 0001:000cebf0       _jwe_duid                  004d2bf0 f   fj90i:jwe_duis.obj
+ 0001:000cf000       _jwe_dack                  004d3000 f   fj90i:jwe_dack.obj
+ 0001:000cf880       _jwe_dacd                  004d3880 f   fj90i:jwe_dack.obj
+ 0001:000d0750       _jwe_xalc_fast             004d4750 f   fj90i:jwe_xdta.obj
+ 0001:000d0960       _jwe_xdal_fast             004d4960 f   fj90i:jwe_xdta.obj
+ 0001:000d0c00       _jwe_xget_align            004d4c00 f   fj90i:jwe_xdta.obj
+ 0001:000d0c70       _jwe_xfree_align           004d4c70 f   fj90i:jwe_xdta.obj
+ 0001:000d0c90       _jwe_xarg                  004d4c90 f   fj90i:jwe_xarg.obj
+ 0001:000d0dd0       _jwe_ifct                  004d4dd0 f   fj90i:jwe_ifct.obj
+ 0001:000d2ef0       _jwe_isob                  004d6ef0 f   fj90i:jwe_isob.obj
+ 0001:000d3020       _jwe_ifmt                  004d7020 f   fj90i:jwe_ifmt.obj
+ 0001:000d4590       _jwe_inao                  004d8590 f   fj90i:jwe_inao.obj
+ 0001:000d5bf0       _jwe_inai                  004d9bf0 f   fj90i:jwe_inai.obj
+ 0001:000d7060       _jwe_inkw                  004db060 f   fj90i:jwe_inai.obj
+ 0001:000d7810       _jwe_inch                  004db810 f   fj90i:jwe_inai.obj
+ 0001:000d7880       _jwe_inc2                  004db880 f   fj90i:jwe_inai.obj
+ 0001:000d78c0       _jwe_inhx                  004db8c0 f   fj90i:jwe_inai.obj
+ 0001:000d7a90       _jwe_inex                  004dba90 f   fj90i:jwe_inai.obj
+ 0001:000d7ae0       _jwe_inhc                  004dbae0 f   fj90i:jwe_inai.obj
+ 0001:000d8830       _jwe_ine1                  004dc830 f   fj90i:jwe_inai.obj
+ 0001:000d8a10       _jwe_ine2                  004dca10 f   fj90i:jwe_inai.obj
+ 0001:000d8c30       _jwe_ine3                  004dcc30 f   fj90i:jwe_inai.obj
+ 0001:000d8d60       _jwe_in_g                  004dcd60 f   fj90i:jwe_inai.obj
+ 0001:000d8f50       _jwe_insf                  004dcf50 f   fj90i:jwe_inai.obj
+ 0001:000d8fd0       _jwe_inah                  004dcfd0 f   fj90i:jwe_inai.obj
+ 0001:000d9030       _jwe_ilni                  004dd030 f   fj90i:jwe_ilni.obj
+ 0001:000da420       _jwe_igad                  004de420 f   fj90i:jwe_igad.obj
+ 0001:000da440       _jwe_ipid                  004de440 f   fj90i:jwe_ipid.obj
+ 0001:000da4d0       _jwe_iipg                  004de4d0 f   fj90i:jwe_iipg.obj
+ 0001:000da820       _jwe_iedo                  004de820 f   fj90i:jwe_iedo.obj
+ 0001:000dd8b0       _jwe_iedi                  004e18b0 f   fj90i:jwe_iedi.obj
+ 0001:000e0ee0       _jwe_icui                  004e4ee0 f   fj90i:jwe_icui.obj
+ 0001:000e1350       _jwe_iist                  004e5350 f   fj90i:jwe_icui.obj
+ 0001:000e13a0       _jwe_ildo                  004e53a0 f   fj90i:jwe_ildo.obj
+ 0001:000e2be0       _jwe_illd                  004e6be0 f   fj90i:jwe_ildo.obj
+ 0001:000e2d10       _jwe_ildi                  004e6d10 f   fj90i:jwe_ildi.obj
+ 0001:000e39b0       _jwe_iscf                  004e79b0 f   fj90i:jwe_iscf.obj
+ 0001:000e4570       _jwe_iadc                  004e8570 f   fj90i:jwe_iadc.obj
+ 0001:000e47d0       _jwe_idfm                  004e87d0 f   fj90i:jwe_idfm.obj
+ 0001:000e4c00       _jwe_isui                  004e8c00 f   fj90i:jwe_isui.obj
+ 0001:000e4d30       _jwe_isu1                  004e8d30 f   fj90i:jwe_isui.obj
+ 0001:000e4de0       _jwe_icep                  004e8de0 f   fj90i:jwe_icep.obj
+ 0001:000e4ea0       _jwe_ifcf                  004e8ea0 f   fj90i:jwe_ifcf.obj
+ 0001:000e5020       _jwe_ifcc                  004e9020 f   fj90i:jwe_ifcc.obj
+ 0001:000e50e0       _jwe_iflc                  004e90e0 f   fj90i:jwe_iflc.obj
+ 0001:000e5340       _jwe_iflo                  004e9340 f   fj90i:jwe_iflo.obj
+ 0001:000e53d0       _jwe_ienv                  004e93d0 f   fj90i:jwe_ienv.obj
+ 0001:000e5550       _jwe_isss                  004e9550 f   fj90i:jwe_isss.obj
+ 0001:000e5560       _jwe_ifnc                  004e9560 f   fj90i:jwe_ifnc.obj
+ 0001:000e5810       _jwe_ifck                  004e9810 f   fj90i:jwe_ifck.obj
+ 0001:000e58e0       _jwe_igfn                  004e98e0 f   fj90i:jwe_igfn.obj
+ 0001:000e5990       _jwe_iftx                  004e9990 f   fj90i:jwe_iftx.obj
+ 0001:000e5af0       _jwe_xsns                  004e9af0 f   fj90i:jwe_xsns.obj
+ 0001:000e5b78       _jwe_xscr                  004e9b78 f   fj90i:jwe_xsns.obj
+ 0001:000e5c0c       _jwe_xgsr                  004e9c0c f   fj90i:jwe_xsns.obj
+ 0001:000e5cb0       _jwe_xexi                  004e9cb0 f   fj90i:jwe_xexi.obj
+ 0001:000e5d10       _jwe_epmp                  004e9d10 f   fj90i:jwe_eprt.obj
+ 0001:000e5dd0       _jwe_eprt                  004e9dd0 f   fj90i:jwe_eprt.obj
+ 0001:000e6270       _jwe_etpt                  004ea270 f   fj90i:jwe_etpt.obj
+ 0001:000e62a0       _jwe_iluc                  004ea2a0 f   fj90i:jwe_iluc.obj
+ 0001:000e63b0       _jwe_ioef                  004ea3b0 f   fj90i:jwe_ioef.obj
+ 0001:000e6430       _jwe_iosf                  004ea430 f   fj90i:jwe_iosf.obj
+ 0001:000e65f0       _jwe_eerm                  004ea5f0 f   fj90i:jwe_eerm.obj
+ 0001:000e6a40       _jwe_xbfh                  004eaa40 f   fj90i:jwe_xbfh.obj
+ 0001:000e6a60       _jwe_xbsg                  004eaa60 f   fj90i:jwe_xbsg.obj
+ 0001:000e6ab0       _jwe_xend                  004eaab0 f   fj90i:jwe_xend.obj
+ 0001:000e6bd0       _jwe_xtim                  004eabd0 f   fj90i:jwe_xtim.obj
+ 0001:000e6c90       _jwe_ifss                  004eac90 f   fj90i:jwe_ifss.obj
+ 0001:000e6d80       _jwe_icfc                  004ead80 f   fj90i:jwe_icfc.obj
+ 0001:000e6db0       _jwe_xexs                  004eadb0 f   fj90i:jwe_xexs.obj
+ 0001:000e6dd0       _jwe_xets                  004eadd0 f   fj90i:jwe_xexs.obj
+ 0001:000e6fe0       _jwe_xacp                  004eafe0 f   fj90i:jwe_xacp.obj
+ 0001:000e7020       _jwe_eset                  004eb020 f   fj90i:jwe_eset.obj
+ 0001:000e7030       _jwe_dgui                  004eb030 f   fj90i:jwe_dgui.obj
+ 0001:000e7040       _jwe_irpp                  004eb040 f   fj90i:jwe_irpp.obj
+ 0001:000e76b0       _jwe_isdp                  004eb6b0 f   fj90i:jwe_isdp.obj
+ 0001:000e7890       _jwe_isd1                  004eb890 f   fj90i:jwe_isdp.obj
+ 0001:000e7970       _jwe_isd2                  004eb970 f   fj90i:jwe_isdp.obj
+ 0001:000e7ad0       _jwe_isls                  004ebad0 f   fj90i:jwe_isdp.obj
+ 0001:000e7b20       _jwe_ielo                  004ebb20 f   fj90i:jwe_ielo.obj
+ 0001:000e80c0       _jwe_inad                  004ec0c0 f   fj90i:jwe_inad.obj
+ 0001:000ea390       _jwe_inas                  004ee390 f   fj90i:jwe_inas.obj
+ 0001:000eb970       _jwe_indi                  004ef970 f   fj90i:jwe_inas.obj
+ 0001:000ec6b0       _jwe_icft                  004f06b0 f   fj90i:jwe_icft.obj
+ 0001:000eff20       _jwe_iric                  004f3f20 f   fj90i:jwe_irio.obj
+ 0001:000f0e80       _jwe_iroc                  004f4e80 f   fj90i:jwe_irio.obj
+ 0001:000f2e40       _jwe_icbd                  004f6e40 f   fj90i:jwe_icbd.obj
+ 0001:000f2f40       _jwe_icbdu                 004f6f40 f   fj90i:jwe_icbd.obj
+ 0001:000f2fc0       _jwe_icbdr                 004f6fc0 f   fj90i:jwe_icbd.obj
+ 0001:000f3090       _jwe_ibtd                  004f7090 f   fj90i:jwe_ibtd.obj
+ 0001:000f34f0       _jwe_ibtr                  004f74f0 f   fj90i:jwe_ibtr.obj
+ 0001:000f36e0       _jwe_ibtru                 004f76e0 f   fj90i:jwe_ibtr.obj
+ 0001:000f3800       _jwe_ibtrr                 004f7800 f   fj90i:jwe_ibtr.obj
+ 0001:000f39f0       _jwe_irms                  004f79f0 f   fj90i:jwe_irms.obj
+ 0001:000f3b40       _jwe_inis                  004f7b40 f   fj90i:jwe_inis.obj
+ 0001:000f3c40       _jwe_iims                  004f7c40 f   fj90i:jwe_iims.obj
+ 0001:000f3cf0       _jwe_icdb                  004f7cf0 f   fj90i:jwe_icdb.obj
+ 0001:000f3e80       _jwe_icdbu                 004f7e80 f   fj90i:jwe_icdb.obj
+ 0001:000f3f50       _jwe_idtb                  004f7f50 f   fj90i:jwe_idtb.obj
+ 0001:000f4180       _jwe_idtbu                 004f8180 f   fj90i:jwe_idtb.obj
+ 0001:000f4340       _jwe_idtr                  004f8340 f   fj90i:jwe_idtr.obj
+ 0001:000f44b0       _jwe_idtru                 004f84b0 f   fj90i:jwe_idtr.obj
+ 0001:000f45b0       _jwe_iczb                  004f85b0 f   fj90i:jwe_iczb.obj
+ 0001:000f47f0       _jwe_icbb                  004f87f0 f   fj90i:jwe_icbb.obj
+ 0001:000f4920       _jwe_icob                  004f8920 f   fj90i:jwe_icob.obj
+ 0001:000f4c00       _jwe_igrr                  004f8c00 f   fj90i:jwe_igrr.obj
+ 0001:000f51a0       _jwe_iedp                  004f91a0 f   fj90i:jwe_iedp.obj
+ 0001:000f53b0       _jwe_ifal                  004f93b0 f   fj90i:jwe_ifal.obj
+ 0001:000f5570       _jwe_ifch                  004f9570 f   fj90i:jwe_ifch.obj
+ 0001:000f56d0       _jwe_ioec                  004f96d0 f   fj90i:jwe_ioec.obj
+ 0001:000f5ad0       _jwe_idcf                  004f9ad0 f   fj90i:jwe_idcf.obj
+ 0001:000f5f50       _jwe_icps                  004f9f50 f   fj90i:jwe_icps.obj
+ 0001:000f66c0       _jwe_icpt                  004fa6c0 f   fj90i:jwe_icpt.obj
+ 0001:000f6e80       _jwe_ifps                  004fae80 f   fj90i:jwe_ifps.obj
+ 0001:000f73e0       _jwe_ifcr                  004fb3e0 f   fj90i:jwe_ifcr.obj
+ 0001:000f7480       _jwe_iefn                  004fb480 f   fj90i:jwe_iefn.obj
+ 0001:000f75f0       _jwe_ifcs                  004fb5f0 f   fj90i:jwe_ifcs.obj
+ 0001:000f76e0       _jwe_ifcl                  004fb6e0 f   fj90i:jwe_ifcl.obj
+ 0001:000f8480       _jwe_ifan                  004fc480 f   fj90i:jwe_ifan.obj
+ 0001:000f8640       _jwe_xget_cpuid            004fc640 f   fj90i:jwe_xcpu.obj
+ 0001:000f8740       _jwe_ecnv                  004fc740 f   fj90i:jwe_ecnv.obj
+ 0001:000f8870       _jwe_xtyp                  004fc870 f   fj90i:jwe_xtyp.obj
+ 0001:000f8b10       _jwe_errr                  004fcb10 f   fj90i:jwe_errr.obj
+ 0001:000f9350       _jwe_einf                  004fd350 f   fj90i:jwe_einf.obj
+ 0001:000f96a0       _jwe_eitm                  004fd6a0 f   fj90i:jwe_eitm.obj
+ 0001:000f96d0       _jwe_xpac                  004fd6d0 f   fj90i:jwe_xpac.obj
+ 0001:000f98d0       _jwe_iged                  004fd8d0 f   fj90i:jwe_iend.obj
+ 0001:000f9b10       _jwe_ieed                  004fdb10 f   fj90i:jwe_iend.obj
+ 0001:000f9bb0       _jwe_xfpe                  004fdbb0 f   fj90i:jwe_xfpe.obj
+ 0001:000f9c90       _jwe_xsko                  004fdc90 f   fj90i:jwe_xsko.obj
+ 0001:000f9cc0       _jwe_xacv                  004fdcc0 f   fj90i:jwe_xacv.obj
+ 0001:000f9cf0       _jwe_xacd                  004fdcf0 f   fj90i:jwe_xacd.obj
+ 0001:000f9d00       _jwe_xesm                  004fdd00 f   fj90i:jwe_xesm.obj
+ 0001:000f9da0       _jwe_etbm                  004fdda0 f   fj90i:jwe_etbm.obj
+ 0001:000fb080       _jwe_xill                  004ff080 f   fj90i:jwe_xill.obj
+ 0001:000fb0b0       _jwe_xrdy                  004ff0b0 f   fj90i:jwe_xrdy.obj
+ 0001:000fb0c0       _jwe_iicn                  004ff0c0 f   fj90i:jwe_iicn.obj
+ 0001:000fb400       _jwe_irpd                  004ff400 f   fj90i:jwe_irpd.obj
+ 0001:000fb980       _jwe_irp1                  004ff980 f   fj90i:jwe_irpd.obj
+ 0001:000fba40       _jwe_irp2                  004ffa40 f   fj90i:jwe_irpd.obj
+ 0001:000fbc10       _jwe_ijdj                  004ffc10 f   fj90i:jwe_ijdj.obj
+ 0001:000fbe70       _jwe_imdj                  004ffe70 f   fj90i:jwe_imdj.obj
+ 0001:000fbec0       _jwe_imdju                 004ffec0 f   fj90i:jwe_imdj.obj
+ 0001:000fbf20       _jwe_ifvsv                 004fff20 f   fj90i:jwe_imdj.obj
+ 0001:000fbf80       _jwe_ifvdu                 004fff80 f   fj90i:jwe_imdj.obj
+ 0001:000fc0c0       _jwe_ifvdv                 005000c0 f   fj90i:jwe_imdj.obj
+ 0001:000fc240       _jwe_ijad                  00500240 f   fj90i:jwe_ijad.obj
+ 0001:000fc2c0       _jwe_ijmj                  005002c0 f   fj90i:jwe_ijmj.obj
+ 0001:000fc410       _jwe_ifop                  00500410 f   fj90i:jwe_ifop.obj
+ 0001:000fd2c0       _jwe_emsg                  005012c0 f   fj90i:jwe_emsg.obj
+ 0001:000fe220       _jwe_egtb                  00502220 f   fj90i:jwe_ertb.obj
+ 0001:000fe230       _jwe_ebtl                  00502230 f   fj90i:jwe_ertb.obj
+ 0001:000fe240       _jwe_etbl                  00502240 f   fj90i:jwe_etbl.obj
+ 0001:000fe270       _jwe_etbe                  00502270 f   fj90i:jwe_etbe.obj
+ 0001:000fe370       _jwe_etbn                  00502370 f   fj90i:jwe_etbn.obj
+ 0001:000fe490       _jwe_etbg                  00502490 f   fj90i:jwe_etbg.obj
+ 0001:000fe5f0       _jwe_etbs_dll              005025f0 f   fj90i:jwe_etbs.obj
+ 0001:000fe970       _jwe_etbs                  00502970 f   fj90i:jwe_etbs.obj
+ 0001:000fed20       _jwe_ijsb                  00502d20 f   fj90i:jwe_ijsb.obj
+ 0001:000fed90       _jwe_idpa                  00502d90 f   fj90i:jwe_idpa.obj
+ 0001:000ffb40       _jwe_idpb                  00503b40 f   fj90i:jwe_idpa.obj
+ 0001:000ffd30       _jwe_idpe                  00503d30 f   fj90i:jwe_idpa.obj
+ 0001:000ffe50       _jwe_idga                  00503e50 f   fj90i:jwe_idga.obj
+ 0001:00100510       _jwe_idpt                  00504510 f   fj90i:jwe_idpt.obj
+ 0001:00101130       _jwe_idft                  00505130 f   fj90i:jwe_idpt.obj
+ 0001:00101310       _jwe_idgt                  00505310 f   fj90i:jwe_idgt.obj
+ 0001:001019d0       _jwe_iupd                  005059d0 f   fj90i:jwe_iupd.obj
+ 0001:00102080       _jwe_iupd_error            00506080 f   fj90i:jwe_iupd.obj
+ 0001:00102120       _jwe_iugd                  00506120 f   fj90i:jwe_iugd.obj
+ 0001:00102580       _jwe_ibpd                  00506580 f   fj90i:jwe_ibpd.obj
+ 0001:00102890       _jwe_ibgd                  00506890 f   fj90i:jwe_ibgd.obj
+ 0001:00102a30       _jwe_ifpf                  00506a30 f   fj90i:jwe_ifpf.obj
+ 0001:00103660       _jwe_icpf                  00507660 f   fj90i:jwe_icpf.obj
+ 0001:001045b0       _jwe_ifgf                  005085b0 f   fj90i:jwe_ifgf.obj
+ 0001:00104d30       _jwe_ipfd                  00508d30 f   fj90i:jwe_ipfd.obj
+ 0001:00105a50       _jwe_itfn                  00509a50 f   fj90i:jwe_itfn.obj
+ 0001:00105d90       _jwe_iifd                  00509d90 f   fj90i:jwe_iifd.obj
+ 0001:001060a0       _jwe_igfd                  0050a0a0 f   fj90i:jwe_igfd.obj
+ 0001:00106420       _jwe_itfd                  0050a420 f   fj90i:jwe_itfd.obj
+ 0001:001068f0       _jwe_isfd                  0050a8f0 f   fj90i:jwe_isfd.obj
+ 0001:00106a70       _jwe_irfd                  0050aa70 f   fj90i:jwe_irfd.obj
+ 0001:00106b60       _jwe_ibfd                  0050ab60 f   fj90i:jwe_ibfd.obj
+ 0001:00107870       _jwe_ifgs                  0050b870 f   fj90i:jwe_ifgs.obj
+ 0001:00107a40       _jwe_ifga                  0050ba40 f   fj90i:jwe_ifga.obj
+ 0001:00107af0       _jwe_ipsd                  0050baf0 f   fj90i:jwe_ipsd.obj
+ 0001:00108200       _jwe_ipad                  0050c200 f   fj90i:jwe_ipad.obj
+ 0001:00108230       _jwe_itsn                  0050c230 f   fj90i:jwe_itsn.obj
+ 0001:00108320       _jwe_ifpa                  0050c320 f   fj90i:jwe_ifpa.obj
+ 0001:00108400       _jwe_igsd                  0050c400 f   fj90i:jwe_igsd.obj
+ 0001:001085a0       _jwe_itsd                  0050c5a0 f   fj90i:jwe_itsd.obj
+ 0001:001086b0       _jwe_issd                  0050c6b0 f   fj90i:jwe_issd.obj
+ 0001:00108710       _jwe_irsd                  0050c710 f   fj90i:jwe_irsd.obj
+ 0001:00108760       _jwe_ibsd                  0050c760 f   fj90i:jwe_ibsd.obj
+ 0001:00108980       _jwe_etxt                  0050c980 f   fj90i:jwe_etxt.obj
+ 0001:001089e0       _jwe_etbf                  0050c9e0 f   fj90i:jwe_etbf.obj
+ 0001:00108de0       _jwe_itpt                  0050cde0 f   fj90i:jwe_itpt.obj
+ 0001:00108e70       _jwe_emso                  0050ce70 f   fj90i:jwe_emso.obj
+ 0001:00108e80       _jwe_emss                  0050ce80 f   fj90i:jwe_emss.obj
+ 0001:00108e90       _jwe_emsf                  0050ce90 f   fj90i:jwe_emsf.obj
+ 0001:00108ea0       _jwe_emsi                  0050cea0 f   fj90i:jwe_emsi.obj
+ 0001:00108eb0       _jwe_emsx                  0050ceb0 f   fj90i:jwe_emsx.obj
+ 0001:00108ec0       _jwe_ems5                  0050cec0 f   fj90i:jwe_ems5.obj
+ 0001:00108ed0       _jwe_ems4                  0050ced0 f   fj90i:jwe_ems4.obj
+ 0001:00108ee0       _jwe_ems3                  0050cee0 f   fj90i:jwe_ems3.obj
+ 0001:00108ef0       _jwe_ems2                  0050cef0 f   fj90i:jwe_ems2.obj
+ 0001:00108f00       _jwe_ems1                  0050cf00 f   fj90i:jwe_ems1.obj
+ 0001:00108f10       __chkstk                   0050cf10 f   libc:chkstk.obj
+ 0001:00108f10       __alloca_probe             0050cf10 f   libc:chkstk.obj
+ 0001:00108f40       __ftol                     0050cf40 f   libc:ftol.obj
+ 0001:00108f67       _mainCRTStartup            0050cf67 f   libc:crt0.obj
+ 0001:00109046       __amsg_exit                0050d046 f   libc:crt0.obj
+ 0001:0010908f       __fpmath                   0050d08f f   libc:fpinit.obj
+ 0001:001090a6       __fpclear                  0050d0a6 f   libc:fpinit.obj
+ 0001:001090a7       __cfltcvt_init             0050d0a7 f   libc:fpinit.obj
+ 0001:001090df       ___setfflag                0050d0df f   libc:fpinit.obj
+ 0001:001090ef       _strtol                    0050d0ef f   libc:strtol.obj
+ 0001:0010930e       _strtoul                   0050d30e f   libc:strtol.obj
+ 0001:00109325       _getenv                    0050d325 f   libc:getenv.obj
+ 0001:001093a2       __statusfp                 0050d3a2 f   libc:ieee87.obj
+ 0001:001093b5       __clearfp                  0050d3b5 f   libc:ieee87.obj
+ 0001:001093c9       __control87                0050d3c9 f   libc:ieee87.obj
+ 0001:001093fe       __controlfp                0050d3fe f   libc:ieee87.obj
+ 0001:00109414       __fpreset                  0050d414 f   libc:ieee87.obj
+ 0001:0010958e       ___initstdio               0050d58e f   libc:_file.obj
+ 0001:00109633       ___endstdio                0050d633 f   libc:_file.obj
+ 0001:00109647       __stati64                  0050d647 f   libc:stati64.obj
+ 0001:00109986       _fflush                    0050d986 f   libc:fflush.obj
+ 0001:001099c1       __flush                    0050d9c1 f   libc:fflush.obj
+ 0001:00109a1d       __flushall                 0050da1d f   libc:fflush.obj
+ 0001:00109a93       _printf                    0050da93 f   libc:printf.obj
+ 0001:00109ac4       __isctype                  0050dac4 f   libc:isctype.obj
+ 0001:00109b40       _strncpy                   0050db40 f   libc:strncpy.obj
+ 0001:00109c3e       _free                      0050dc3e f   libc:free.obj
+ 0001:00109ca7       _malloc                    0050dca7 f   libc:malloc.obj
+ 0001:00109cb9       __nh_malloc                0050dcb9 f   libc:malloc.obj
+ 0001:00109ce5       __heap_alloc               0050dce5 f   libc:malloc.obj
+ 0001:00109d59       _realloc                   0050dd59 f   libc:realloc.obj
+ 0001:0010a000       _memmove                   0050e000 f   libc:memmove.obj
+ 0001:0010a340       __CIpow                    0050e340 f   libc:pow.obj
+ 0001:0010a359       _pow                       0050e359 f   libc:pow.obj
+ 0001:0010a55d       __tolower                  0050e55d f   libc:tolower.obj
+ 0001:0010a565       _tolower                   0050e565 f   libc:tolower.obj
+ 0001:0010a630       _fputc                     0050e630 f   libc:fputc.obj
+ 0001:0010a654       _putc                      0050e654 f   libc:fputc.obj
+ 0001:0010a664       _sprintf                   0050e664 f   libc:sprintf.obj
+ 0001:0010a6b6       _fgets                     0050e6b6 f   libc:fgets.obj
+ 0001:0010a70d       _fclose                    0050e70d f   libc:fclose.obj
+ 0001:0010a763       _fputs                     0050e763 f   libc:fputs.obj
+ 0001:0010a7a6       __fsopen                   0050e7a6 f   libc:fopen.obj
+ 0001:0010a7c6       _fopen                     0050e7c6 f   libc:fopen.obj
+ 0001:0010a7d9       _abort                     0050e7d9 f   libc:abort.obj
+ 0001:0010a7f0       __cinit                    0050e7f0 f   libc:crt0dat.obj
+ 0001:0010a81d       _exit                      0050e81d f   libc:crt0dat.obj
+ 0001:0010a82e       __exit                     0050e82e f   libc:crt0dat.obj
+ 0001:0010a83f       __cexit                    0050e83f f   libc:crt0dat.obj
+ 0001:0010a84e       __c_exit                   0050e84e f   libc:crt0dat.obj
+ 0001:0010a910       _isalpha                   0050e910 f   libc:_ctype.obj
+ 0001:0010a93e       _isupper                   0050e93e f   libc:_ctype.obj
+ 0001:0010a966       _islower                   0050e966 f   libc:_ctype.obj
+ 0001:0010a98e       _isdigit                   0050e98e f   libc:_ctype.obj
+ 0001:0010a9b6       _isxdigit                  0050e9b6 f   libc:_ctype.obj
+ 0001:0010a9e3       _isspace                   0050e9e3 f   libc:_ctype.obj
+ 0001:0010aa0b       _ispunct                   0050ea0b f   libc:_ctype.obj
+ 0001:0010aa33       _isalnum                   0050ea33 f   libc:_ctype.obj
+ 0001:0010aa61       _isprint                   0050ea61 f   libc:_ctype.obj
+ 0001:0010aa8f       _isgraph                   0050ea8f f   libc:_ctype.obj
+ 0001:0010aabd       _iscntrl                   0050eabd f   libc:_ctype.obj
+ 0001:0010aae5       ___isascii                 0050eae5 f   libc:_ctype.obj
+ 0001:0010aaf2       ___toascii                 0050eaf2 f   libc:_ctype.obj
+ 0001:0010aafa       ___iscsymf                 0050eafa f   libc:_ctype.obj
+ 0001:0010ab37       ___iscsym                  0050eb37 f   libc:_ctype.obj
+ 0001:0010ab74       __lseeki64                 0050eb74 f   libc:lseeki64.obj
+ 0001:0010ac25       _fseek                     0050ec25 f   libc:fseek.obj
+ 0001:0010acb1       _fread                     0050ecb1 f   libc:fread.obj
+ 0001:0010ad99       _ftell                     0050ed99 f   libc:ftell.obj
+ 0001:0010aef1       _strerror                  0050eef1 f   libc:strerror.obj
+ 0001:0010af1d       _fwrite                    0050ef1d f   libc:fwrite.obj
+ 0001:0010b027       __fstati64                 0050f027 f   libc:fstati64.obj
+ 0001:0010b2c0       _memcmp                    0050f2c0 f   libc:memcmp.obj
+ 0001:0010b36c       __toupper                  0050f36c f   libc:toupper.obj
+ 0001:0010b374       _toupper                   0050f374 f   libc:toupper.obj
+ 0001:0010b440       _strncat                   0050f440 f   libc:strncat.obj
+ 0001:0010b570       _strncmp                   0050f570 f   libc:strncmp.obj
+ 0001:0010b5a8       _atol                      0050f5a8 f   libc:atox.obj
+ 0001:0010b633       _atoi                      0050f633 f   libc:atox.obj
+ 0001:0010b63e       __atoi64                   0050f63e f   libc:atox.obj
+ 0001:0010b6f8       _setvbuf                   0050f6f8 f   libc:setvbuf.obj
+ 0001:0010b7a0       __allrem                   0050f7a0 f   libc:llrem.obj
+ 0001:0010b860       __alldiv                   0050f860 f   libc:lldiv.obj
+ 0001:0010b910       __allmul                   0050f910 f   libc:llmul.obj
+ 0001:0010b944       __flsbuf                   0050f944 f   libc:_flsbuf.obj
+ 0001:0010ba59       _clearerr                  0050fa59 f   libc:clearerr.obj
+ 0001:0010ba87       _rewind                    0050fa87 f   libc:rewind.obj
+ 0001:0010badb       __XcptFilter               0050fadb f   libc:winxfltr.obj
+ 0001:0010bc5f       __setenvp                  0050fc5f f   libc:stdenvp.obj
+ 0001:0010bd18       __setargv                  0050fd18 f   libc:stdargv.obj
+ 0001:0010bf65       ___crtGetEnvironmentStringsA 0050ff65 f   libc:a_env.obj
+ 0001:0010c097       __ioinit                   00510097 f   libc:ioinit.obj
+ 0001:0010c242       __ioterm                   00510242 f   libc:ioinit.obj
+ 0001:0010c265       __GetLinkerVersion         00510265 f   libc:heapinit.obj
+ 0001:0010c292       ___heap_select             00510292 f   libc:heapinit.obj
+ 0001:0010c3da       __heap_init                005103da f   libc:heapinit.obj
+ 0001:0010c437       __heap_term                00510437 f   libc:heapinit.obj
+ 0001:0010c4e0       __global_unwind2           005104e0 f   libc:exsup.obj
+ 0001:0010c522       __local_unwind2            00510522 f   libc:exsup.obj
+ 0001:0010c57a       __NLG_Return2              0051057a f   libc:exsup.obj
+ 0001:0010c58a       __abnormal_termination     0051058a f   libc:exsup.obj
+ 0001:0010c5ad       __NLG_Notify1              005105ad f   libc:exsup.obj
+ 0001:0010c5b6       __NLG_Notify               005105b6 f   libc:exsup.obj
+ 0001:0010c5c9       __NLG_Dispatch             005105c9 f   libc:exsup.obj
+ 0001:0010c5d8       __except_handler3          005105d8 f   libc:exsup3.obj
+ 0001:0010c695       __seh_longjmp_unwind@4     00510695 f   libc:exsup3.obj
+ 0001:0010c6b0       __FF_MSGBANNER             005106b0 f   libc:crt0msg.obj
+ 0001:0010c6e9       __NMSG_WRITE               005106e9 f   libc:crt0msg.obj
+ 0001:0010c83c       __GET_RTERRMSG             0051083c f   libc:crt0msg.obj
+ 0001:0010c86d       __setdefaultprecision      0051086d f   libc:fp8.obj
+ 0001:0010c87f       __ms_p5_test_fdiv          0051087f f   libc:testfdiv.obj
+ 0001:0010c8bd       __ms_p5_mp_test_fdiv       005108bd f   libc:testfdiv.obj
+ 0001:0010c8e6       __forcdecpt                005108e6 f   libc:cvt.obj
+ 0001:0010c940       __cropzeros                00510940 f   libc:cvt.obj
+ 0001:0010c98e       __positive                 0051098e f   libc:cvt.obj
+ 0001:0010c9a6       __fassign                  005109a6 f   libc:cvt.obj
+ 0001:0010c9e4       __cftoe                    005109e4 f   libc:cvt.obj
+ 0001:0010cae8       __cftof                    00510ae8 f   libc:cvt.obj
+ 0001:0010cbc6       __cftog                    00510bc6 f   libc:cvt.obj
+ 0001:0010ccab       __cfltcvt                  00510cab f   libc:cvt.obj
+ 0001:0010cd21       __mbsnbicoll               00510d21 f   libc:mbsnbico.obj
+ 0001:0010cd60       _strlen                    00510d60 f   libc:strlen.obj
+ 0001:0010cddb       ___wtomb_environ           00510ddb f   libc:wtombenv.obj
+ 0001:0010ce49       _calloc                    00510e49 f   libc:calloc.obj
+ 0001:0010cefa       __fcloseall                00510efa f   libc:closeall.obj
+ 0001:0010cf52       __dosmaperr                00510f52 f   libc:dosmap.obj
+ 0001:0010cfb9       ___dtoxmode                00510fb9 f   libc:stat.obj
+ 0001:0010d071       __stat                     00511071 f   libc:stat.obj
+ 0001:0010d394       ___loctotime_t             00511394 f   libc:dtoxtime.obj
+ 0001:0010d456       __fullpath                 00511456 f   libc:fullpath.obj
+ 0001:0010d4f9       __getdrive                 005114f9 f   libc:drive.obj
+ 0001:0010d53c       __chdrive                  0051153c f   libc:drive.obj
+ 0001:0010d593       __mbctolower               00511593 f   libc:mbtolwr.obj
+ 0001:0010d60e       __mbspbrk                  0051160e f   libc:mbspbrk.obj
+ 0001:0010d693       __commit                   00511693 f   libc:commit.obj
+ 0001:0010d6ea       _write                     005116ea f   libc:write.obj
+ 0001:0010d6ea       __write                    005116ea f   libc:write.obj
+ 0001:0010d897       __stbuf                    00511897 f   libc:_sftbuf.obj
+ 0001:0010d924       __ftbuf                    00511924 f   libc:_sftbuf.obj
+ 0001:0010d961       __output                   00511961 f   libc:output.obj
+ 0001:0010e16b       ___crtGetStringTypeA       0051216b f   libc:a_str.obj
+ 0001:0010e2b4       __get_sbh_threshold        005122b4 f   libc:sbheap.obj
+ 0001:0010e2d3       __set_sbh_threshold        005122d3 f   libc:sbheap.obj
+ 0001:0010e386       ___sbh_heap_init           00512386 f   libc:sbheap.obj
+ 0001:0010e3ce       ___sbh_find_block          005123ce f   libc:sbheap.obj
+ 0001:0010e3f9       ___sbh_free_block          005123f9 f   libc:sbheap.obj
+ 0001:0010e722       ___sbh_alloc_block         00512722 f   libc:sbheap.obj
+ 0001:0010ea2b       ___sbh_alloc_new_region    00512a2b f   libc:sbheap.obj
+ 0001:0010eadc       ___sbh_alloc_new_group     00512adc f   libc:sbheap.obj
+ 0001:0010ebd7       ___sbh_resize_block        00512bd7 f   libc:sbheap.obj
+ 0001:0010eecd       ___sbh_heapmin             00512ecd f   libc:sbheap.obj
+ 0001:0010ef9e       ___sbh_heap_check          00512f9e f   libc:sbheap.obj
+ 0001:0010f2cd       __get_old_sbh_threshold    005132cd f   libc:sbheap.obj
+ 0001:0010f2d3       __set_old_sbh_threshold    005132d3 f   libc:sbheap.obj
+ 0001:0010f2ef       ___old_sbh_new_region      005132ef f   libc:sbheap.obj
+ 0001:0010f433       ___old_sbh_release_region  00513433 f   libc:sbheap.obj
+ 0001:0010f489       ___old_sbh_decommit_pages  00513489 f   libc:sbheap.obj
+ 0001:0010f54b       ___old_sbh_find_block      0051354b f   libc:sbheap.obj
+ 0001:0010f5a2       ___old_sbh_free_block      005135a2 f   libc:sbheap.obj
+ 0001:0010f5e7       ___old_sbh_alloc_block     005135e7 f   libc:sbheap.obj
+ 0001:0010f7ef       ___old_sbh_alloc_block_from_page 005137ef f   libc:sbheap.obj
+ 0001:0010f913       ___old_sbh_resize_block    00513913 f   libc:sbheap.obj
+ 0001:0010f9bc       ___old_sbh_heap_check      005139bc f   libc:sbheap.obj
+ 0001:0010fb1a       ?_set_new_handler@@YAP6AHI@ZP6AHI@Z@Z 00513b1a f   libc:handler.obj
+ 0001:0010fb2a       ?_query_new_handler@@YAP6AHI@ZXZ 00513b2a f   libc:handler.obj
+ 0001:0010fb30       __callnewh                 00513b30 f   libc:handler.obj
+ 0001:0010fb50       _memcpy                    00513b50 f   libc:memcpy.obj
+ 0001:0010fea1       __fFEXP                    00513ea1 f   libc:87tran.obj
+ 0001:0010ff08       __rtinfpopse               00513f08 f   libc:87tran.obj
+ 0001:0010ff0a       __rtinfnpopse              00513f0a f   libc:87tran.obj
+ 0001:0010ff1a       __fFLN                     00513f1a f   libc:87tran.obj
+ 0001:0010ffcf       __rtinfpop                 00513fcf f   libc:87tran.obj
+ 0001:0010ffd1       __rtinfnpop                00513fd1 f   libc:87tran.obj
+ 0001:0010ffee       __ffexpm1                  00513fee f   libc:87tran.obj
+ 0001:001100a0       __trandisp1                005140a0 f   libc:87disp.obj
+ 0001:00110107       __trandisp2                00514107 f   libc:87disp.obj
+ 0001:00110193       __rttospopde               00514193 f   libc:87disp.obj
+ 0001:00110198       __rttospop                 00514198 f   libc:87disp.obj
+ 0001:0011019a       __rtnospop                 0051419a f   libc:87disp.obj
+ 0001:0011019c       __rttosnpop                0051419c f   libc:87disp.obj
+ 0001:0011019d       __rtnospopde               0051419d f   libc:87disp.obj
+ 0001:001101a4       __rtzeropop                005141a4 f   libc:87disp.obj
+ 0001:001101a6       __rtzeronpop               005141a6 f   libc:87disp.obj
+ 0001:001101ab       __rtonepop                 005141ab f   libc:87disp.obj
+ 0001:001101ad       __rtonenpop                005141ad f   libc:87disp.obj
+ 0001:001101b2       __tosnan1                  005141b2 f   libc:87disp.obj
+ 0001:001101dd       __nosnan2                  005141dd f   libc:87disp.obj
+ 0001:001101df       __tosnan2                  005141df f   libc:87disp.obj
+ 0001:00110207       __nan2                     00514207 f   libc:87disp.obj
+ 0001:00110246       __rtindfpop                00514246 f   libc:87disp.obj
+ 0001:00110248       __rtindfnpop               00514248 f   libc:87disp.obj
+ 0001:00110259       __rttosnpopde              00514259 f   libc:87disp.obj
+ 0001:00110263       __rtchsifneg               00514263 f   libc:87disp.obj
+ 0001:00110270       __startTwoArgErrorHandling 00514270 f   libc:genexcep.obj
+ 0001:00110287       __startOneArgErrorHandling 00514287 f   libc:genexcep.obj
+ 0001:001102d0       __twoToTOS                 005142d0 f   libc:common.obj
+ 0001:001102e5       __load_CW                  005142e5 f   libc:common.obj
+ 0001:001102fc       __convertTOStoQNaN         005142fc f   libc:common.obj
+ 0001:00110315       __fload_withFB             00514315 f   libc:common.obj
+ 0001:00110358       __checkTOS_withFB          00514358 f   libc:common.obj
+ 0001:0011036e       __fast_exit                0051436e f   libc:common.obj
+ 0001:0011037b       __math_exit                0051437b f   libc:common.obj
+ 0001:001103a5       __check_overflow_exit      005143a5 f   libc:common.obj
+ 0001:001103b9       __check_range_exit         005143b9 f   libc:common.obj
+ 0001:0011045c       __powhlp                   0051445c f   libc:powhlp.obj
+ 0001:0011058c       __d_inttype                0051458c f   libc:powhlp.obj
+ 0001:001105f1       ___crtLCMapStringA         005145f1 f   libc:a_map.obj
+ 0001:00110840       __filbuf                   00514840 f   libc:_filbuf.obj
+ 0001:00110919       __close                    00514919 f   libc:close.obj
+ 0001:00110919       _close                     00514919 f   libc:close.obj
+ 0001:001109cc       __freebuf                  005149cc f   libc:_freebuf.obj
+ 0001:001109f7       __openfile                 005149f7 f   libc:_open.obj
+ 0001:00110b67       __getstream                00514b67 f   libc:stream.obj
+ 0001:00110bdf       _signal                    00514bdf f   libc:winsig.obj
+ 0001:00110d23       _raise                     00514d23 f   libc:winsig.obj
+ 0001:00110e95       __alloc_osfhnd             00514e95 f   libc:osfinfo.obj
+ 0001:00110f2a       __set_osfhnd               00514f2a f   libc:osfinfo.obj
+ 0001:00110fa1       __free_osfhnd              00514fa1 f   libc:osfinfo.obj
+ 0001:0011101b       __get_osfhandle            0051501b f   libc:osfinfo.obj
+ 0001:00111058       __open_osfhandle           00515058 f   libc:osfinfo.obj
+ 0001:001110f5       __lseek                    005150f5 f   libc:lseek.obj
+ 0001:001110f5       _lseek                     005150f5 f   libc:lseek.obj
+ 0001:0011118f       __read                     0051518f f   libc:read.obj
+ 0001:0011118f       _read                      0051518f f   libc:read.obj
+ 0001:00111390       _strcpy                    00515390 f   libc:strcat.obj
+ 0001:001113a0       _strcat                    005153a0 f   libc:strcat.obj
+ 0001:00111480       __getbuf                   00515480 f   libc:_getbuf.obj
+ 0001:001114c4       __isatty                   005154c4 f   libc:isatty.obj
+ 0001:001114c4       _isatty                    005154c4 f   libc:isatty.obj
+ 0001:001114ea       __setmbcp                  005154ea f   libc:mbctype.obj
+ 0001:001118ae       __getmbcp                  005158ae f   libc:mbctype.obj
+ 0001:001118be       ___initmbctable            005158be f   libc:mbctype.obj
+ 0001:001118f0       _strchr                    005158f0 f   libc:strchr.obj
+ 0001:001118f6       ___from_strstr_to_strchr   005158f6 f   libc:strchr.obj
+ 0001:001119b0       _strstr                    005159b0 f   libc:strstr.obj
+ 0001:00111a30       ___crtMessageBoxA          00515a30 f   libc:crtmbox.obj
+ 0001:00111ab9       __ZeroTail                 00515ab9 f   libc:intrncvt.obj
+ 0001:00111b02       __IncMan                   00515b02 f   libc:intrncvt.obj
+ 0001:00111b58       __RoundMan                 00515b58 f   libc:intrncvt.obj
+ 0001:00111be4       __CopyMan                  00515be4 f   libc:intrncvt.obj
+ 0001:00111bff       __FillZeroMan              00515bff f   libc:intrncvt.obj
+ 0001:00111c0b       __IsZeroMan                00515c0b f   libc:intrncvt.obj
+ 0001:00111c26       __ShrMan                   00515c26 f   libc:intrncvt.obj
+ 0001:00111cb3       __ld12cvt                  00515cb3 f   libc:intrncvt.obj
+ 0001:00111e1f       __ld12tod                  00515e1f f   libc:intrncvt.obj
+ 0001:00111e35       __ld12tof                  00515e35 f   libc:intrncvt.obj
+ 0001:00111e4b       __ld12told                 00515e4b f   libc:intrncvt.obj
+ 0001:00111ec5       __atodbl                   00515ec5 f   libc:intrncvt.obj
+ 0001:00111ef2       __atoldbl                  00515ef2 f   libc:intrncvt.obj
+ 0001:00111f20       __atoflt                   00515f20 f   libc:intrncvt.obj
+ 0001:00111f4d       __fptostr                  00515f4d f   libc:_fptostr.obj
+ 0001:00111fc4       __fltout                   00515fc4 f   libc:cfout.obj
+ 0001:00112028       ___dtold                   00516028 f   libc:cfout.obj
+ 0001:001120e0       _memset                    005160e0 f   libc:memset.obj
+ 0001:00112138       __fptrap                   00516138 f   libc:crt0fp.obj
+ 0001:00112141       ___crtCompareStringA       00516141 f   libc:a_cmp.obj
+ 0001:001123e9       ___crtsetenv               005163e9 f   libc:setenv.obj
+ 0001:0011262f       __mbsicmp                  0051662f f   libc:mbsicmp.obj
+ 0001:0011279d       __mbsrchr                  0051679d f   libc:mbsrchr.obj
+ 0001:001127fd       ___tzset                   005167fd f   libc:tzset.obj
+ 0001:00112812       __tzset                    00516812 f   libc:tzset.obj
+ 0001:00112a70       __isindst                  00516a70 f   libc:tzset.obj
+ 0001:00112d5c       _getcwd                    00516d5c f   libc:getcwd.obj
+ 0001:00112d5c       __getcwd                   00516d5c f   libc:getcwd.obj
+ 0001:00112d6f       __getdcwd                  00516d6f f   libc:getcwd.obj
+ 0001:00112e40       __validdrive               00516e40 f   libc:getcwd.obj
+ 0001:00112e80       _strpbrk                   00516e80 f   libc:strpbrk.obj
+ 0001:00112eba       _wctomb                    00516eba f   libc:wctomb.obj
+ 0001:00112f30       __aulldiv                  00516f30 f   libc:ulldiv.obj
+ 0001:00112fa0       __aullrem                  00516fa0 f   libc:ullrem.obj
+ 0001:00113020       _fdiv_main_routine         00517020 f   libc:adj_fdiv.obj
+ 0001:00113137       __adj_fdiv_r               00517137 f   libc:adj_fdiv.obj
+ 0001:001135d6       __fdivp_sti_st             005175d6 f   libc:adj_fdiv.obj
+ 0001:001135e9       __fdivrp_sti_st            005175e9 f   libc:adj_fdiv.obj
+ 0001:001135fc       __adj_fdiv_m32             005175fc f   libc:adj_fdiv.obj
+ 0001:00113648       __adj_fdiv_m64             00517648 f   libc:adj_fdiv.obj
+ 0001:00113694       __adj_fdiv_m16i            00517694 f   libc:adj_fdiv.obj
+ 0001:001136c8       __adj_fdiv_m32i            005176c8 f   libc:adj_fdiv.obj
+ 0001:001136fc       __adj_fdivr_m32            005176fc f   libc:adj_fdiv.obj
+ 0001:00113748       __adj_fdivr_m64            00517748 f   libc:adj_fdiv.obj
+ 0001:00113794       __adj_fdivr_m16i           00517794 f   libc:adj_fdiv.obj
+ 0001:001137c8       __adj_fdivr_m32i           005177c8 f   libc:adj_fdiv.obj
+ 0001:001137fc       __safe_fdiv                005177fc f   libc:adj_fdiv.obj
+ 0001:00113811       __safe_fdivr               00517811 f   libc:adj_fdiv.obj
+ 0001:00113826       __fprem_common             00517826 f   libc:adj_fdiv.obj
+ 0001:00113a2c       __adj_fprem                00517a2c f   libc:adj_fdiv.obj
+ 0001:00113ade       __fprem1_common            00517ade f   libc:adj_fdiv.obj
+ 0001:00113ce4       __adj_fprem1               00517ce4 f   libc:adj_fdiv.obj
+ 0001:00113d99       __safe_fprem               00517d99 f   libc:adj_fdiv.obj
+ 0001:00113d9f       __safe_fprem1              00517d9f f   libc:adj_fdiv.obj
+ 0001:00113da5       __adj_fpatan               00517da5 f   libc:adj_fdiv.obj
+ 0001:00113da8       __adj_fptan                00517da8 f   libc:adj_fdiv.obj
+ 0001:00113dab       __87except                 00517dab f   libc:87except.obj
+ 0001:00113e7b       __set_exp                  00517e7b f   libc:util.obj
+ 0001:00113ea4       __get_exp                  00517ea4 f   libc:util.obj
+ 0001:00113eb8       __add_exp                  00517eb8 f   libc:util.obj
+ 0001:00113ee4       __set_bexp                 00517ee4 f   libc:util.obj
+ 0001:00113f08       __sptype                   00517f08 f   libc:util.obj
+ 0001:00113f62       __decomp                   00517f62 f   libc:util.obj
+ 0001:00114023       __frnd                     00518023 f   libc:frnd.obj
+ 0001:00114035       __copysign                 00518035 f   libc:ieeemisc.obj
+ 0001:00114056       __chgsign                  00518056 f   libc:ieeemisc.obj
+ 0001:0011407b       __scalb                    0051807b f   libc:ieeemisc.obj
+ 0001:00114091       __logb                     00518091 f   libc:ieeemisc.obj
+ 0001:00114178       __nextafter                00518178 f   libc:ieeemisc.obj
+ 0001:0011440d       __finite                   0051840d f   libc:ieeemisc.obj
+ 0001:00114421       __isnan                    00518421 f   libc:ieeemisc.obj
+ 0001:0011444f       __fpclass                  0051844f f   libc:ieeemisc.obj
+ 0001:001144e1       __open                     005184e1 f   libc:open.obj
+ 0001:001144e1       _open                      005184e1 f   libc:open.obj
+ 0001:001144f8       __sopen                    005184f8 f   libc:open.obj
+ 0001:001147b1       ___addl                    005187b1 f   libc:mantold.obj
+ 0001:001147d2       ___add_12                  005187d2 f   libc:mantold.obj
+ 0001:00114830       ___shl_12                  00518830 f   libc:mantold.obj
+ 0001:0011485e       ___shr_12                  0051885e f   libc:mantold.obj
+ 0001:0011488b       ___mtold12                 0051888b f   libc:mantold.obj
+ 0001:00114952       ___strgtold12              00518952 f   libc:strgtold.obj
+ 0001:00114e23       ___STRINGTOLD              00518e23 f   libc:strgtold.obj
+ 0001:00114e5f       _$I10_OUTPUT               00518e5f f   libc:x10fout.obj
+ 0001:001150f2       __mbschr                   005190f2 f   libc:mbschr.obj
+ 0001:00115165       __strdup                   00519165 f   libc:strdup.obj
+ 0001:00115190       __stricmp                  00519190 f   libc:stricmp.obj
+ 0001:00115190       __strcmpi                  00519190 f   libc:stricmp.obj
+ 0001:00115220       _strrchr                   00519220 f   libc:strrchr.obj
+ 0001:00115250       _strcmp                    00519250 f   libc:strcmp.obj
+ 0001:001152d4       __handle_qnan1             005192d4 f   libc:fpexcept.obj
+ 0001:00115327       __handle_qnan2             00519327 f   libc:fpexcept.obj
+ 0001:00115386       __except1                  00519386 f   libc:fpexcept.obj
+ 0001:0011541e       __except2                  0051941e f   libc:fpexcept.obj
+ 0001:001154c3       __raise_exc                005194c3 f   libc:fpexcept.obj
+ 0001:00115776       __handle_exc               00519776 f   libc:fpexcept.obj
+ 0001:0011598d       __umatherr                 0051998d f   libc:fpexcept.obj
+ 0001:00115a15       __set_errno                00519a15 f   libc:fpexcept.obj
+ 0001:00115a60       __errcode                  00519a60 f   libc:fpexcept.obj
+ 0001:00115a8d       __matherr                  00519a8d f   libc:matherr.obj
+ 0001:00115a90       __statfp                   00519a90 f   libc:fpctrl.obj
+ 0001:00115a9e       __clrfp                    00519a9e f   libc:fpctrl.obj
+ 0001:00115aad       __ctrlfp                   00519aad f   libc:fpctrl.obj
+ 0001:00115ad0       __set_statfp               00519ad0 f   libc:fpctrl.obj
+ 0001:00115b26       _ldexp                     00519b26 f   libc:ldexp.obj
+ 0001:00115d0c       __chsize                   00519d0c f   libc:chsize.obj
+ 0001:00115e52       ___ld12mul                 00519e52 f   libc:tenpow.obj
+ 0001:00116072       ___multtenpow12            0051a072 f   libc:tenpow.obj
+ 0001:001160ee       __setmode                  0051a0ee f   libc:setmode.obj
+ 0001:00116164       _MessageBoxA@16            0051a164 f   user32:USER32.dll
+ 0001:00116170       _GetTimeZoneInformation@4  0051a170 f   kernel32:KERNEL32.dll
+ 0001:00116176       _GetLocalTime@4            0051a176 f   kernel32:KERNEL32.dll
+ 0001:0011617c       _GetCommandLineA@0         0051a17c f   kernel32:KERNEL32.dll
+ 0001:00116182       _AllocConsole@0            0051a182 f   kernel32:KERNEL32.dll
+ 0001:00116188       _GetStdHandle@4            0051a188 f   kernel32:KERNEL32.dll
+ 0001:0011618e       _QueryPerformanceCounter@4 0051a18e f   kernel32:KERNEL32.dll
+ 0001:00116194       _QueryPerformanceFrequency@4 0051a194 f   kernel32:KERNEL32.dll
+ 0001:0011619a       _GetVersionExA@4           0051a19a f   kernel32:KERNEL32.dll
+ 0001:001161a0       _GetProcAddress@8          0051a1a0 f   kernel32:KERNEL32.dll
+ 0001:001161a6       _GetModuleHandleA@4        0051a1a6 f   kernel32:KERNEL32.dll
+ 0001:001161ac       _ReadFile@20               0051a1ac f   kernel32:KERNEL32.dll
+ 0001:001161b2       _GetLastError@0            0051a1b2 f   kernel32:KERNEL32.dll
+ 0001:001161b8       _SetFilePointer@16         0051a1b8 f   kernel32:KERNEL32.dll
+ 0001:001161be       _FormatMessageA@28         0051a1be f   kernel32:KERNEL32.dll
+ 0001:001161c4       _DeleteFileA@4             0051a1c4 f   kernel32:KERNEL32.dll
+ 0001:001161ca       _WriteFile@20              0051a1ca f   kernel32:KERNEL32.dll
+ 0001:001161d0       _CreateFileA@28            0051a1d0 f   kernel32:KERNEL32.dll
+ 0001:001161d6       _CloseHandle@4             0051a1d6 f   kernel32:KERNEL32.dll
+ 0001:001161dc       _GetFileSize@8             0051a1dc f   kernel32:KERNEL32.dll
+ 0001:001161e2       _UnmapViewOfFile@4         0051a1e2 f   kernel32:KERNEL32.dll
+ 0001:001161e8       _IsBadReadPtr@8            0051a1e8 f   kernel32:KERNEL32.dll
+ 0001:001161ee       _MapViewOfFile@20          0051a1ee f   kernel32:KERNEL32.dll
+ 0001:001161f4       _CreateFileMappingA@24     0051a1f4 f   kernel32:KERNEL32.dll
+ 0001:001161fa       _GetFileType@4             0051a1fa f   kernel32:KERNEL32.dll
+ 0001:00116200       _GetFileAttributesA@4      0051a200 f   kernel32:KERNEL32.dll
+ 0001:00116206       _SearchPathA@24            0051a206 f   kernel32:KERNEL32.dll
+ 0001:0011620c       _LoadLibraryExA@12         0051a20c f   kernel32:KERNEL32.dll
+ 0001:00116212       _GetVersion@0              0051a212 f   kernel32:KERNEL32.dll
+ 0001:00116218       _ExitProcess@4             0051a218 f   kernel32:KERNEL32.dll
+ 0001:0011621e       _FindClose@4               0051a21e f   kernel32:KERNEL32.dll
+ 0001:00116224       _FileTimeToSystemTime@8    0051a224 f   kernel32:KERNEL32.dll
+ 0001:0011622a       _FileTimeToLocalFileTime@8 0051a22a f   kernel32:KERNEL32.dll
+ 0001:00116230       _GetDriveTypeA@4           0051a230 f   kernel32:KERNEL32.dll
+ 0001:00116236       _FindFirstFileA@8          0051a236 f   kernel32:KERNEL32.dll
+ 0001:0011623c       _HeapFree@12               0051a23c f   kernel32:KERNEL32.dll
+ 0001:00116242       _HeapAlloc@12              0051a242 f   kernel32:KERNEL32.dll
+ 0001:00116248       _HeapReAlloc@16            0051a248 f   kernel32:KERNEL32.dll
+ 0001:0011624e       _TerminateProcess@8        0051a24e f   kernel32:KERNEL32.dll
+ 0001:00116254       _GetCurrentProcess@0       0051a254 f   kernel32:KERNEL32.dll
+ 0001:0011625a       _GetFileInformationByHandle@8 0051a25a f   kernel32:KERNEL32.dll
+ 0001:00116260       _PeekNamedPipe@24          0051a260 f   kernel32:KERNEL32.dll
+ 0001:00116266       _UnhandledExceptionFilter@4 0051a266 f   kernel32:KERNEL32.dll
+ 0001:0011626c       _GetModuleFileNameA@12     0051a26c f   kernel32:KERNEL32.dll
+ 0001:00116272       _FreeEnvironmentStringsA@4 0051a272 f   kernel32:KERNEL32.dll
+ 0001:00116278       _FreeEnvironmentStringsW@4 0051a278 f   kernel32:KERNEL32.dll
+ 0001:0011627e       _WideCharToMultiByte@32    0051a27e f   kernel32:KERNEL32.dll
+ 0001:00116284       _GetEnvironmentStrings@0   0051a284 f   kernel32:KERNEL32.dll
+ 0001:0011628a       _GetEnvironmentStringsW@0  0051a28a f   kernel32:KERNEL32.dll
+ 0001:00116290       _SetHandleCount@4          0051a290 f   kernel32:KERNEL32.dll
+ 0001:00116296       _GetStartupInfoA@4         0051a296 f   kernel32:KERNEL32.dll
+ 0001:0011629c       _GetEnvironmentVariableA@12 0051a29c f   kernel32:KERNEL32.dll
+ 0001:001162a2       _HeapDestroy@4             0051a2a2 f   kernel32:KERNEL32.dll
+ 0001:001162a8       _HeapCreate@12             0051a2a8 f   kernel32:KERNEL32.dll
+ 0001:001162ae       _VirtualFree@12            0051a2ae f   kernel32:KERNEL32.dll
+ 0001:001162b4       _RtlUnwind@16              0051a2b4 f   kernel32:KERNEL32.dll
+ 0001:001162ba       _GetFullPathNameA@16       0051a2ba f   kernel32:KERNEL32.dll
+ 0001:001162c0       _GetCurrentDirectoryA@8    0051a2c0 f   kernel32:KERNEL32.dll
+ 0001:001162c6       _SetCurrentDirectoryA@4    0051a2c6 f   kernel32:KERNEL32.dll
+ 0001:001162cc       _FlushFileBuffers@4        0051a2cc f   kernel32:KERNEL32.dll
+ 0001:001162d2       _MultiByteToWideChar@24    0051a2d2 f   kernel32:KERNEL32.dll
+ 0001:001162d8       _GetStringTypeA@20         0051a2d8 f   kernel32:KERNEL32.dll
+ 0001:001162de       _GetStringTypeW@16         0051a2de f   kernel32:KERNEL32.dll
+ 0001:001162e4       _VirtualAlloc@16           0051a2e4 f   kernel32:KERNEL32.dll
+ 0001:001162ea       _IsBadWritePtr@8           0051a2ea f   kernel32:KERNEL32.dll
+ 0001:001162f0       _LCMapStringA@24           0051a2f0 f   kernel32:KERNEL32.dll
+ 0001:001162f6       _LCMapStringW@24           0051a2f6 f   kernel32:KERNEL32.dll
+ 0001:001162fc       _SetConsoleCtrlHandler@8   0051a2fc f   kernel32:KERNEL32.dll
+ 0001:00116302       _SetStdHandle@8            0051a302 f   kernel32:KERNEL32.dll
+ 0001:00116308       _GetCPInfo@8               0051a308 f   kernel32:KERNEL32.dll
+ 0001:0011630e       _GetACP@0                  0051a30e f   kernel32:KERNEL32.dll
+ 0001:00116314       _GetOEMCP@0                0051a314 f   kernel32:KERNEL32.dll
+ 0001:0011631a       _LoadLibraryA@4            0051a31a f   kernel32:KERNEL32.dll
+ 0001:00116320       _CompareStringA@24         0051a320 f   kernel32:KERNEL32.dll
+ 0001:00116326       _CompareStringW@24         0051a326 f   kernel32:KERNEL32.dll
+ 0001:0011632c       _SetEnvironmentVariableA@8 0051a32c f   kernel32:KERNEL32.dll
+ 0001:00116332       _RaiseException@16         0051a332 f   kernel32:KERNEL32.dll
+ 0001:00116338       _SetEndOfFile@4            0051a338 f   kernel32:KERNEL32.dll
+ 0001:00116340       _f_dint                    0051a340 f   fj90f:jwe_fdin.obj
+ 0001:001163b0       _jwe_fjci                  0051a3b0 f   fj90f:jwe_fjci.obj
+ 0001:001163e0       _jwe_fvav                  0051a3e0 f   fj90f:jwe_fu8f.obj
+ 0001:00116430       _jwe_fumu                  0051a430 f   fj90f:jwe_fu8f.obj
+ 0001:001164c0       _jwe_fvvv                  0051a4c0 f   fj90f:jwe_fu8f.obj
+ 0001:00116510       _jwe_fjcv                  0051a510 f   fj90f:jwe_fjcv.obj
+ 0001:00116530       _jwe_fjdu                  0051a530 f   fj90f:jwe_fjdu.obj
+ 0001:001166d0       _jwe_fnzb                  0051a6d0 f   fj90f:jwe_fnzb.obj
+ 0001:00116810       _f_a8sb                    0051a810 f   fj90f:jwe_fjsb.obj
+ 0001:00116980       _g_dbleq                   0051a980 f   fj90g:jwe_gdbq.obj
+ 0001:00116b50       _g_aqcj                    0051ab50 f   fj90g:jwe_gqcj.obj
+ 0001:00116ce0       _main                      0051ace0 f   fj90i:jwe_xrt0.obj
+ 0001:00116dd0       _fstat                     0051add0 f   libc:fstat.obj
+ 0001:00116dd0       __fstat                    0051add0 f   libc:fstat.obj
+ 0001:00117048       _fileno                    0051b048 f   libc:fileno.obj
+ 0001:00117048       __fileno                   0051b048 f   libc:fileno.obj
+ 0001:00117050       _cprintf                   0051b050 f   libc:cprintf.obj
+ 0001:00117050       __cprintf                  0051b050 f   libc:cprintf.obj
+ 0001:00117832       _tempnam                   0051b832 f   libc:tempnam.obj
+ 0001:00117832       __tempnam                  0051b832 f   libc:tempnam.obj
+ 0001:00117a19       _remove                    0051ba19 f   libc:unlink.obj
+ 0001:00117a43       _unlink                    0051ba43 f   libc:unlink.obj
+ 0001:00117a43       __unlink                   0051ba43 f   libc:unlink.obj
+ 0001:00117a50       _strnicmp                  0051ba50 f   libc:strnicmp.obj
+ 0001:00117a50       __strnicmp                 0051ba50 f   libc:strnicmp.obj
+ 0001:00117afd       __putch                    0051bafd f   libc:putch.obj
+ 0001:00117b41       __itoa                     0051bb41 f   libc:xtoa.obj
+ 0001:00117bca       __ltoa                     0051bbca f   libc:xtoa.obj
+ 0001:00117bf4       __ultoa                    0051bbf4 f   libc:xtoa.obj
+ 0001:00117c0f       __i64toa                   0051bc0f f   libc:xtoa.obj
+ 0001:00117cc6       __ui64toa                  0051bcc6 f   libc:xtoa.obj
+ 0001:00117ce1       __rmtmp                    0051bce1 f   libc:rmtmp.obj
+ 0001:00117d1d       __access                   0051bd1d f   libc:access.obj
+ 0001:00117d61       ___initconin               0051bd61 f   libc:initcon.obj
+ 0001:00117d80       ___initconout              0051bd80 f   libc:initcon.obj
+ 0001:00117d9f       ___termcon                 0051bd9f f   libc:initcon.obj
+ 0001:00117dcc       _WriteConsoleA@20          0051bdcc f   kernel32:KERNEL32.dll
+ 0002:00000000       __imp__GetVersion@0        0051c000     kernel32:KERNEL32.dll
+ 0002:00000004       __imp__SetEndOfFile@4      0051c004     kernel32:KERNEL32.dll
+ 0002:00000008       __imp__RaiseException@16   0051c008     kernel32:KERNEL32.dll
+ 0002:0000000c       __imp__SetEnvironmentVariableA@8 0051c00c     kernel32:KERNEL32.dll
+ 0002:00000010       __imp__CompareStringW@24   0051c010     kernel32:KERNEL32.dll
+ 0002:00000014       __imp__CompareStringA@24   0051c014     kernel32:KERNEL32.dll
+ 0002:00000018       __imp__LoadLibraryA@4      0051c018     kernel32:KERNEL32.dll
+ 0002:0000001c       __imp__GetOEMCP@0          0051c01c     kernel32:KERNEL32.dll
+ 0002:00000020       __imp__GetACP@0            0051c020     kernel32:KERNEL32.dll
+ 0002:00000024       __imp__GetCPInfo@8         0051c024     kernel32:KERNEL32.dll
+ 0002:00000028       __imp__SetStdHandle@8      0051c028     kernel32:KERNEL32.dll
+ 0002:0000002c       __imp__SetConsoleCtrlHandler@8 0051c02c     kernel32:KERNEL32.dll
+ 0002:00000030       __imp__LCMapStringW@24     0051c030     kernel32:KERNEL32.dll
+ 0002:00000034       __imp__LCMapStringA@24     0051c034     kernel32:KERNEL32.dll
+ 0002:00000038       __imp__IsBadWritePtr@8     0051c038     kernel32:KERNEL32.dll
+ 0002:0000003c       __imp__VirtualAlloc@16     0051c03c     kernel32:KERNEL32.dll
+ 0002:00000040       __imp__GetStringTypeW@16   0051c040     kernel32:KERNEL32.dll
+ 0002:00000044       __imp__GetStringTypeA@20   0051c044     kernel32:KERNEL32.dll
+ 0002:00000048       __imp__MultiByteToWideChar@24 0051c048     kernel32:KERNEL32.dll
+ 0002:0000004c       __imp__FlushFileBuffers@4  0051c04c     kernel32:KERNEL32.dll
+ 0002:00000050       __imp__SetCurrentDirectoryA@4 0051c050     kernel32:KERNEL32.dll
+ 0002:00000054       __imp__GetCurrentDirectoryA@8 0051c054     kernel32:KERNEL32.dll
+ 0002:00000058       __imp__GetFullPathNameA@16 0051c058     kernel32:KERNEL32.dll
+ 0002:0000005c       __imp__GetTimeZoneInformation@4 0051c05c     kernel32:KERNEL32.dll
+ 0002:00000060       __imp__GetLocalTime@4      0051c060     kernel32:KERNEL32.dll
+ 0002:00000064       __imp__GetCommandLineA@0   0051c064     kernel32:KERNEL32.dll
+ 0002:00000068       __imp__AllocConsole@0      0051c068     kernel32:KERNEL32.dll
+ 0002:0000006c       __imp__GetStdHandle@4      0051c06c     kernel32:KERNEL32.dll
+ 0002:00000070       __imp__QueryPerformanceCounter@4 0051c070     kernel32:KERNEL32.dll
+ 0002:00000074       __imp__QueryPerformanceFrequency@4 0051c074     kernel32:KERNEL32.dll
+ 0002:00000078       __imp__GetVersionExA@4     0051c078     kernel32:KERNEL32.dll
+ 0002:0000007c       __imp__GetProcAddress@8    0051c07c     kernel32:KERNEL32.dll
+ 0002:00000080       __imp__GetModuleHandleA@4  0051c080     kernel32:KERNEL32.dll
+ 0002:00000084       __imp__ReadFile@20         0051c084     kernel32:KERNEL32.dll
+ 0002:00000088       __imp__GetLastError@0      0051c088     kernel32:KERNEL32.dll
+ 0002:0000008c       __imp__SetFilePointer@16   0051c08c     kernel32:KERNEL32.dll
+ 0002:00000090       __imp__FormatMessageA@28   0051c090     kernel32:KERNEL32.dll
+ 0002:00000094       __imp__DeleteFileA@4       0051c094     kernel32:KERNEL32.dll
+ 0002:00000098       __imp__WriteFile@20        0051c098     kernel32:KERNEL32.dll
+ 0002:0000009c       __imp__CreateFileA@28      0051c09c     kernel32:KERNEL32.dll
+ 0002:000000a0       __imp__CloseHandle@4       0051c0a0     kernel32:KERNEL32.dll
+ 0002:000000a4       __imp__GetFileSize@8       0051c0a4     kernel32:KERNEL32.dll
+ 0002:000000a8       __imp__UnmapViewOfFile@4   0051c0a8     kernel32:KERNEL32.dll
+ 0002:000000ac       __imp__IsBadReadPtr@8      0051c0ac     kernel32:KERNEL32.dll
+ 0002:000000b0       __imp__MapViewOfFile@20    0051c0b0     kernel32:KERNEL32.dll
+ 0002:000000b4       __imp__CreateFileMappingA@24 0051c0b4     kernel32:KERNEL32.dll
+ 0002:000000b8       __imp__GetFileType@4       0051c0b8     kernel32:KERNEL32.dll
+ 0002:000000bc       __imp__GetFileAttributesA@4 0051c0bc     kernel32:KERNEL32.dll
+ 0002:000000c0       __imp__SearchPathA@24      0051c0c0     kernel32:KERNEL32.dll
+ 0002:000000c4       __imp__LoadLibraryExA@12   0051c0c4     kernel32:KERNEL32.dll
+ 0002:000000c8       __imp__WriteConsoleA@20    0051c0c8     kernel32:KERNEL32.dll
+ 0002:000000cc       __imp__ExitProcess@4       0051c0cc     kernel32:KERNEL32.dll
+ 0002:000000d0       __imp__FindClose@4         0051c0d0     kernel32:KERNEL32.dll
+ 0002:000000d4       __imp__FileTimeToSystemTime@8 0051c0d4     kernel32:KERNEL32.dll
+ 0002:000000d8       __imp__FileTimeToLocalFileTime@8 0051c0d8     kernel32:KERNEL32.dll
+ 0002:000000dc       __imp__GetDriveTypeA@4     0051c0dc     kernel32:KERNEL32.dll
+ 0002:000000e0       __imp__FindFirstFileA@8    0051c0e0     kernel32:KERNEL32.dll
+ 0002:000000e4       __imp__HeapFree@12         0051c0e4     kernel32:KERNEL32.dll
+ 0002:000000e8       __imp__HeapAlloc@12        0051c0e8     kernel32:KERNEL32.dll
+ 0002:000000ec       __imp__HeapReAlloc@16      0051c0ec     kernel32:KERNEL32.dll
+ 0002:000000f0       __imp__TerminateProcess@8  0051c0f0     kernel32:KERNEL32.dll
+ 0002:000000f4       __imp__GetCurrentProcess@0 0051c0f4     kernel32:KERNEL32.dll
+ 0002:000000f8       __imp__GetFileInformationByHandle@8 0051c0f8     kernel32:KERNEL32.dll
+ 0002:000000fc       __imp__PeekNamedPipe@24    0051c0fc     kernel32:KERNEL32.dll
+ 0002:00000100       __imp__UnhandledExceptionFilter@4 0051c100     kernel32:KERNEL32.dll
+ 0002:00000104       __imp__GetModuleFileNameA@12 0051c104     kernel32:KERNEL32.dll
+ 0002:00000108       __imp__FreeEnvironmentStringsA@4 0051c108     kernel32:KERNEL32.dll
+ 0002:0000010c       __imp__FreeEnvironmentStringsW@4 0051c10c     kernel32:KERNEL32.dll
+ 0002:00000110       __imp__WideCharToMultiByte@32 0051c110     kernel32:KERNEL32.dll
+ 0002:00000114       __imp__GetEnvironmentStrings@0 0051c114     kernel32:KERNEL32.dll
+ 0002:00000118       __imp__GetEnvironmentStringsW@0 0051c118     kernel32:KERNEL32.dll
+ 0002:0000011c       __imp__SetHandleCount@4    0051c11c     kernel32:KERNEL32.dll
+ 0002:00000120       __imp__GetStartupInfoA@4   0051c120     kernel32:KERNEL32.dll
+ 0002:00000124       __imp__GetEnvironmentVariableA@12 0051c124     kernel32:KERNEL32.dll
+ 0002:00000128       __imp__HeapDestroy@4       0051c128     kernel32:KERNEL32.dll
+ 0002:0000012c       __imp__HeapCreate@12       0051c12c     kernel32:KERNEL32.dll
+ 0002:00000130       __imp__VirtualFree@12      0051c130     kernel32:KERNEL32.dll
+ 0002:00000134       __imp__RtlUnwind@16        0051c134     kernel32:KERNEL32.dll
+ 0002:00000138       \177KERNEL32_NULL_THUNK_DATA 0051c138     kernel32:KERNEL32.dll
+ 0002:0000013c       __imp__MessageBoxA@16      0051c13c     user32:USER32.dll
+ 0002:00000140       \177USER32_NULL_THUNK_DATA 0051c140     user32:USER32.dll
+ 0002:00000144       __imp__f90sqlconnectstr_   0051c144     f90sql:f90SQLLF95.dll
+ 0002:00000148       __imp__f90sqlsetconnectattint_ 0051c148     f90sql:f90SQLLF95.dll
+ 0002:0000014c       __imp__f90sqlbindparameterdouble_ 0051c14c     f90sql:f90SQLLF95.dll
+ 0002:00000150       __imp__f90sqlbindparameterstr_ 0051c150     f90sql:f90SQLLF95.dll
+ 0002:00000154       __imp__f90sqlbindparametertimestmp_ 0051c154     f90sql:f90SQLLF95.dll
+ 0002:00000158       __imp__f90sqlbindparameterint_ 0051c158     f90sql:f90SQLLF95.dll
+ 0002:0000015c       __imp__f90sqlgetdiagrecstr_ 0051c15c     f90sql:f90SQLLF95.dll
+ 0002:00000160       __imp__f90sqlexecdirectstr_ 0051c160     f90sql:f90SQLLF95.dll
+ 0002:00000164       __imp__f90sqlbindcoldouble_ 0051c164     f90sql:f90SQLLF95.dll
+ 0002:00000168       __imp__f90sqlbindcoltimestmp_ 0051c168     f90sql:f90SQLLF95.dll
+ 0002:0000016c       __imp__f90sqlallochandle_  0051c16c     f90sql:f90SQLLF95.dll
+ 0002:00000170       __imp__f90sqlsetenvattrint_ 0051c170     f90sql:f90SQLLF95.dll
+ 0002:00000174       __imp__f90sqldriverconnectstr_ 0051c174     f90sql:f90SQLLF95.dll
+ 0002:00000178       __imp__f90sqlpreparestr_   0051c178     f90sql:f90SQLLF95.dll
+ 0002:0000017c       __imp__f90sqlexecute_      0051c17c     f90sql:f90SQLLF95.dll
+ 0002:00000180       __imp__f90sqlbindcolint_   0051c180     f90sql:f90SQLLF95.dll
+ 0002:00000184       __imp__f90sqlbindcolstr_   0051c184     f90sql:f90SQLLF95.dll
+ 0002:00000188       __imp__f90sqlbindcolsmllint_ 0051c188     f90sql:f90SQLLF95.dll
+ 0002:0000018c       __imp__f90sqlfetch_        0051c18c     f90sql:f90SQLLF95.dll
+ 0002:00000190       __imp__f90sqlfreehandle_   0051c190     f90sql:f90SQLLF95.dll
+ 0002:00000194       __imp__f90sqldisconnect_   0051c194     f90sql:f90SQLLF95.dll
+ 0002:00000198       \177f90SQLLF95_NULL_THUNK_DATA 0051c198     f90sql:f90SQLLF95.dll
+ 0002:000001f8       _jwe_sz__lndclc_           0051c1f8     BlacksFork.OBJ
+ 0002:000001fc       _jwe_ssn__lndclc_          0051c1fc     BlacksFork.OBJ
+ 0002:000002ac       _jwe_sz__errorfunc_        0051c2ac     BlacksFork.OBJ
+ 0002:000002b0       _jwe_ssn__errorfunc_       0051c2b0     BlacksFork.OBJ
+ 0002:000003c8       _jwe_sz__paramdim_         0051c3c8     BUDGET.obj
+ 0002:000003cc       _jwe_sz__commo_            0051c3cc     BUDGET.obj
+ 0002:000003d0       _jwe_sz__subvars_          0051c3d0     BUDGET.obj
+ 0002:000003d4       _jwe_sz__printstuff_       0051c3d4     BUDGET.obj
+ 0002:000003d8       _jwe_sz__f90sqlvariables_  0051c3d8     BUDGET.obj
+ 0002:000003dc       _jwe_sz__MAIN__            0051c3dc     BUDGET.obj
+ 0002:000003e0       _jwe_ssn__MAIN__           0051c3e0     BUDGET.obj
+ 0002:00007aa4       _jwe_sz__inq_              00523aa4     BUDGET.obj
+ 0002:00007aa8       _jwe_ssn__cby_             00523aa8     BUDGET.obj
+ 0002:00007aa8       _jwe_ssn__iou_             00523aa8     BUDGET.obj
+ 0002:00007aa8       _jwe_ssn__inq_             00523aa8     BUDGET.obj
+ 0002:00007aa8       _jwe_ssn__cgw_             00523aa8     BUDGET.obj
+ 0002:00007aa8       _jwe_ssn__upc_             00523aa8     BUDGET.obj
+ 0002:00007aa8       _jwe_ssn__rck_             00523aa8     BUDGET.obj
+ 0002:00007c54       _jwe_sz__errprt_           00523c54     BUDGET.obj
+ 0002:00007c58       _jwe_ssn__errprt_          00523c58     BUDGET.obj
+ 0002:00007d04       _jwe_sz__getpat_           00523d04     BUDGET.obj
+ 0002:00007d08       _jwe_ssn__getpat_          00523d08     BUDGET.obj
+ 0002:00007dc4       _jwe_sz__justem_           00523dc4     BUDGET.obj
+ 0002:00007dc8       _jwe_ssn__justem_          00523dc8     BUDGET.obj
+ 0002:00007e9c       _jwe_sz__nonull_           00523e9c     BUDGET.obj
+ 0002:00007ea0       _jwe_ssn__nonull_          00523ea0     BUDGET.obj
+ 0002:00007f34       _jwe_sz__prntit_           00523f34     BUDGET.obj
+ 0002:00007f38       _jwe_ssn__prntit_          00523f38     BUDGET.obj
+ 0002:00007fdc       _jwe_sz__round_            00523fdc     BUDGET.obj
+ 0002:00007fe0       _jwe_ssn__round_           00523fe0     BUDGET.obj
+ 0002:0000802c       _jwe_sz__alltrim_          0052402c     BUDGET.obj
+ 0002:00008030       _jwe_ssn__alltrim_         00524030     BUDGET.obj
+ 0002:0000812c       _jwe_sz__justext_          0052412c     BUDGET.obj
+ 0002:00008130       _jwe_ssn__justext_         00524130     BUDGET.obj
+ 0002:000081a4       _jwe_sz__strcomp_          005241a4     BUDGET.obj
+ 0002:000081a8       _jwe_ssn__strcomp_         005241a8     BUDGET.obj
+ 0002:00008274       _jwe_sz__initializeaccessvars_ 00524274     BUDGET.obj
+ 0002:00008278       _jwe_ssn__initializeaccessvars_ 00524278     BUDGET.obj
+ 0002:000082fc       _jwe_sz__swap_             005242fc     BUDGET.obj
+ 0002:00008300       _jwe_ssn__swap_            00524300     BUDGET.obj
+ 0002:00008354       _jwe_sz__writecrop_        00524354     BUDGET.obj
+ 0002:00008358       _jwe_ssn__writecrop_       00524358     BUDGET.obj
+ 0002:000083ec       _jwe_sz__storemonvar_      005243ec     BUDGET.obj
+ 0002:000083f0       _jwe_ssn__storemonvar_     005243f0     BUDGET.obj
+ 0002:00008674       _jwe_sz__storemonvarxi_    00524674     BUDGET.obj
+ 0002:00008678       _jwe_ssn__storemonvarxi_   00524678     BUDGET.obj
+ 0002:000088fc       _jwe_sz__storemon_         005248fc     BUDGET.obj
+ 0002:00008900       _jwe_ssn__storemon_        00524900     BUDGET.obj
+ 0002:00008b14       _jwe_sz__justright_        00524b14     BUDGET.obj
+ 0002:00008b18       _jwe_ssn__justright_       00524b18     BUDGET.obj
+ 0002:00008b94       _jwe_sz__nocomma_          00524b94     BUDGET.obj
+ 0002:00008b98       _jwe_ssn__nocomma_         00524b98     BUDGET.obj
+ 0002:00008c14       _jwe_sz__MODULE@printstuff_ 00524c14     BUDGET.obj
+ 0002:00008c18       _jwe_sz__MODULE@commo_     00524c18     BUDGET.obj
+ 0002:0000d740       _jwe_sz__fsql_data_        00529740     AccessSubs.OBJ
+ 0002:0000d744       _jwe_sz__accessread_       00529744     AccessSubs.OBJ
+ 0002:0000d748       _jwe_ssn__accessread_      00529748     AccessSubs.OBJ
+ 0002:0000dac8       _jwe_sz__showdiags_        00529ac8     AccessSubs.OBJ
+ 0002:0000dacc       _jwe_ssn__showdiags_       00529acc     AccessSubs.OBJ
+ 0002:0000db5c       _jwe_sz__accessupdate_     00529b5c     AccessSubs.OBJ
+ 0002:0000db60       _jwe_ssn__accessupdate_    00529b60     AccessSubs.OBJ
+ 0002:0000e158       _jwe_sz__accesswrite_      0052a158     AccessSubs.OBJ
+ 0002:0000e15c       _jwe_ssn__accesswrite_     0052a15c     AccessSubs.OBJ
+ 0002:0000e544       _jwe_sz__accessexecute_    0052a544     AccessSubs.OBJ
+ 0002:0000e548       _jwe_ssn__accessexecute_   0052a548     AccessSubs.OBJ
+ 0002:0000e690       _jwe_sz__accessexedsn_     0052a690     AccessSubs.OBJ
+ 0002:0000e694       _jwe_ssn__accessexedsn_    0052a694     AccessSubs.OBJ
+ 0002:0000e7fc       _jwe_sz__MODULE@fsql_data_ 0052a7fc     AccessSubs.OBJ
+ 0002:000129b0       _jwe_sz__arsub_            0052e9b0     ARSUB.OBJ
+ 0002:000129b4       _jwe_ssn__arlim_           0052e9b4     ARSUB.OBJ
+ 0002:000129b4       _jwe_ssn__ardel_           0052e9b4     ARSUB.OBJ
+ 0002:000129b4       _jwe_ssn__arsub_           0052e9b4     ARSUB.OBJ
+ 0002:000133d8       _jwe_sz__munsub_           0052f3d8     ARSUB.OBJ
+ 0002:000133dc       _jwe_ssn__munsub_          0052f3dc     ARSUB.OBJ
+ 0002:00013918       _jwe_sz__wetlnd_           0052f918     ARSUB.OBJ
+ 0002:0001391c       _jwe_ssn__wetlnd_          0052f91c     ARSUB.OBJ
+ 0002:000139b8       _jwe_sz__wetdmd_           0052f9b8     ARSUB.OBJ
+ 0002:000139bc       _jwe_ssn__wetdmd_          0052f9bc     ARSUB.OBJ
+ 0002:00013a00       _jwe_sz__reini_            0052fa00     ARSUB.OBJ
+ 0002:00013a04       _jwe_ssn__readd_           0052fa04     ARSUB.OBJ
+ 0002:00013a04       _jwe_ssn__reini_           0052fa04     ARSUB.OBJ
+ 0002:00013b88       _jwe_sz__avclc_            0052fb88     ARSUB.OBJ
+ 0002:00013b8c       _jwe_ssn__avclc_           0052fb8c     ARSUB.OBJ
+ 0002:00013d78       _jwe_sz__arbak_            0052fd78     ARSUB.OBJ
+ 0002:00013d7c       _jwe_ssn__arbak_           0052fd7c     ARSUB.OBJ
+ 0002:00013e98       _jwe_sz__munbak_           0052fe98     ARSUB.OBJ
+ 0002:00013e9c       _jwe_ssn__munbak_          0052fe9c     ARSUB.OBJ
+ 0002:00013f90       _jwe_sz__rsbak_            0052ff90     ARSUB.OBJ
+ 0002:00013f94       _jwe_ssn__rsbak_           0052ff94     ARSUB.OBJ
+ 0002:00014230       _jwe_sz__rsout_            00530230     ARSUB.OBJ
+ 0002:00014234       _jwe_ssn__rsout_           00530234     ARSUB.OBJ
+ 0002:000142a8       _jwe_sz__resrel_           005302a8     ARSUB.OBJ
+ 0002:000142ac       _jwe_ssn__resrel_          005302ac     ARSUB.OBJ
+ 0002:00014360       _jwe_sz__ardem_            00530360     ARSUB.OBJ
+ 0002:00014364       _jwe_ssn__ardem_           00530364     ARSUB.OBJ
+ 0002:00014410       _jwe_sz__dmdmd_            00530410     ARSUB.OBJ
+ 0002:00014414       _jwe_ssn__dmdmd_           00530414     ARSUB.OBJ
+ 0002:00014460       _jwe_sz__solve_            00530460     ARSUB.OBJ
+ 0002:00014464       _jwe_ssn__solve_           00530464     ARSUB.OBJ
+ 0002:00014ef0       _jwe_sz__flowdr_           00530ef0     BUDSUB.OBJ
+ 0002:00014ef4       _jwe_ssn__flowdr_          00530ef4     BUDSUB.OBJ
+ 0002:00015068       _jwe_sz__headin_           00531068     BUDSUB.OBJ
+ 0002:0001506c       _jwe_ssn__headin_          0053106c     BUDSUB.OBJ
+ 0002:000150e8       _jwe_sz__seep_             005310e8     BUDSUB.OBJ
+ 0002:000150ec       _jwe_ssn__seep_            005310ec     BUDSUB.OBJ
+ 0002:00015208       _jwe_sz__plmlpt_           00531208     BUDSUB.OBJ
+ 0002:0001520c       _jwe_ssn__plmlpt_          0053120c     BUDSUB.OBJ
+ 0002:00015288       _jwe_sz__pltlpt_           00531288     BUDSUB.OBJ
+ 0002:0001528c       _jwe_ssn__pltlpt_          0053128c     BUDSUB.OBJ
+ 0002:00015320       _jwe_sz__pltmpt_           00531320     BUDSUB.OBJ
+ 0002:00015324       _jwe_ssn__pltmpt_          00531324     BUDSUB.OBJ
+ 0002:000153a0       _jwe_sz__pltpts_           005313a0     BUDSUB.OBJ
+ 0002:000153a4       _jwe_ssn__pltpts_          005313a4     BUDSUB.OBJ
+ 0002:00015440       _jwe_sz__printr_           00531440     BUDSUB.OBJ
+ 0002:00015444       _jwe_ssn__printr_          00531444     BUDSUB.OBJ
+ 0002:00019328       _jwe_sz__prntqi_           00535328     BUDSUB.OBJ
+ 0002:0001932c       _jwe_ssn__prntqi_          0053532c     BUDSUB.OBJ
+ 0002:00019450       _jwe_sz__race_             00535450     BUDSUB.OBJ
+ 0002:00019454       _jwe_ssn__race_            00535454     BUDSUB.OBJ
+ 0002:00019600       _jwe_sz__resr_             00535600     BUDSUB.OBJ
+ 0002:00019604       _jwe_ssn__resr_            00535604     BUDSUB.OBJ
+ 0002:000196e8       _jwe_sz__resrr_            005356e8     BUDSUB.OBJ
+ 0002:000196ec       _jwe_ssn__resrr_           005356ec     BUDSUB.OBJ
+ 0002:00019750       _jwe_sz__resv_             00535750     BUDSUB.OBJ
+ 0002:00019754       _jwe_ssn__resv_            00535754     BUDSUB.OBJ
+ 0002:000199e0       _jwe_sz__rtflo_            005359e0     BUDSUB.OBJ
+ 0002:000199e4       _jwe_ssn__rtflo_           005359e4     BUDSUB.OBJ
+ 0002:00019af0       _jwe_sz__sort_             00535af0     BUDSUB.OBJ
+ 0002:00019af4       _jwe_ssn__sort_            00535af4     BUDSUB.OBJ
+ 0002:00019bd8       _jwe_sz__getqin_           00535bd8     BUDSUB.OBJ
+ 0002:00019bdc       _jwe_ssn__getqin_          00535bdc     BUDSUB.OBJ
+ 0002:0001a070       _jwe_sz__readfile_         00536070     BUDSUB.OBJ
+ 0002:0001a074       _jwe_ssn__readfile_        00536074     BUDSUB.OBJ
+ 0002:0001a548       _jwe_sz__crpuse_           00536548     BUDSUB.OBJ
+ 0002:0001a54c       _jwe_ssn__crpuse_          0053654c     BUDSUB.OBJ
+ 0002:0001a608       _jwe_sz__lndprt_           00536608     BUDSUB.OBJ
+ 0002:0001a60c       _jwe_ssn__lndprt_          0053660c     BUDSUB.OBJ
+ 0002:0001a750       _jwe_sz__fzer_             00536750     BUDSUB.OBJ
+ 0002:0001a754       _jwe_ssn__fzer_            00536754     BUDSUB.OBJ
+ 0002:0001a7b0       _jwe_sz__izer_             005367b0     BUDSUB.OBJ
+ 0002:0001a7b4       _jwe_ssn__izer_            005367b4     BUDSUB.OBJ
+ 0002:0001a810       _jwe_sz__tprin_            00536810     BUDSUB.OBJ
+ 0002:0001a814       _jwe_ssn__tprin_           00536814     BUDSUB.OBJ
+ 0002:0001a8c8       _jwe_sz__faver_            005368c8     BUDSUB.OBJ
+ 0002:0001a8cc       _jwe_ssn__faver_           005368cc     BUDSUB.OBJ
+ 0002:0001a920       _jwe_sz__uline_            00536920     BUDSUB.OBJ
+ 0002:0001a924       _jwe_ssn__uline_           00536924     BUDSUB.OBJ
+ 0002:0001a9c0       _jwe_sz__sprin_            005369c0     BUDSUB.OBJ
+ 0002:0001a9c4       _jwe_ssn__sprin_           005369c4     BUDSUB.OBJ
+ 0002:0001ab40       _jwe_sz__addin_            00536b40     BUDSUB.OBJ
+ 0002:0001ab44       _jwe_ssn__addin_           00536b44     BUDSUB.OBJ
+ 0002:0001abe0       _jwe_sz__frost_            00536be0     BUDSUB.OBJ
+ 0002:0001abe4       _jwe_ssn__frost_           00536be4     BUDSUB.OBJ
+ 0002:0001ac58       _jwe_sz__aver2_            00536c58     BUDSUB.OBJ
+ 0002:0001ac5c       _jwe_ssn__aver2_           00536c5c     BUDSUB.OBJ
+ 0002:0001acb0       _jwe_sz__arrang_           00536cb0     BUDSUB.OBJ
+ 0002:0001acb4       _jwe_ssn__arrang_          00536cb4     BUDSUB.OBJ
+ 0002:0001ad70       _jwe_sz__qricalc_          00536d70     BUDSUB.OBJ
+ 0002:0001ad74       _jwe_ssn__qricalc_         00536d74     BUDSUB.OBJ
+ 0002:0001adf0       _jwe_sz__allt_             00536df0     BUDSUB.OBJ
+ 0002:0001adf4       _jwe_ssn__allt_            00536df4     BUDSUB.OBJ
+ 0002:0001af00       _jwe_sz__leftadj_          00536f00     BUDSUB.OBJ
+ 0002:0001af04       _jwe_ssn__leftadj_         00536f04     BUDSUB.OBJ
+ 0002:0001b008       _jwe_sz__brent_            00537008     BUDSUB.OBJ
+ 0002:0001b00c       _jwe_ssn__brent_           0053700c     BUDSUB.OBJ
+ 0002:0001b2c0       _jwe_sz__simul_            005372c0     BUDSUB.OBJ
+ 0002:0001b2c4       _jwe_ssn__simul_           005372c4     BUDSUB.OBJ
+ 0002:0001b978       _jwe_sz__centerit_         00537978     BUDSUB.OBJ
+ 0002:0001b97c       _jwe_ssn__centerit_        0053797c     BUDSUB.OBJ
+ 0002:0001f9c0       __real@ffefffffffffffb6    0053b9c0     fj90g:jwe_gdl1.obj
+ 0002:0001f9c8       __real@0000000000000000    0053b9c8     fj90g:jwe_gdl1.obj
+ 0002:0001fa44       __real@7f7fffee            0053ba44     fj90g:jwe_grxi.obj
+ 0002:0001fa48       __real@00000000            0053ba48     fj90g:jwe_grxi.obj
+ 0002:0001fa50       __real@3ff0000000000000    0053ba50     fj90g:jwe_grxi.obj
+ 0002:0001fa58       __real@bff0000000000000    0053ba58     fj90g:jwe_grxi.obj
+ 0002:0001fa60       __real@bf800000            0053ba60     fj90g:jwe_grxi.obj
+ 0002:0001fa64       __real@3f800000            0053ba64     fj90g:jwe_grxi.obj
+ 0002:0001fae0       __real@7fefffffffffffb6    0053bae0     fj90g:jwe_gdxi.obj
+ 0002:00022028       __real@3fe0000000000000    0053e028     fj90g:jwe_gdxd.obj
+ 0002:00022038       __real@3fb999999999999a    0053e038     fj90i:jwe_inao.obj
+ 0002:00022040       __real@3fb2492492492492    0053e040     fj90i:jwe_irio.obj
+ 0002:00022048       __real@4024000000000000    0053e048     fj90i:jwe_irio.obj
+ 0002:00022050       __real@3e112e0be826d695    0053e050     fj90i:jwe_irio.obj
+ 0002:00022058       __real@bfb2492492492492    0053e058     fj90i:jwe_irio.obj
+ 0002:00022060       __real@416312d000000000    0053e060     fj90i:jwe_irio.obj
+ 0002:00022068       __real@4180000000000000    0053e068     fj90i:jwe_irio.obj
+ 0002:00022070       __real@bfb999999999999a    0053e070     fj90i:jwe_irio.obj
+ 0002:000220dc       ??_C@_03MNBA@?4?1?2?$AA@   0053e0dc     libc:stati64.obj
+ 0002:000220e0       ??_C@_02DIIM@?$DP?$CK?$AA@ 0053e0e0     libc:stati64.obj
+ 0002:000220e4       ??_C@_0BH@PHHF@__GLOBAL_HEAP_SELECTED?$AA@ 0053e0e4     libc:heapinit.obj
+ 0002:000220fc       ??_C@_0BF@BBGL@__MSVCRT_HEAP_SELECT?$AA@ 0053e0fc     libc:heapinit.obj
+ 0002:00022114       ??_C@_0P@GGKG@runtime?5error?5?$AA@ 0053e114     libc:crt0msg.obj
+ 0002:00022124       ??_C@_02PIMC@?$AN?6?$AA@   0053e124     libc:crt0msg.obj
+ 0002:00022128       ??_C@_0O@DELO@TLOSS?5error?$AN?6?$AA@ 0053e128     libc:crt0msg.obj
+ 0002:00022138       ??_C@_0N@OMLL@SING?5error?$AN?6?$AA@ 0053e138     libc:crt0msg.obj
+ 0002:00022148       ??_C@_0P@OJAK@DOMAIN?5error?$AN?6?$AA@ 0053e148     libc:crt0msg.obj
+ 0002:00022158       ??_C@_0CF@EANP@R6028?$AN?6?9?5unable?5to?5initialize?5he@ 0053e158     libc:crt0msg.obj
+ 0002:00022180       ??_C@_0DF@ECGN@R6027?$AN?6?9?5not?5enough?5space?5for?5lo@ 0053e180     libc:crt0msg.obj
+ 0002:000221b8       ??_C@_0DF@FKAC@R6026?$AN?6?9?5not?5enough?5space?5for?5st@ 0053e1b8     libc:crt0msg.obj
+ 0002:000221f0       ??_C@_0CG@DPMN@R6025?$AN?6?9?5pure?5virtual?5function?5c@ 0053e1f0     libc:crt0msg.obj
+ 0002:00022218       ??_C@_0DF@CKIP@R6024?$AN?6?9?5not?5enough?5space?5for?5_o@ 0053e218     libc:crt0msg.obj
+ 0002:00022250       ??_C@_0CJ@GGOE@R6019?$AN?6?9?5unable?5to?5open?5console?5@ 0053e250     libc:crt0msg.obj
+ 0002:0002227c       ??_C@_0CB@LBOB@R6018?$AN?6?9?5unexpected?5heap?5error?$AN?6@ 0053e27c     libc:crt0msg.obj
+ 0002:000222a0       ??_C@_0CN@FPEG@R6017?$AN?6?9?5unexpected?5multithread?5@ 0053e2a0     libc:crt0msg.obj
+ 0002:000222d0       ??_C@_0CM@OBIC@R6016?$AN?6?9?5not?5enough?5space?5for?5th@ 0053e2d0     libc:crt0msg.obj
+ 0002:000222fc       ??_C@_0CB@HPAL@?$AN?6abnormal?5program?5termination?$AN?6@ 0053e2fc     libc:crt0msg.obj
+ 0002:00022320       ??_C@_0CM@JOOB@R6009?$AN?6?9?5not?5enough?5space?5for?5en@ 0053e320     libc:crt0msg.obj
+ 0002:0002234c       ??_C@_0CK@OIBL@R6008?$AN?6?9?5not?5enough?5space?5for?5ar@ 0053e34c     libc:crt0msg.obj
+ 0002:00022378       ??_C@_0CF@LKPB@R6002?$AN?6?9?5floating?5point?5not?5load@ 0053e378     libc:crt0msg.obj
+ 0002:000223a0       ??_C@_0CF@JPDF@Microsoft?5Visual?5C?$CL?$CL?5Runtime?5Lib@ 0053e3a0     libc:crt0msg.obj
+ 0002:000223c8       ??_C@_02JJJH@?6?6?$AA@     0053e3c8     libc:crt0msg.obj
+ 0002:000223cc       ??_C@_0BK@DEOK@Runtime?5Error?$CB?6?6Program?3?5?$AA@ 0053e3cc     libc:crt0msg.obj
+ 0002:000223e8       ??_C@_03NAME@?4?4?4?$AA@   0053e3e8     libc:crt0msg.obj
+ 0002:000223ec       ??_C@_0BH@NNCD@?$DMprogram?5name?5unknown?$DO?$AA@ 0053e3ec     libc:crt0msg.obj
+ 0002:00022408       __real@8@3fff8000000000000000 0053e408     libc:testfdiv.obj
+ 0002:00022410       __real@8@4015800bf60000000000 0053e410     libc:testfdiv.obj
+ 0002:00022418       __real@8@4014bffffc0000000000 0053e418     libc:testfdiv.obj
+ 0002:00022420       ??_C@_0BK@JEGK@IsProcessorFeaturePresent?$AA@ 0053e420     libc:testfdiv.obj
+ 0002:0002243c       ??_C@_08OBID@KERNEL32?$AA@ 0053e43c     libc:testfdiv.obj
+ 0002:00022448       __real@8@00000000000000000000 0053e448     libc:cvt.obj
+ 0002:00022450       ??_C@_05OFLO@e?$CL000?$AA@ 0053e450     libc:cvt.obj
+ 0002:00022458       ??_C@_04GGNP@?4com?$AA@    0053e458     libc:stat.obj
+ 0002:00022460       ??_C@_04KBDN@?4bat?$AA@    0053e460     libc:stat.obj
+ 0002:00022468       ??_C@_04LFKF@?4cmd?$AA@    0053e468     libc:stat.obj
+ 0002:00022470       ??_C@_04NFOM@?4exe?$AA@    0053e470     libc:stat.obj
+ 0002:00022478       ___lookuptable             0053e478     libc:output.obj
+ 0002:000224d4       ??_C@_1O@POHA@?$AA?$CI?$AAn?$AAu?$AAl?$AAl?$AA?$CJ?$AA?$AA@ 0053e4d4     libc:output.obj
+ 0002:000224e4       ??_C@_06ONKE@?$CInull?$CJ?$AA@ 0053e4e4     libc:output.obj
+ 0002:000224ec       ??_C@_01A@?$AA?$AA@        0053e4ec     libc:a_str.obj
+ 0002:000224f0       ??_C@_13A@?$AA?$AA?$AA?$AA@ 0053e4f0     libc:a_str.obj
+ 0002:00022518       __DEFAULT_CW_in_mem        0053e518     libc:common.obj
+ 0002:0002251a       __pi_by_2_to_61            0053e51a     libc:common.obj
+ 0002:00022558       __real@8@40008000000000000000 0053e558     libc:powhlp.obj
+ 0002:00022578       ??_C@_0BG@JPLP@Illegal?5byte?5sequence?$AA@ 0053e578     libc:syserr.obj
+ 0002:00022590       ??_C@_0BE@FLBN@Directory?5not?5empty?$AA@ 0053e590     libc:syserr.obj
+ 0002:000225a4       ??_C@_0BJ@KAFL@Function?5not?5implemented?$AA@ 0053e5a4     libc:syserr.obj
+ 0002:000225c0       ??_C@_0BD@CEML@No?5locks?5available?$AA@ 0053e5c0     libc:syserr.obj
+ 0002:000225d4       ??_C@_0BC@GADJ@Filename?5too?5long?$AA@ 0053e5d4     libc:syserr.obj
+ 0002:000225e8       ??_C@_0BK@FNFN@Resource?5deadlock?5avoided?$AA@ 0053e5e8     libc:syserr.obj
+ 0002:00022604       ??_C@_0BB@EALI@Result?5too?5large?$AA@ 0053e604     libc:syserr.obj
+ 0002:00022618       ??_C@_0N@FIAN@Domain?5error?$AA@ 0053e618     libc:syserr.obj
+ 0002:00022628       ??_C@_0M@CLKF@Broken?5pipe?$AA@ 0053e628     libc:syserr.obj
+ 0002:00022634       ??_C@_0P@OFDM@Too?5many?5links?$AA@ 0053e634     libc:syserr.obj
+ 0002:00022644       ??_C@_0BG@OHDM@Read?9only?5file?5system?$AA@ 0053e644     libc:syserr.obj
+ 0002:0002265c       ??_C@_0N@NGPA@Invalid?5seek?$AA@ 0053e65c     libc:syserr.obj
+ 0002:0002266c       ??_C@_0BI@DMFE@No?5space?5left?5on?5device?$AA@ 0053e66c     libc:syserr.obj
+ 0002:00022684       ??_C@_0P@OPNK@File?5too?5large?$AA@ 0053e684     libc:syserr.obj
+ 0002:00022694       ??_C@_0CE@BADJ@Inappropriate?5I?1O?5control?5operat@ 0053e694     libc:syserr.obj
+ 0002:000226b8       ??_C@_0BE@COOK@Too?5many?5open?5files?$AA@ 0053e6b8     libc:syserr.obj
+ 0002:000226cc       ??_C@_0BO@ELHF@Too?5many?5open?5files?5in?5system?$AA@ 0053e6cc     libc:syserr.obj
+ 0002:000226ec       ??_C@_0BB@IHAB@Invalid?5argument?$AA@ 0053e6ec     libc:syserr.obj
+ 0002:00022700       ??_C@_0P@NDNC@Is?5a?5directory?$AA@ 0053e700     libc:syserr.obj
+ 0002:00022710       ??_C@_0BA@JMMO@Not?5a?5directory?$AA@ 0053e710     libc:syserr.obj
+ 0002:00022720       ??_C@_0P@GFAI@No?5such?5device?$AA@ 0053e720     libc:syserr.obj
+ 0002:00022730       ??_C@_0O@KHHM@Improper?5link?$AA@ 0053e730     libc:syserr.obj
+ 0002:00022740       ??_C@_0M@EPHJ@File?5exists?$AA@ 0053e740     libc:syserr.obj
+ 0002:0002274c       ??_C@_0BA@LPOH@Resource?5device?$AA@ 0053e74c     libc:syserr.obj
+ 0002:0002275c       ??_C@_0O@NOFB@Unknown?5error?$AA@ 0053e75c     libc:syserr.obj
+ 0002:0002276c       ??_C@_0M@MLJM@Bad?5address?$AA@ 0053e76c     libc:syserr.obj
+ 0002:00022778       ??_C@_0BC@DJON@Permission?5denied?$AA@ 0053e778     libc:syserr.obj
+ 0002:0002278c       ??_C@_0BB@KDDC@Not?5enough?5space?$AA@ 0053e78c     libc:syserr.obj
+ 0002:000227a0       ??_C@_0CB@BBBH@Resource?5temporarily?5unavailable@ 0053e7a0     libc:syserr.obj
+ 0002:000227c4       ??_C@_0BD@ODIH@No?5child?5processes?$AA@ 0053e7c4     libc:syserr.obj
+ 0002:000227d8       ??_C@_0BE@CDDH@Bad?5file?5descriptor?$AA@ 0053e7d8     libc:syserr.obj
+ 0002:000227ec       ??_C@_0BC@BICL@Exec?5format?5error?$AA@ 0053e7ec     libc:syserr.obj
+ 0002:00022800       ??_C@_0BC@IGMC@Arg?5list?5too?5long?$AA@ 0053e800     libc:syserr.obj
+ 0002:00022814       ??_C@_0BK@HLB@No?5such?5device?5or?5address?$AA@ 0053e814     libc:syserr.obj
+ 0002:00022830       ??_C@_0BD@MPKK@Input?1output?5error?$AA@ 0053e830     libc:syserr.obj
+ 0002:00022844       ??_C@_0BK@ODCM@Interrupted?5function?5call?$AA@ 0053e844     libc:syserr.obj
+ 0002:00022860       ??_C@_0BA@BPKN@No?5such?5process?$AA@ 0053e860     libc:syserr.obj
+ 0002:00022870       ??_C@_0BK@IEMO@No?5such?5file?5or?5directory?$AA@ 0053e870     libc:syserr.obj
+ 0002:0002288c       ??_C@_0BI@IIAE@Operation?5not?5permitted?$AA@ 0053e88c     libc:syserr.obj
+ 0002:000228a4       ??_C@_08KKBH@No?5error?$AA@ 0053e8a4     libc:syserr.obj
+ 0002:000228b0       ??_C@_0BD@NJFP@GetLastActivePopup?$AA@ 0053e8b0     libc:crtmbox.obj
+ 0002:000228c4       ??_C@_0BA@GILI@GetActiveWindow?$AA@ 0053e8c4     libc:crtmbox.obj
+ 0002:000228d4       ??_C@_0M@PKCK@MessageBoxA?$AA@ 0053e8d4     libc:crtmbox.obj
+ 0002:000228e0       ??_C@_0L@HKL@user32?4dll?$AA@ 0053e8e0     libc:crtmbox.obj
+ 0002:00022908       ___dnames                  0053e908     libc:timeset.obj
+ 0002:00022920       ___mnames                  0053e920     libc:timeset.obj
+ 0002:00022948       ??_C@_02JHIA@TZ?$AA@       0053e948     libc:tzset.obj
+ 0002:0002294c       ??_C@_06PAPI@1?$CDQNAN?$AA@ 0053e94c     libc:x10fout.obj
+ 0002:00022954       ??_C@_05BGNL@1?$CDINF?$AA@ 0053e954     libc:x10fout.obj
+ 0002:0002295c       ??_C@_05EDPF@1?$CDIND?$AA@ 0053e95c     libc:x10fout.obj
+ 0002:00022964       ??_C@_06LKFM@1?$CDSNAN?$AA@ 0053e964     libc:x10fout.obj
+ 0002:0002296c       ??_C@_03GAFO@_yn?$AA@      0053e96c     libc:fpexcept.obj
+ 0002:00022970       ??_C@_03GNLD@_y1?$AA@      0053e970     libc:fpexcept.obj
+ 0002:00022974       ??_C@_03MHCE@_y0?$AA@      0053e974     libc:fpexcept.obj
+ 0002:00022978       ??_C@_05PAK@frexp?$AA@     0053e978     libc:fpexcept.obj
+ 0002:00022980       ??_C@_04JKCH@fmod?$AA@     0053e980     libc:fpexcept.obj
+ 0002:00022988       ??_C@_06GGHF@_hypot?$AA@   0053e988     libc:fpexcept.obj
+ 0002:00022990       ??_C@_05JNMC@_cabs?$AA@    0053e990     libc:fpexcept.obj
+ 0002:00022998       ??_C@_05MEKH@ldexp?$AA@    0053e998     libc:fpexcept.obj
+ 0002:000229a0       ??_C@_04KAOJ@modf?$AA@     0053e9a0     libc:fpexcept.obj
+ 0002:000229a8       ??_C@_04EHAJ@fabs?$AA@     0053e9a8     libc:fpexcept.obj
+ 0002:000229b0       ??_C@_05MFBN@floor?$AA@    0053e9b0     libc:fpexcept.obj
+ 0002:000229b8       ??_C@_04JJMP@ceil?$AA@     0053e9b8     libc:fpexcept.obj
+ 0002:000229c0       ??_C@_03JLPI@tan?$AA@      0053e9c0     libc:fpexcept.obj
+ 0002:000229c4       ??_C@_03DLFL@cos?$AA@      0053e9c4     libc:fpexcept.obj
+ 0002:000229c8       ??_C@_03JAMN@sin?$AA@      0053e9c8     libc:fpexcept.obj
+ 0002:000229cc       ??_C@_04LMBE@sqrt?$AA@     0053e9cc     libc:fpexcept.obj
+ 0002:000229d4       ??_C@_05BFPO@atan2?$AA@    0053e9d4     libc:fpexcept.obj
+ 0002:000229dc       ??_C@_04EAGN@atan?$AA@     0053e9dc     libc:fpexcept.obj
+ 0002:000229e4       ??_C@_04OAMO@acos?$AA@     0053e9e4     libc:fpexcept.obj
+ 0002:000229ec       ??_C@_04ELFI@asin?$AA@     0053e9ec     libc:fpexcept.obj
+ 0002:000229f4       ??_C@_04LFAD@tanh?$AA@     0053e9f4     libc:fpexcept.obj
+ 0002:000229fc       ??_C@_04PFKD@cosh?$AA@     0053e9fc     libc:fpexcept.obj
+ 0002:00022a04       ??_C@_04NPAI@sinh?$AA@     0053ea04     libc:fpexcept.obj
+ 0002:00022a0c       ??_C@_05IJHH@log10?$AA@    0053ea0c     libc:fpexcept.obj
+ 0002:00022a14       ??_C@_03BGKD@log?$AA@      0053ea14     libc:fpexcept.obj
+ 0002:00022a18       ??_C@_03EGFG@pow?$AA@      0053ea18     libc:fpexcept.obj
+ 0002:00022a1c       ??_C@_03CDGJ@exp?$AA@      0053ea1c     libc:fpexcept.obj
+ 0002:00022d2c       ??_C@_01PJCK@?4?$AA@       0053ed2c     libc:tempnam.obj
+ 0002:00022d30       ??_C@_01PCFE@?2?$AA@       0053ed30     libc:tempnam.obj
+ 0002:00022d34       ??_C@_03LDNL@TMP?$AA@      0053ed34     libc:tempnam.obj
+ 0002:00022d38       ??_C@_06MICP@CONIN$?$AA@   0053ed38     libc:initcon.obj
+ 0002:00022d40       ??_C@_07GLCC@CONOUT$?$AA@  0053ed40     libc:initcon.obj
+ 0002:00022d48       __IMPORT_DESCRIPTOR_f90SQLLF95 0053ed48     f90sql:f90SQLLF95.dll
+ 0002:00022d5c       __IMPORT_DESCRIPTOR_USER32 0053ed5c     user32:USER32.dll
+ 0002:00022d70       __IMPORT_DESCRIPTOR_KERNEL32 0053ed70     kernel32:KERNEL32.dll
+ 0002:00022d84       __NULL_IMPORT_DESCRIPTOR   0053ed84     f90sql:f90SQLLF95.dll
+ 0003:00000000       ___xc_a                    00540000     libc:crt0init.obj
+ 0003:00000004       ___xc_z                    00540004     libc:crt0init.obj
+ 0003:00000008       ___xi_a                    00540008     libc:crt0init.obj
+ 0003:00000014       ___xi_z                    00540014     libc:crt0init.obj
+ 0003:00000018       ___xp_a                    00540018     libc:crt0init.obj
+ 0003:00000028       ___xp_z                    00540028     libc:crt0init.obj
+ 0003:0000002c       ___xt_a                    0054002c     libc:crt0init.obj
+ 0003:00000030       ___xt_z                    00540030     libc:crt0init.obj
+ 0003:000a0d90       _MODULE@printstuff_        005e0d90     BUDGET.obj
+ 0003:00159c68       _MODULE@commo_             00699c68     BUDGET.obj
+ 0003:002c77a0       _MODULE@fsql_data_         008077a0     AccessSubs.OBJ
+ 0003:00471ae0       _jwe_lca                   009b1ae0     fj90i:jwe_xilc.obj
+ 0003:004744e8       _jwe_efcs                  009b44e8     fj90i:jwe_eerm.obj
+ 0003:00476470       _jwe_iend                  009b6470     fj90i:jwe_iend.obj
+ 0003:00476d80       _jwe_ertb                  009b6d80     fj90i:jwe_ertb.obj
+ 0003:00478894       _jwe_emto                  009b8894     fj90i:jwe_emso.obj
+ 0003:00478898       _jwe_emno                  009b8898     fj90i:jwe_emso.obj
+ 0003:004788a8       _jwe_emio                  009b88a8     fj90i:jwe_emso.obj
+ 0003:004790b0       _jwe_emts                  009b90b0     fj90i:jwe_emss.obj
+ 0003:004790bc       _jwe_emns                  009b90bc     fj90i:jwe_emss.obj
+ 0003:004790dc       _jwe_emis                  009b90dc     fj90i:jwe_emss.obj
+ 0003:0047b548       _jwe_emtf                  009bb548     fj90i:jwe_emsf.obj
+ 0003:0047b550       _jwe_emnf                  009bb550     fj90i:jwe_emsf.obj
+ 0003:0047b568       _jwe_emif                  009bb568     fj90i:jwe_emsf.obj
+ 0003:0047bff8       _jwe_emti                  009bbff8     fj90i:jwe_emsi.obj
+ 0003:0047c018       _jwe_emni                  009bc018     fj90i:jwe_emsi.obj
+ 0003:0047c060       _jwe_emii                  009bc060     fj90i:jwe_emsi.obj
+ 0003:0047cc40       _jwe_emtx                  009bcc40     fj90i:jwe_emsx.obj
+ 0003:0047cc4c       _jwe_emnx                  009bcc4c     fj90i:jwe_emsx.obj
+ 0003:0047cc6c       _jwe_emix                  009bcc6c     fj90i:jwe_emsx.obj
+ 0003:0047d418       _jwe_edeb                  009bd418     fj90i:jwe_ems5.obj
+ 0003:0047d800       _jwe_esub                  009bd800     fj90i:jwe_ems5.obj
+ 0003:0047dd40       _jwe_esyt                  009bdd40     fj90i:jwe_ems5.obj
+ 0003:0047e020       _jwe_emt5                  009be020     fj90i:jwe_ems5.obj
+ 0003:0047e02c       _jwe_emn5                  009be02c     fj90i:jwe_ems5.obj
+ 0003:0047e04c       _jwe_emi5                  009be04c     fj90i:jwe_ems5.obj
+ 0003:0047f1b0       _jwe_efn1                  009bf1b0     fj90i:jwe_ems4.obj
+ 0003:00480188       _jwe_efn2                  009c0188     fj90i:jwe_ems4.obj
+ 0003:004805e8       _jwe_emt4                  009c05e8     fj90i:jwe_ems4.obj
+ 0003:004805f0       _jwe_emn4                  009c05f0     fj90i:jwe_ems4.obj
+ 0003:00480608       _jwe_emi4                  009c0608     fj90i:jwe_ems4.obj
+ 0003:00480b98       _jwe_eili                  009c0b98     fj90i:jwe_ems3.obj
+ 0003:00481130       _jwe_eifm                  009c1130     fj90i:jwe_ems3.obj
+ 0003:00481848       _jwe_eide                  009c1848     fj90i:jwe_ems3.obj
+ 0003:00481b28       _jwe_emt3                  009c1b28     fj90i:jwe_ems3.obj
+ 0003:00481b34       _jwe_emn3                  009c1b34     fj90i:jwe_ems3.obj
+ 0003:00481b54       _jwe_emi3                  009c1b54     fj90i:jwe_ems3.obj
+ 0003:00481ff0       _jwe_eifc                  009c1ff0     fj90i:jwe_ems2.obj
+ 0003:00482c20       _jwe_eisp                  009c2c20     fj90i:jwe_ems2.obj
+ 0003:004832f8       _jwe_eics                  009c32f8     fj90i:jwe_ems2.obj
+ 0003:004834d8       _jwe_emt2                  009c34d8     fj90i:jwe_ems2.obj
+ 0003:004834e4       _jwe_emn2                  009c34e4     fj90i:jwe_ems2.obj
+ 0003:00483504       _jwe_emi2                  009c3504     fj90i:jwe_ems2.obj
+ 0003:00483720       _jwe_estm                  009c3720     fj90i:jwe_ems1.obj
+ 0003:00483980       _jwe_eexm                  009c3980     fj90i:jwe_ems1.obj
+ 0003:00483ba0       _jwe_eimc                  009c3ba0     fj90i:jwe_ems1.obj
+ 0003:00483d20       _jwe_emt1                  009c3d20     fj90i:jwe_ems1.obj
+ 0003:00483d30       _jwe_emn1                  009c3d30     fj90i:jwe_ems1.obj
+ 0003:00483d50       _jwe_emi1                  009c3d50     fj90i:jwe_ems1.obj
+ 0003:00483d60       __aexit_rtn                009c3d60     libc:crt0.obj
+ 0003:00483d64       ___app_type                009c3d64     libc:crt0.obj
+ 0003:00483d68       __fltused                  009c3d68     libc:fpinit.obj
+ 0003:00483d6c       __ldused                   009c3d6c     libc:fpinit.obj
+ 0003:00483d70       __FPinit                   009c3d70     libc:fpinit.obj
+ 0003:00483d74       __FPmtinit                 009c3d74     libc:fpinit.obj
+ 0003:00483d78       __FPmtterm                 009c3d78     libc:fpinit.obj
+ 0003:00483d80       __iob                      009c3d80     libc:_file.obj
+ 0003:00484000       __pctype                   009c4000     libc:ctype.obj
+ 0003:00484004       __pwctype                  009c4004     libc:ctype.obj
+ 0003:00484008       __ctype                    009c4008     libc:ctype.obj
+ 0003:0048420c       ___mb_cur_max              009c420c     libc:nlsdata1.obj
+ 0003:00484210       ___decimal_point           009c4210     libc:nlsdata1.obj
+ 0003:00484214       ___decimal_point_length    009c4214     libc:nlsdata1.obj
+ 0003:00484220       __half                     009c4220     libc:pow.obj
+ 0003:00484230       __XcptActTab               009c4230     libc:winxfltr.obj
+ 0003:004842a8       __First_FPE_Indx           009c42a8     libc:winxfltr.obj
+ 0003:004842ac       __Num_FPE                  009c42ac     libc:winxfltr.obj
+ 0003:004842b0       __XcptActTabCount          009c42b0     libc:winxfltr.obj
+ 0003:004842b4       __fpecode                  009c42b4     libc:winxfltr.obj
+ 0003:004842b8       ___badioinfo               009c42b8     libc:ioinit.obj
+ 0003:004842c0       __amblksiz                 009c42c0     libc:heapinit.obj
+ 0003:004842c4       __NLG_Destination          009c42c4     libc:exsup.obj
+ 0003:00484368       __cfltcvt_tab              009c4368     libc:cmiscdat.obj
+ 0003:004844e8       ___nullstring              009c44e8     libc:output.obj
+ 0003:004844ec       ___wnullstring             009c44ec     libc:output.obj
+ 0003:004844f0       ___old_small_block_heap    009c44f0     libc:sbheap.obj
+ 0003:00486514       ___old_sbh_threshold       009c6514     libc:sbheap.obj
+ 0003:00486520       __infinity                 009c6520     libc:87tran.obj
+ 0003:0048652a       __minfinity                009c652a     libc:87tran.obj
+ 0003:00486534       __logemax                  009c6534     libc:87tran.obj
+ 0003:00486564       __OP_EXPjmptab             009c6564     libc:87tran.obj
+ 0003:00486590       __indefinite               009c6590     libc:87disp.obj
+ 0003:0048659a       __piby2                    009c659a     libc:87disp.obj
+ 0003:004865ac       __cpower                   009c65ac     libc:87disp.obj
+ 0003:004865c0       __sys_errlist              009c65c0     libc:syserr.obj
+ 0003:00486670       __sys_nerr                 009c6670     libc:syserr.obj
+ 0003:004867a0       __timezone                 009c67a0     libc:timeset.obj
+ 0003:004867a4       __daylight                 009c67a4     libc:timeset.obj
+ 0003:004867a8       __dstbias                  009c67a8     libc:timeset.obj
+ 0003:0048682c       __tzname                   009c682c     libc:timeset.obj
+ 0003:00486854       __lpdays                   009c6854     libc:days.obj
+ 0003:00486888       __days                     009c6888     libc:days.obj
+ 0003:00486a20       __d_inf                    009c6a20     libc:util.obj
+ 0003:00486a28       __d_ind                    009c6a28     libc:util.obj
+ 0003:00486a30       __d_max                    009c6a30     libc:util.obj
+ 0003:00486a38       __d_min                    009c6a38     libc:util.obj
+ 0003:00486a40       __d_mzero                  009c6a40     libc:util.obj
+ 0003:00486b28       __matherr_flag             009c6b28     libc:matherr.obj
+ 0003:00486b48       __pow10pos                 009c6b48     libc:constpow.obj
+ 0003:00486ca8       __pow10neg                 009c6ca8     libc:constpow.obj
+ 0003:00486e10       __tmpoff                   009c6e10     libc:rmtmp.obj
+ 0003:00486e14       __tempoff                  009c6e14     libc:rmtmp.obj
+ 0003:00486e18       __coninpfh                 009c6e18     libc:initcon.obj
+ 0003:00486e1c       __confh                    009c6e1c     libc:initcon.obj
+ 0003:00812238       _jwe_xsfc                  00d52238     fj90i:jwe_xstp.obj
+ 0003:0081223c       _jwe_act                   00d5223c     fj90i:jwe_xalc.obj
+ 0003:00812280       _jwe_x_init                00d52280     fj90i:jwe_xint.obj
+ 0003:008122b0       _jwe_efca                  00d522b0     fj90i:jwe_eerm.obj
+ 0003:00812408       _jwe_eftb                  00d52408     fj90i:jwe_etbm.obj
+ 0003:00812500       __aenvptr                  00d52500     libc:crt0.obj
+ 0003:00812504       __wenvptr                  00d52504     libc:crt0.obj
+ 0003:00812508       ___error_mode              00d52508     libc:crt0.obj
+ 0003:0081250c       ___fastflag                00d5250c     libc:fpinit.obj
+ 0003:00812510       __adjust_fdiv              00d52510     libc:fpinit.obj
+ 0003:00812514       __cflush                   00d52514     libc:_file.obj
+ 0003:00812518       _errno                     00d52518     libc:crt0dat.obj
+ 0003:0081251c       __doserrno                 00d5251c     libc:crt0dat.obj
+ 0003:00812520       __umaskval                 00d52520     libc:crt0dat.obj
+ 0003:00812524       __osver                    00d52524     libc:crt0dat.obj
+ 0003:00812528       __winver                   00d52528     libc:crt0dat.obj
+ 0003:0081252c       __winmajor                 00d5252c     libc:crt0dat.obj
+ 0003:00812530       __winminor                 00d52530     libc:crt0dat.obj
+ 0003:00812534       ___argc                    00d52534     libc:crt0dat.obj
+ 0003:00812538       ___argv                    00d52538     libc:crt0dat.obj
+ 0003:0081253c       ___wargv                   00d5253c     libc:crt0dat.obj
+ 0003:00812540       __environ                  00d52540     libc:crt0dat.obj
+ 0003:00812544       ___initenv                 00d52544     libc:crt0dat.obj
+ 0003:00812548       __wenviron                 00d52548     libc:crt0dat.obj
+ 0003:0081254c       ___winitenv                00d5254c     libc:crt0dat.obj
+ 0003:00812550       __pgmptr                   00d52550     libc:crt0dat.obj
+ 0003:00812554       __wpgmptr                  00d52554     libc:crt0dat.obj
+ 0003:00812558       __exitflag                 00d52558     libc:crt0dat.obj
+ 0003:0081255c       __C_Termination_Done       00d5255c     libc:crt0dat.obj
+ 0003:00812560       __C_Exit_Done              00d52560     libc:crt0dat.obj
+ 0003:0081258c       __pxcptinfoptrs            00d5258c     libc:winxfltr.obj
+ 0003:00812698       __adbgmsg                  00d52698     libc:crt0msg.obj
+ 0003:008126ac       __stdbuf                   00d526ac     libc:_sftbuf.obj
+ 0003:008126bc       __newmode                  00d526bc     libc:_newmode.obj
+ 0003:008126c0       ?_pnhHeap@@3P6AHI@ZA       00d526c0     libc:handler.obj
+ 0003:008126c8       ___lc_handle               00d526c8     libc:nlsdata2.obj
+ 0003:008126e0       ___lc_codepage             00d526e0     libc:nlsdata2.obj
+ 0003:008126e4       ___lc_collate_cp           00d526e4     libc:nlsdata2.obj
+ 0003:00812804       __commode                  00d52804     libc:ncommode.obj
+ 0003:00812808       __fmode                    00d52808     libc:txtmode.obj
+ 0003:0081280c       __old_pfxlen               00d5280c     libc:rmtmp.obj
+ 0003:00812820       _MODULE@__fsql_data_       00d52820     <common>
+ 0003:00dcfb60       _iarqi_                    0130fb60     <common>
+ 0003:00dcfdc0       _flow_                     0130fdc0     <common>
+ 0003:00dd1bc0       _MODULE@f90sqlvariables_   01311bc0     <common>
+ 0003:00de5460       _MODULE@__printstuff_      01325460     <common>
+ 0003:0317ec20       _MODULE@subvars_           036bec20     <common>
+ 0003:03193120       _MODULE@__commo_           036d3120     <common>
+ 0003:03257850       _MODULE@paramdim_          03797850     <common>
+ 0003:0325785c       _jwe_etb_fca               0379785c     <common>
+ 0003:03257860       _heni_add                  03797860     <common>
+ 0003:03257864       _recur_call                03797864     <common>
+ 0003:03257868       _move_top                  03797868     <common>
+ 0003:0325786c       _item_a                    0379786c     <common>
+ 0003:03257870       _top_addr                  03797870     <common>
+ 0003:03257874       _arry_num                  03797874     <common>
+ 0003:03257878       _scla_num                  03797878     <common>
+ 0003:0325787c       _type_flag                 0379787c     <common>
+ 0003:03257880       __fdivflag                 03797880     <common>
+ 0003:032578a0       _jwe_eprm                  037978a0     <common>
+ 0003:03257940       _jwe_iuia                  03797940     <common>
+ 0003:03257944       _jwe_ifca                  03797944     <common>
+ 0003:03257948       ___mbcodepage              03797948     <common>
+ 0003:03257950       ___mbulinfo                03797950     <common>
+ 0003:0325795c       ___ismbcodepage            0379795c     <common>
+ 0003:03257960       __mbcasemap                03797960     <common>
+ 0003:03257a60       __mbctype                  03797a60     <common>
+ 0003:03257b64       ___mblcid                  03797b64     <common>
+ 0003:03257b68       ___sbh_sizeHeaderList      03797b68     <common>
+ 0003:03257b6c       ___sbh_indGroupDefer       03797b6c     <common>
+ 0003:03257b70       ___sbh_pHeaderScan         03797b70     <common>
+ 0003:03257b74       ___sbh_initialized         03797b74     <common>
+ 0003:03257b78       ___sbh_pHeaderDefer        03797b78     <common>
+ 0003:03257b7c       ___sbh_cntHeaderList       03797b7c     <common>
+ 0003:03257b80       ___sbh_pHeaderList         03797b80     <common>
+ 0003:03257b84       ___sbh_threshold           03797b84     <common>
+ 0003:03257b88       __crtheap                  03797b88     <common>
+ 0003:03257b8c       ___active_heap             03797b8c     <common>
+ 0003:03257ba0       ___pioinfo                 03797ba0     <common>
+ 0003:03257ca0       __nhandle                  03797ca0     <common>
+ 0003:03257ca4       ___env_initialized         03797ca4     <common>
+ 0003:03257ca8       ___mbctype_initialized     03797ca8     <common>
+ 0003:03257cac       ___onexitend               03797cac     <common>
+ 0003:03257cb0       ___onexitbegin             03797cb0     <common>
+ 0003:03257cb4       ___piob                    03797cb4     <common>
+ 0003:03257cc0       __bufin                    03797cc0     <common>
+ 0003:03258cc0       __nstream                  03798cc0     <common>
+ 0003:03258cc4       __acmdln                   03798cc4     <common>
+
+ entry point at        0001:00108f67
+
+ Static symbols
+
+ 0001:00108cf0       _jwe_etb_sort              0050ccf0 f   fj90i:jwe_etbf.obj
+ 0001:00108170       _jwe_ipsd1                 0050c170 f   fj90i:jwe_ipsd.obj
+ 0001:001074a0       _jwe_ibfd1                 0050b4a0 f   fj90i:jwe_ibfd.obj
+ 0001:00105bf0       _jwe_itfn1                 00509bf0 f   fj90i:jwe_itfn.obj
+ 0001:00104ac0       _jwe_ifgf1                 00508ac0 f   fj90i:jwe_ifgf.obj
+ 0001:00103b90       _jwe_icpf1                 00507b90 f   fj90i:jwe_icpf.obj
+ 0001:00103cb0       _jwe_icpf2                 00507cb0 f   fj90i:jwe_icpf.obj
+ 0001:00103da0       _jwe_icpf3                 00507da0 f   fj90i:jwe_icpf.obj
+ 0001:00103ea0       _jwe_icpf4                 00507ea0 f   fj90i:jwe_icpf.obj
+ 0001:00103ff0       _jwe_icpf5                 00507ff0 f   fj90i:jwe_icpf.obj
+ 0001:001030e0       _jwe_ifpf1                 005070e0 f   fj90i:jwe_ifpf.obj
+ 0001:001032e0       _jwe_ifpf2                 005072e0 f   fj90i:jwe_ifpf.obj
+ 0001:00103470       _jwe_ifpf3                 00507470 f   fj90i:jwe_ifpf.obj
+ 0001:001026a0       _jwe_ibpd1                 005066a0 f   fj90i:jwe_ibpd.obj
+ 0001:00101ed0       _jwe_iupd1                 00505ed0 f   fj90i:jwe_iupd.obj
+ 0001:00101540       _jwe_idgw                  00505540 f   fj90i:jwe_idgt.obj
+ 0001:00101760       _jwe_idgr                  00505760 f   fj90i:jwe_idgt.obj
+ 0001:000fda60       _jwe_eied                  00501a60 f   fj90i:jwe_emsg.obj
+ 0001:000fd1d0       _jwe_ifop1                 005011d0 f   fj90i:jwe_ifop.obj
+ 0001:000fab50       _jwe_e_cnv_e16c            004feb50 f   fj90i:jwe_etbm.obj
+ 0001:000fabb0       _jwe_e_mk_tb_tbl           004febb0 f   fj90i:jwe_etbm.obj
+ 0001:000fb050       _jwe_e_free_tbc            004ff050 f   fj90i:jwe_etbm.obj
+ 0001:000f9a80       _jwe_iend_stdfile          004fda80 f   fj90i:jwe_iend.obj
+ 0001:000f9170       _jwe_esye                  004fd170 f   fj90i:jwe_errr.obj
+ 0001:000f86e1       _chk_eflags_id             004fc6e1 f   fj90i:jwe_xcpu.obj
+ 0001:000f8703       _cpuid                     004fc703 f   fj90i:jwe_xcpu.obj
+ 0001:000f7150       _jwe_ifps1                 004fb150 f   fj90i:jwe_ifps.obj
+ 0001:000f71d0       _jwe_ifps2                 004fb1d0 f   fj90i:jwe_ifps.obj
+ 0001:000f72a0       _jwe_ifps3                 004fb2a0 f   fj90i:jwe_ifps.obj
+ 0001:000f69e0       _jwe_icpt1                 004fa9e0 f   fj90i:jwe_icpt.obj
+ 0001:000f6c70       _jwe_icpt2                 004fac70 f   fj90i:jwe_icpt.obj
+ 0001:000f6d40       _jwe_icpt3                 004fad40 f   fj90i:jwe_icpt.obj
+ 0001:000f6270       _jwe_icps1                 004fa270 f   fj90i:jwe_icps.obj
+ 0001:000f64b0       _jwe_icps2                 004fa4b0 f   fj90i:jwe_icps.obj
+ 0001:000f6580       _jwe_icps3                 004fa580 f   fj90i:jwe_icps.obj
+ 0001:000f5d50       _jwe_idce                  004f9d50 f   fj90i:jwe_idcf.obj
+ 0001:000f0120       _jwe_iridd                 004f4120 f   fj90i:jwe_irio.obj
+ 0001:000f0480       _jwe_iricq                 004f4480 f   fj90i:jwe_irio.obj
+ 0001:000f1240       _jwe_irocd                 004f5240 f   fj90i:jwe_irio.obj
+ 0001:000f1a60       _jwe_idivmod               004f5a60 f   fj90i:jwe_irio.obj
+ 0001:000f1b50       _jwe_irocq                 004f5b50 f   fj90i:jwe_irio.obj
+ 0001:000f2450       _jwe_igetfig               004f6450 f   fj90i:jwe_irio.obj
+ 0001:000f2500       _jwe_imul                  004f6500 f   fj90i:jwe_irio.obj
+ 0001:000f2770       _jwe_inormalize            004f6770 f   fj90i:jwe_irio.obj
+ 0001:000f2920       _jwe_iaddxq                004f6920 f   fj90i:jwe_irio.obj
+ 0001:000f2aa0       _jwe_igetdec               004f6aa0 f   fj90i:jwe_irio.obj
+ 0001:000f2b60       _jwe_ixqtoq                004f6b60 f   fj90i:jwe_irio.obj
+ 0001:000ec850       _jwe_iclp                  004f0850 f   fj90i:jwe_icft.obj
+ 0001:000ec970       _jwe_icrp                  004f0970 f   fj90i:jwe_icft.obj
+ 0001:000ecac0       _jwe_icfd                  004f0ac0 f   fj90i:jwe_icft.obj
+ 0001:000ecc30       _jwe_icq_                  004f0c30 f   fj90i:jwe_icft.obj
+ 0001:000ece90       _jwe_ice_                  004f0e90 f   fj90i:jwe_icft.obj
+ 0001:000ed150       _jwe_ici_                  004f1150 f   fj90i:jwe_icft.obj
+ 0001:000ed2b0       _jwe_ict_                  004f12b0 f   fj90i:jwe_icft.obj
+ 0001:000ed510       _jwe_ictd                  004f1510 f   fj90i:jwe_icft.obj
+ 0001:000ed590       _jwe_ica_                  004f1590 f   fj90i:jwe_icft.obj
+ 0001:000ed610       _jwe_iclz                  004f1610 f   fj90i:jwe_icft.obj
+ 0001:000ed7f0       _jwe_icx_                  004f17f0 f   fj90i:jwe_icft.obj
+ 0001:000ed8d0       _jwe_icsr                  004f18d0 f   fj90i:jwe_icft.obj
+ 0001:000ed980       _jwe_ics_                  004f1980 f   fj90i:jwe_icft.obj
+ 0001:000eda80       _jwe_icb_                  004f1a80 f   fj90i:jwe_icft.obj
+ 0001:000edd00       _jwe_ico_                  004f1d00 f   fj90i:jwe_icft.obj
+ 0001:000ede90       _jwe_iccl                  004f1e90 f   fj90i:jwe_icft.obj
+ 0001:000edf20       _jwe_icbl                  004f1f20 f   fj90i:jwe_icft.obj
+ 0001:000edf30       _jwe_iccn                  004f1f30 f   fj90i:jwe_icft.obj
+ 0001:000edfa0       _jwe_icnm                  004f1fa0 f   fj90i:jwe_icft.obj
+ 0001:000ee080       _jwe_icng                  004f2080 f   fj90i:jwe_icft.obj
+ 0001:000ee220       _jwe_icp_                  004f2220 f   fj90i:jwe_icft.obj
+ 0001:000ee2b0       _jwe_icg_                  004f22b0 f   fj90i:jwe_icft.obj
+ 0001:000ee420       _jwe_ich_                  004f2420 f   fj90i:jwe_icft.obj
+ 0001:000ee6c0       _jwe_icap                  004f26c0 f   fj90i:jwe_icft.obj
+ 0001:000ee9c0       _jwe_icch                  004f29c0 f   fj90i:jwe_icft.obj
+ 0001:000eedf0       _jwe_icc2                  004f2df0 f   fj90i:jwe_icft.obj
+ 0001:000eefb0       _jwe_icrm                  004f2fb0 f   fj90i:jwe_icft.obj
+ 0001:000ef560       _jwe_ice1                  004f3560 f   fj90i:jwe_icft.obj
+ 0001:000ef660       _jwe_ice2                  004f3660 f   fj90i:jwe_icft.obj
+ 0001:000ef690       _jwe_icer                  004f3690 f   fj90i:jwe_icft.obj
+ 0001:000ef7a0       _jwe_ic_w                  004f37a0 f   fj90i:jwe_icft.obj
+ 0001:000ef880       _jwe_icwd                  004f3880 f   fj90i:jwe_icft.obj
+ 0001:000ef930       _jwe_ic_e                  004f3930 f   fj90i:jwe_icft.obj
+ 0001:000efa10       _jwe_icfl                  004f3a10 f   fj90i:jwe_icft.obj
+ 0001:000efa70       _jwe_icgt                  004f3a70 f   fj90i:jwe_icft.obj
+ 0001:000efad0       _jwe_icpt                  004f3ad0 f   fj90i:jwe_icft.obj
+ 0001:000efb60       _jwe_iccv                  004f3b60 f   fj90i:jwe_icft.obj
+ 0001:000efc00       _jwe_icn_                  004f3c00 f   fj90i:jwe_icft.obj
+ 0001:000efc10       _jwe_icbe                  004f3c10 f   fj90i:jwe_icft.obj
+ 0001:000efc20       _jwe_icsk                  004f3c20 f   fj90i:jwe_icft.obj
+ 0001:000efc70       _jwe_iclf                  004f3c70 f   fj90i:jwe_icft.obj
+ 0001:000efcb0       _jwe_icct                  004f3cb0 f   fj90i:jwe_icft.obj
+ 0001:000efd70       _jwe_icw2                  004f3d70 f   fj90i:jwe_icft.obj
+ 0001:000efe10       _jwe_icr_                  004f3e10 f   fj90i:jwe_icft.obj
+ 0001:000eb410       _jwe_insu                  004ef410 f   fj90i:jwe_inas.obj
+ 0001:000eb680       _jwe_insr                  004ef680 f   fj90i:jwe_inas.obj
+ 0001:000eb740       _jwe_inmk                  004ef740 f   fj90i:jwe_inas.obj
+ 0001:000ec5c0       _jwe_inrr                  004f05c0 f   fj90i:jwe_inas.obj
+ 0001:000e81d0       _jwe_inrb                  004ec1d0 f   fj90i:jwe_inad.obj
+ 0001:000e8440       _jwe_inbs                  004ec440 f   fj90i:jwe_inad.obj
+ 0001:000e84c0       _jwe_inna                  004ec4c0 f   fj90i:jwe_inad.obj
+ 0001:000e8790       _jwe_innc                  004ec790 f   fj90i:jwe_inad.obj
+ 0001:000e8930       _jwe_inpa                  004ec930 f   fj90i:jwe_inad.obj
+ 0001:000e8b60       _jwe_inpg                  004ecb60 f   fj90i:jwe_inad.obj
+ 0001:000e8cf0       _jwe_inps                  004eccf0 f   fj90i:jwe_inad.obj
+ 0001:000e9130       _jwe_inse                  004ed130 f   fj90i:jwe_inad.obj
+ 0001:000e94d0       _jwe_inm1                  004ed4d0 f   fj90i:jwe_inad.obj
+ 0001:000e96e0       _jwe_inpe                  004ed6e0 f   fj90i:jwe_inad.obj
+ 0001:000e97c0       _jwe_inee                  004ed7c0 f   fj90i:jwe_inad.obj
+ 0001:000e9960       _jwe_inpu                  004ed960 f   fj90i:jwe_inad.obj
+ 0001:000e9ad0       _jwe_inue                  004edad0 f   fj90i:jwe_inad.obj
+ 0001:000e9b60       _jwe_inqn                  004edb60 f   fj90i:jwe_inad.obj
+ 0001:000e9bc0       _jwe_inqt                  004edbc0 f   fj90i:jwe_inad.obj
+ 0001:000e9c60       _jwe_incv                  004edc60 f   fj90i:jwe_inad.obj
+ 0001:000e9df0       _jwe_incs                  004eddf0 f   fj90i:jwe_inad.obj
+ 0001:000e9e90       _jwe_inct                  004ede90 f   fj90i:jwe_inad.obj
+ 0001:000e9f90       _jwe_inm2                  004edf90 f   fj90i:jwe_inad.obj
+ 0001:000ea150       _jwe_inm3                  004ee150 f   fj90i:jwe_inad.obj
+ 0001:000ea260       _jwe_inet                  004ee260 f   fj90i:jwe_inad.obj
+ 0001:000ea2e0       _jwe_inpt                  004ee2e0 f   fj90i:jwe_inad.obj
+ 0001:000ea340       _jwe_incd                  004ee340 f   fj90i:jwe_inad.obj
+ 0001:000e7b40       _jwe_ilie                  004ebb40 f   fj90i:jwe_ielo.obj
+ 0001:000e7d80       _jwe_ilze                  004ebd80 f   fj90i:jwe_ielo.obj
+ 0001:000e7e20       _jwe_iloe                  004ebe20 f   fj90i:jwe_ielo.obj
+ 0001:000e7f00       _jwe_ilbe                  004ebf00 f   fj90i:jwe_ielo.obj
+ 0001:000e7fd0       _jwe_ilfe                  004ebfd0 f   fj90i:jwe_ielo.obj
+ 0001:000e6ef0       _dummy                     004eaef0 f   fj90i:jwe_xexs.obj
+ 0001:000e6f00       _jwe_xamg                  004eaf00 f   fj90i:jwe_xexs.obj
+ 0001:000e6fa0       _jwe_xeed                  004eafa0 f   fj90i:jwe_xexs.obj
+ 0001:000e5200       _jwe_errproc               004e9200 f   fj90i:jwe_iflc.obj
+ 0001:000e46e0       _jwe_iade                  004e86e0 f   fj90i:jwe_iadc.obj
+ 0001:000e3ca0       _jwe_isc0                  004e7ca0 f   fj90i:jwe_iscf.obj
+ 0001:000e3d30       _jwe_isc1                  004e7d30 f   fj90i:jwe_iscf.obj
+ 0001:000e3d90       _jwe_isc2                  004e7d90 f   fj90i:jwe_iscf.obj
+ 0001:000e3e80       _jwe_isc3                  004e7e80 f   fj90i:jwe_iscf.obj
+ 0001:000e3f10       _jwe_isc4                  004e7f10 f   fj90i:jwe_iscf.obj
+ 0001:000e3f30       _jwe_isc5                  004e7f30 f   fj90i:jwe_iscf.obj
+ 0001:000e3f40       _jwe_isc6                  004e7f40 f   fj90i:jwe_iscf.obj
+ 0001:000e3f70       _jwe_isc7                  004e7f70 f   fj90i:jwe_iscf.obj
+ 0001:000e3ff0       _jwe_isc8                  004e7ff0 f   fj90i:jwe_iscf.obj
+ 0001:000e40a0       _jwe_isc9                  004e80a0 f   fj90i:jwe_iscf.obj
+ 0001:000e40b0       _jwe_is10                  004e80b0 f   fj90i:jwe_iscf.obj
+ 0001:000e40c0       _jwe_is11                  004e80c0 f   fj90i:jwe_iscf.obj
+ 0001:000e40d0       _jwe_iser                  004e80d0 f   fj90i:jwe_iscf.obj
+ 0001:000e2e70       _jwe_ilip                  004e6e70 f   fj90i:jwe_ildi.obj
+ 0001:000e2ff0       _jwe_iled                  004e6ff0 f   fj90i:jwe_ildi.obj
+ 0001:000e38a0       _jwe_il_r                  004e78a0 f   fj90i:jwe_ildi.obj
+ 0001:000e1410       _jwe_ilor                  004e5410 f   fj90i:jwe_ildo.obj
+ 0001:000e25b0       _jwe_il_c                  004e65b0 f   fj90i:jwe_ildo.obj
+ 0001:000e2670       _jwe_il_r                  004e6670 f   fj90i:jwe_ildo.obj
+ 0001:000e2990       _jwe_iloc                  004e6990 f   fj90i:jwe_ildo.obj
+ 0001:000e2b40       _jwe_iloe                  004e6b40 f   fj90i:jwe_ildo.obj
+ 0001:000dd8d0       _jwe_iife                  004e18d0 f   fj90i:jwe_iedi.obj
+ 0001:000dda10       _jwe_iiip                  004e1a10 f   fj90i:jwe_iedi.obj
+ 0001:000ddcb0       _jwe_iimv                  004e1cb0 f   fj90i:jwe_iedi.obj
+ 0001:000ddd90       _jwe_iidp                  004e1d90 f   fj90i:jwe_iedi.obj
+ 0001:000ddf80       _jwe_idmv                  004e1f80 f   fj90i:jwe_iedi.obj
+ 0001:000de050       _jwe_iiex                  004e2050 f   fj90i:jwe_iedi.obj
+ 0001:000de160       _jwe_iexp                  004e2160 f   fj90i:jwe_iedi.obj
+ 0001:000de290       _jwe_iied                  004e2290 f   fj90i:jwe_iedi.obj
+ 0001:000de3b0       _jwe_iiif                  004e23b0 f   fj90i:jwe_iedi.obj
+ 0001:000de480       _jwe_iiec                  004e2480 f   fj90i:jwe_iedi.obj
+ 0001:000de4d0       _jwe_iieo                  004e24d0 f   fj90i:jwe_iedi.obj
+ 0001:000de570       _jwe_iiri                  004e2570 f   fj90i:jwe_iedi.obj
+ 0001:000de670       _jwe_iini                  004e2670 f   fj90i:jwe_iedi.obj
+ 0001:000de7d0       _jwe_iiie                  004e27d0 f   fj90i:jwe_iedi.obj
+ 0001:000deee0       _jwe_iile                  004e2ee0 f   fj90i:jwe_iedi.obj
+ 0001:000df1f0       _jwe_iize                  004e31f0 f   fj90i:jwe_iedi.obj
+ 0001:000df610       _jwe_iizs                  004e3610 f   fj90i:jwe_iedi.obj
+ 0001:000df9a0       _jwe_iiae                  004e39a0 f   fj90i:jwe_iedi.obj
+ 0001:000dfa40       _jwe_iiaw                  004e3a40 f   fj90i:jwe_iedi.obj
+ 0001:000dfba0       _jwe_iire                  004e3ba0 f   fj90i:jwe_iedi.obj
+ 0001:000dfd20       _jwe_iibe                  004e3d20 f   fj90i:jwe_iedi.obj
+ 0001:000e00b0       _jwe_iibs                  004e40b0 f   fj90i:jwe_iedi.obj
+ 0001:000e0390       _jwe_iioe                  004e4390 f   fj90i:jwe_iedi.obj
+ 0001:000e0700       _jwe_iios                  004e4700 f   fj90i:jwe_iedi.obj
+ 0001:000e0a10       _jwe_iige                  004e4a10 f   fj90i:jwe_iedi.obj
+ 0001:000e0a30       _jwe_iine                  004e4a30 f   fj90i:jwe_iedi.obj
+ 0001:000e0a40       _jwe_iief                  004e4a40 f   fj90i:jwe_iedi.obj
+ 0001:000e0e30       _jwe_iiqe                  004e4e30 f   fj90i:jwe_iedi.obj
+ 0001:000da840       _jwe_iofe                  004de840 f   fj90i:jwe_iedo.obj
+ 0001:000daab0       _jwe_ioed                  004deab0 f   fj90i:jwe_iedo.obj
+ 0001:000db430       _jwe_ior0                  004df430 f   fj90i:jwe_iedo.obj
+ 0001:000db5c0       _jwe_ioni                  004df5c0 f   fj90i:jwe_iedo.obj
+ 0001:000db680       _jwe_ioic                  004df680 f   fj90i:jwe_iedo.obj
+ 0001:000db8a0       _jwe_ioge                  004df8a0 f   fj90i:jwe_iedo.obj
+ 0001:000db8e0       _jwe_iocl                  004df8e0 f   fj90i:jwe_iedo.obj
+ 0001:000db910       _jwe_ioie                  004df910 f   fj90i:jwe_iedo.obj
+ 0001:000dbbd0       _jwe_ioig                  004dfbd0 f   fj90i:jwe_iedo.obj
+ 0001:000dbe70       _jwe_iole                  004dfe70 f   fj90i:jwe_iedo.obj
+ 0001:000dbf50       _jwe_ioaw                  004dff50 f   fj90i:jwe_iedo.obj
+ 0001:000dbfe0       _jwe_ioae                  004dffe0 f   fj90i:jwe_iedo.obj
+ 0001:000dc010       _jwe_iozs                  004e0010 f   fj90i:jwe_iedo.obj
+ 0001:000dc260       _jwe_ioze                  004e0260 f   fj90i:jwe_iedo.obj
+ 0001:000dc460       _jwe_ioen                  004e0460 f   fj90i:jwe_iedo.obj
+ 0001:000dc910       _jwe_ioes                  004e0910 f   fj90i:jwe_iedo.obj
+ 0001:000dccb0       _jwe_iore                  004e0cb0 f   fj90i:jwe_iedo.obj
+ 0001:000dcd40       _jwe_iobs                  004e0d40 f   fj90i:jwe_iedo.obj
+ 0001:000dd030       _jwe_iobe                  004e1030 f   fj90i:jwe_iedo.obj
+ 0001:000dd2e0       _jwe_ioos                  004e12e0 f   fj90i:jwe_iedo.obj
+ 0001:000dd690       _jwe_iooe                  004e1690 f   fj90i:jwe_iedo.obj
+ 0001:000dd8a0       _jwe_ione                  004e18a0 f   fj90i:jwe_iedo.obj
+ 0001:000da7a0       _jwe_iife                  004de7a0 f   fj90i:jwe_iipg.obj
+ 0001:000d9050       _jwe_ilno                  004dd050 f   fj90i:jwe_ilni.obj
+ 0001:000d9150       _jwe_iln1                  004dd150 f   fj90i:jwe_ilni.obj
+ 0001:000d9280       _jwe_iln2                  004dd280 f   fj90i:jwe_ilni.obj
+ 0001:000d92a0       _jwe_ilnp                  004dd2a0 f   fj90i:jwe_ilni.obj
+ 0001:000d9c40       _jwe_ilnr                  004ddc40 f   fj90i:jwe_ilni.obj
+ 0001:000d9d10       _jwe_ilng                  004ddd10 f   fj90i:jwe_ilni.obj
+ 0001:000d9d80       _jwe_ilnc                  004ddd80 f   fj90i:jwe_ilni.obj
+ 0001:000d9ea0       _jwe_ilns                  004ddea0 f   fj90i:jwe_ilni.obj
+ 0001:000d9f80       _jwe_ilnl                  004ddf80 f   fj90i:jwe_ilni.obj
+ 0001:000da180       _jwe_ilne                  004de180 f   fj90i:jwe_ilni.obj
+ 0001:000da3b0       _jwe_ilnf                  004de3b0 f   fj90i:jwe_ilni.obj
+ 0001:000d7cb0       _jwe_inip                  004dbcb0 f   fj90i:jwe_inai.obj
+ 0001:000d7e10       _jwe_inss                  004dbe10 f   fj90i:jwe_inai.obj
+ 0001:000d80f0       _jwe_inar                  004dc0f0 f   fj90i:jwe_inai.obj
+ 0001:000d84f0       _jwe_insb                  004dc4f0 f   fj90i:jwe_inai.obj
+ 0001:000d8770       _jwe_inst                  004dc770 f   fj90i:jwe_inai.obj
+ 0001:000d47b0       _jwe_incs                  004d87b0 f   fj90i:jwe_inao.obj
+ 0001:000d4940       _jwe_inct                  004d8940 f   fj90i:jwe_inao.obj
+ 0001:000d4b10       _jwe_inon                  004d8b10 f   fj90i:jwe_inao.obj
+ 0001:000d4be0       _jwe_invo                  004d8be0 f   fj90i:jwe_inao.obj
+ 0001:000d5780       _jwe_inop                  004d9780 f   fj90i:jwe_inao.obj
+ 0001:000d5850       _jwe_in_n                  004d9850 f   fj90i:jwe_inao.obj
+ 0001:000d58d0       _jwe_inoe                  004d98d0 f   fj90i:jwe_inao.obj
+ 0001:000d5970       _jwe_in_c                  004d9970 f   fj90i:jwe_inao.obj
+ 0001:000d5a40       _jwe_in_r                  004d9a40 f   fj90i:jwe_inao.obj
+ 0001:000d4240       _jwe_imch                  004d8240 f   fj90i:jwe_ifmt.obj
+ 0001:000d4390       _jwe_imgp                  004d8390 f   fj90i:jwe_ifmt.obj
+ 0001:000d43f0       _jwe_impp                  004d83f0 f   fj90i:jwe_ifmt.obj
+ 0001:000d4480       _jwe_ifme                  004d8480 f   fj90i:jwe_ifmt.obj
+ 0001:000d0e60       _jwe_isip                  004d4e60 f   fj90i:jwe_ifct.obj
+ 0001:000d2c20       _jwe_ifrp                  004d6c20 f   fj90i:jwe_ifct.obj
+ 0001:000d2c60       _jwe_ifer                  004d6c60 f   fj90i:jwe_ifct.obj
+ 0001:000d2d50       _jwe_ifcg                  004d6d50 f   fj90i:jwe_ifct.obj
+ 0001:000d2e30       _jwe_iftc                  004d6e30 f   fj90i:jwe_ifct.obj
+ 0001:000d0ac0       _err_end                   004d4ac0 f   fj90i:jwe_xdta.obj
+ 0001:000cfa10       _jwe_dace                  004d3a10 f   fj90i:jwe_dack.obj
+ 0001:000d0240       _jwe_deat                  004d4240 f   fj90i:jwe_dack.obj
+ 0001:000d04a0       _jwe_deri                  004d44a0 f   fj90i:jwe_dack.obj
+ 0001:000d04d0       _jwe_dety                  004d44d0 f   fj90i:jwe_dack.obj
+ 0001:000cbc10       _jwe_ddoe                  004cfc10 f   fj90i:jwe_ddoa.obj
+ 0001:000cbab0       _jwe_ddoe                  004cfab0 f   fj90i:jwe_ddou.obj
+ 0001:000cb020       _jwe_error_call            004cf020 f   fj90i:jwe_xdal.obj
+ 0001:000caa60       _jwe_error_call            004cea60 f   fj90i:jwe_xalc.obj
+ 0001:000c96e0       _jwe_xsch                  004cd6e0 f   fj90i:jwe_xopt.obj
+ 0001:000c7160       _jwe_iop0                  004cb160 f   fj90i:jwe_iocf.obj
+ 0001:000c7630       _jwe_iocl                  004cb630 f   fj90i:jwe_iocf.obj
+ 0001:000c7850       _jwe_iop1                  004cb850 f   fj90i:jwe_iocf.obj
+ 0001:000c8320       _jwe_iop2                  004cc320 f   fj90i:jwe_iocf.obj
+ 0001:000c84f0       _jwe_iop3                  004cc4f0 f   fj90i:jwe_iocf.obj
+ 0001:000c8560       _jwe_iop5                  004cc560 f   fj90i:jwe_iocf.obj
+ 0001:000c8610       _jwe_iop4                  004cc610 f   fj90i:jwe_iocf.obj
+ 0001:000c86d0       _jwe_iop6                  004cc6d0 f   fj90i:jwe_iocf.obj
+ 0001:000c8750       _jwe_iop7                  004cc750 f   fj90i:jwe_iocf.obj
+ 0001:000c8950       _jwe_iopc                  004cc950 f   fj90i:jwe_iocf.obj
+ 0001:000c8a20       _jwe_iopw                  004cca20 f   fj90i:jwe_iocf.obj
+ 0001:000c8ca0       _jwe_iope                  004ccca0 f   fj90i:jwe_iocf.obj
+ 0001:000c8ec0       _jwe_iops                  004ccec0 f   fj90i:jwe_iocf.obj
+ 0001:000c8f70       _jwe_iop8                  004ccf70 f   fj90i:jwe_iocf.obj
+ 0001:000c6a60       _jwe_iser                  004caa60 f   fj90i:jwe_isfm.obj
+ 0001:000c5ad0       _jwe_iifg                  004c9ad0 f   fj90i:jwe_iinf.obj
+ 0001:000c5b90       _jwe_iifp                  004c9b90 f   fj90i:jwe_iinf.obj
+ 0001:000c4f10       _err_end                   004c8f10 f   fj90i:jwe_xadt.obj
+ 0001:000c4af0       _jwe_debe                  004c8af0 f   fj90i:jwe_debg.obj
+ 0001:00117b6e       _xtoa                      0051bb6e f   libc:xtoa.obj
+ 0001:00117c40       _x64toa@20                 0051bc40 f   libc:xtoa.obj
+ 0001:001179cd       __stripquote               0051b9cd f   libc:tempnam.obj
+ 0001:00117061       _output                    0051b061 f   libc:cprintf.obj
+ 0001:0011778e       _write_char                0051b78e f   libc:cprintf.obj
+ 0001:001177a8       _write_multi_char          0051b7a8 f   libc:cprintf.obj
+ 0001:001177d4       _write_string              0051b7d4 f   libc:cprintf.obj
+ 0001:00117807       _get_int_arg               0051b807 f   libc:cprintf.obj
+ 0001:00117814       _get_int64_arg             0051b814 f   libc:cprintf.obj
+ 0001:00117824       _get_short_arg             0051b824 f   libc:cprintf.obj
+ 0001:00115a3b       __get_fname                00519a3b f   libc:fpexcept.obj
+ 0001:00113144       label0                     00517144 f   libc:adj_fdiv.obj
+ 0001:0011314a       label1                     0051714a f   libc:adj_fdiv.obj
+ 0001:0011314f       label2                     0051714f f   libc:adj_fdiv.obj
+ 0001:00113155       label3                     00517155 f   libc:adj_fdiv.obj
+ 0001:0011315a       label4                     0051715a f   libc:adj_fdiv.obj
+ 0001:00113160       label5                     00517160 f   libc:adj_fdiv.obj
+ 0001:00113166       label6                     00517166 f   libc:adj_fdiv.obj
+ 0001:0011316c       label7                     0051716c f   libc:adj_fdiv.obj
+ 0001:00113172       label8                     00517172 f   libc:adj_fdiv.obj
+ 0001:0011318e       label9                     0051718e f   libc:adj_fdiv.obj
+ 0001:00113193       label10                    00517193 f   libc:adj_fdiv.obj
+ 0001:001131a9       label11                    005171a9 f   libc:adj_fdiv.obj
+ 0001:001131ae       label12                    005171ae f   libc:adj_fdiv.obj
+ 0001:001131ca       label13                    005171ca f   libc:adj_fdiv.obj
+ 0001:001131da       label14                    005171da f   libc:adj_fdiv.obj
+ 0001:001131ee       label15                    005171ee f   libc:adj_fdiv.obj
+ 0001:001131fe       label16                    005171fe f   libc:adj_fdiv.obj
+ 0001:0011321e       label17                    0051721e f   libc:adj_fdiv.obj
+ 0001:00113223       label18                    00517223 f   libc:adj_fdiv.obj
+ 0001:0011323d       label19                    0051723d f   libc:adj_fdiv.obj
+ 0001:00113242       label20                    00517242 f   libc:adj_fdiv.obj
+ 0001:00113262       label21                    00517262 f   libc:adj_fdiv.obj
+ 0001:00113276       label22                    00517276 f   libc:adj_fdiv.obj
+ 0001:0011328e       label23                    0051728e f   libc:adj_fdiv.obj
+ 0001:001132a2       label24                    005172a2 f   libc:adj_fdiv.obj
+ 0001:001132c2       label25                    005172c2 f   libc:adj_fdiv.obj
+ 0001:001132c7       label26                    005172c7 f   libc:adj_fdiv.obj
+ 0001:001132e1       label27                    005172e1 f   libc:adj_fdiv.obj
+ 0001:001132e6       label28                    005172e6 f   libc:adj_fdiv.obj
+ 0001:00113306       label29                    00517306 f   libc:adj_fdiv.obj
+ 0001:0011331a       label30                    0051731a f   libc:adj_fdiv.obj
+ 0001:00113332       label31                    00517332 f   libc:adj_fdiv.obj
+ 0001:00113346       label32                    00517346 f   libc:adj_fdiv.obj
+ 0001:00113366       label33                    00517366 f   libc:adj_fdiv.obj
+ 0001:0011336b       label34                    0051736b f   libc:adj_fdiv.obj
+ 0001:00113385       label35                    00517385 f   libc:adj_fdiv.obj
+ 0001:0011338a       label36                    0051738a f   libc:adj_fdiv.obj
+ 0001:001133aa       label37                    005173aa f   libc:adj_fdiv.obj
+ 0001:001133be       label38                    005173be f   libc:adj_fdiv.obj
+ 0001:001133d6       label39                    005173d6 f   libc:adj_fdiv.obj
+ 0001:001133ea       label40                    005173ea f   libc:adj_fdiv.obj
+ 0001:0011340a       label41                    0051740a f   libc:adj_fdiv.obj
+ 0001:0011340f       label42                    0051740f f   libc:adj_fdiv.obj
+ 0001:00113429       label43                    00517429 f   libc:adj_fdiv.obj
+ 0001:0011342e       label44                    0051742e f   libc:adj_fdiv.obj
+ 0001:0011344e       label45                    0051744e f   libc:adj_fdiv.obj
+ 0001:00113462       label46                    00517462 f   libc:adj_fdiv.obj
+ 0001:0011347a       label47                    0051747a f   libc:adj_fdiv.obj
+ 0001:0011348e       label48                    0051748e f   libc:adj_fdiv.obj
+ 0001:001134ae       label49                    005174ae f   libc:adj_fdiv.obj
+ 0001:001134b3       label50                    005174b3 f   libc:adj_fdiv.obj
+ 0001:001134cd       label51                    005174cd f   libc:adj_fdiv.obj
+ 0001:001134d2       label52                    005174d2 f   libc:adj_fdiv.obj
+ 0001:001134f2       label53                    005174f2 f   libc:adj_fdiv.obj
+ 0001:00113506       label54                    00517506 f   libc:adj_fdiv.obj
+ 0001:0011351e       label55                    0051751e f   libc:adj_fdiv.obj
+ 0001:00113532       label56                    00517532 f   libc:adj_fdiv.obj
+ 0001:00113552       label57                    00517552 f   libc:adj_fdiv.obj
+ 0001:00113557       label58                    00517557 f   libc:adj_fdiv.obj
+ 0001:00113571       label59                    00517571 f   libc:adj_fdiv.obj
+ 0001:00113576       label60                    00517576 f   libc:adj_fdiv.obj
+ 0001:00113596       label61                    00517596 f   libc:adj_fdiv.obj
+ 0001:001135aa       label62                    005175aa f   libc:adj_fdiv.obj
+ 0001:001135c2       label63                    005175c2 f   libc:adj_fdiv.obj
+ 0001:00112c1c       _cvtdate                   00516c1c f   libc:tzset.obj
+ 0001:00112570       _findenv                   00516570 f   libc:setenv.obj
+ 0001:001125c8       _copy_environ              005165c8 f   libc:setenv.obj
+ 0001:001123be       _strncnt                   005163be f   libc:a_cmp.obj
+ 0001:00111683       _getSystemCP               00515683 f   libc:mbctype.obj
+ 0001:001116cd       _CPtoLCID                  005156cd f   libc:mbctype.obj
+ 0001:00111700       _setSBCS                   00515700 f   libc:mbctype.obj
+ 0001:00111729       _setSBUpLow                00515729 f   libc:mbctype.obj
+ 0001:00110ceb       _ctrlevent_capture@4       00514ceb f   libc:winsig.obj
+ 0001:00110e50       _siglookup                 00514e50 f   libc:winsig.obj
+ 0001:00110815       _strncnt                   00514815 f   libc:a_map.obj
+ 0001:0010fea1       fFEXP                      00513ea1 f   libc:87tran.obj
+ 0001:0010ffe1       _rtforexpinf               00513fe1 f   libc:87tran.obj
+ 0001:0010fbc0       LeadUp1                    00513bc0 f   libc:memcpy.obj
+ 0001:0010fbec       LeadUp2                    00513bec f   libc:memcpy.obj
+ 0001:0010fc10       LeadUp3                    00513c10 f   libc:memcpy.obj
+ 0001:0010fc8f       UnwindUp0                  00513c8f f   libc:memcpy.obj
+ 0001:0010fc7c       UnwindUp1                  00513c7c f   libc:memcpy.obj
+ 0001:0010fc74       UnwindUp2                  00513c74 f   libc:memcpy.obj
+ 0001:0010fc6c       UnwindUp3                  00513c6c f   libc:memcpy.obj
+ 0001:0010fc64       UnwindUp4                  00513c64 f   libc:memcpy.obj
+ 0001:0010fc5c       UnwindUp5                  00513c5c f   libc:memcpy.obj
+ 0001:0010fc54       UnwindUp6                  00513c54 f   libc:memcpy.obj
+ 0001:0010fc4c       UnwindUp7                  00513c4c f   libc:memcpy.obj
+ 0001:0010fca8       TrailUp0                   00513ca8 f   libc:memcpy.obj
+ 0001:0010fcb0       TrailUp1                   00513cb0 f   libc:memcpy.obj
+ 0001:0010fcbc       TrailUp2                   00513cbc f   libc:memcpy.obj
+ 0001:0010fcd0       TrailUp3                   00513cd0 f   libc:memcpy.obj
+ 0001:0010fd48       LeadDown1                  00513d48 f   libc:memcpy.obj
+ 0001:0010fd68       LeadDown2                  00513d68 f   libc:memcpy.obj
+ 0001:0010fd90       LeadDown3                  00513d90 f   libc:memcpy.obj
+ 0001:0010fde4       UnwindDown7                00513de4 f   libc:memcpy.obj
+ 0001:0010fdec       UnwindDown6                00513dec f   libc:memcpy.obj
+ 0001:0010fdf4       UnwindDown5                00513df4 f   libc:memcpy.obj
+ 0001:0010fdfc       UnwindDown4                00513dfc f   libc:memcpy.obj
+ 0001:0010fe04       UnwindDown3                00513e04 f   libc:memcpy.obj
+ 0001:0010fe0c       UnwindDown2                00513e0c f   libc:memcpy.obj
+ 0001:0010fe14       UnwindDown1                00513e14 f   libc:memcpy.obj
+ 0001:0010fe27       UnwindDown0                00513e27 f   libc:memcpy.obj
+ 0001:0010fe40       TrailDown0                 00513e40 f   libc:memcpy.obj
+ 0001:0010fe48       TrailDown1                 00513e48 f   libc:memcpy.obj
+ 0001:0010fe58       TrailDown2                 00513e58 f   libc:memcpy.obj
+ 0001:0010fe6c       TrailDown3                 00513e6c f   libc:memcpy.obj
+ 0001:0010e0a2       _write_char                005120a2 f   libc:output.obj
+ 0001:0010e0d7       _write_multi_char          005120d7 f   libc:output.obj
+ 0001:0010e108       _write_string              00512108 f   libc:output.obj
+ 0001:0010e140       _get_int_arg               00512140 f   libc:output.obj
+ 0001:0010e14d       _get_int64_arg             0051214d f   libc:output.obj
+ 0001:0010e15d       _get_short_arg             0051215d f   libc:output.obj
+ 0001:0010d324       _IsRootUNCName             00511324 f   libc:stat.obj
+ 0001:0010cc61       __cftoe_g                  00510c61 f   libc:cvt.obj
+ 0001:0010cc88       __cftof_g                  00510c88 f   libc:cvt.obj
+ 0001:0010ccfc       __shift                    00510cfc f   libc:cvt.obj
+ 0001:0010c4f8       _gu_return                 005104f8 f   libc:exsup.obj
+ 0001:0010c500       __unwind_handler           00510500 f   libc:exsup.obj
+ 0001:0010bdb1       _parse_cmdline             0050fdb1 f   libc:stdargv.obj
+ 0001:0010bc1c       _xcptlookup                0050fc1c f   libc:winxfltr.obj
+ 0001:0010a85d       _doexit                    0050e85d f   libc:crt0dat.obj
+ 0001:0010a8f6       __initterm                 0050e8f6 f   libc:crt0dat.obj
+ 0001:0010a070       LeadUp1                    0050e070 f   libc:memmove.obj
+ 0001:0010a09c       LeadUp2                    0050e09c f   libc:memmove.obj
+ 0001:0010a0c0       LeadUp3                    0050e0c0 f   libc:memmove.obj
+ 0001:0010a13f       UnwindUp0                  0050e13f f   libc:memmove.obj
+ 0001:0010a12c       UnwindUp1                  0050e12c f   libc:memmove.obj
+ 0001:0010a124       UnwindUp2                  0050e124 f   libc:memmove.obj
+ 0001:0010a11c       UnwindUp3                  0050e11c f   libc:memmove.obj
+ 0001:0010a114       UnwindUp4                  0050e114 f   libc:memmove.obj
+ 0001:0010a10c       UnwindUp5                  0050e10c f   libc:memmove.obj
+ 0001:0010a104       UnwindUp6                  0050e104 f   libc:memmove.obj
+ 0001:0010a0fc       UnwindUp7                  0050e0fc f   libc:memmove.obj
+ 0001:0010a158       TrailUp0                   0050e158 f   libc:memmove.obj
+ 0001:0010a160       TrailUp1                   0050e160 f   libc:memmove.obj
+ 0001:0010a16c       TrailUp2                   0050e16c f   libc:memmove.obj
+ 0001:0010a180       TrailUp3                   0050e180 f   libc:memmove.obj
+ 0001:0010a1f8       LeadDown1                  0050e1f8 f   libc:memmove.obj
+ 0001:0010a218       LeadDown2                  0050e218 f   libc:memmove.obj
+ 0001:0010a240       LeadDown3                  0050e240 f   libc:memmove.obj
+ 0001:0010a294       UnwindDown7                0050e294 f   libc:memmove.obj
+ 0001:0010a29c       UnwindDown6                0050e29c f   libc:memmove.obj
+ 0001:0010a2a4       UnwindDown5                0050e2a4 f   libc:memmove.obj
+ 0001:0010a2ac       UnwindDown4                0050e2ac f   libc:memmove.obj
+ 0001:0010a2b4       UnwindDown3                0050e2b4 f   libc:memmove.obj
+ 0001:0010a2bc       UnwindDown2                0050e2bc f   libc:memmove.obj
+ 0001:0010a2c4       UnwindDown1                0050e2c4 f   libc:memmove.obj
+ 0001:0010a2d7       UnwindDown0                0050e2d7 f   libc:memmove.obj
+ 0001:0010a2f0       TrailDown0                 0050e2f0 f   libc:memmove.obj
+ 0001:0010a2f8       TrailDown1                 0050e2f8 f   libc:memmove.obj
+ 0001:0010a308       TrailDown2                 0050e308 f   libc:memmove.obj
+ 0001:0010a31c       TrailDown3                 0050e31c f   libc:memmove.obj
+ 0001:00109a26       _flsall                    0050da26 f   libc:fflush.obj
+ 0001:00109916       _IsRootUNCName             0050d916 f   libc:stati64.obj
+ 0001:0010943e       __abstract_cw              0050d43e f   libc:ieee87.obj
+ 0001:001094d0       __hw_cw                    0050d4d0 f   libc:ieee87.obj
+ 0001:00109559       __abstract_sw              0050d559 f   libc:ieee87.obj
+ 0001:00109106       _strtoxl                   0050d106 f   libc:strtol.obj
+ 0001:0010906b       _fast_error_exit           0050d06b f   libc:crt0.obj

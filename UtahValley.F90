@@ -1,0 +1,334 @@
+!     ******************************************************************
+!     LNDCLC.F90
+!     Copyright(c) Utah Division of Water Resources 2000
+!
+!     Created: 2/29/2012 8:26:35 AM
+!     Author : STATE OF UTAH
+!     Last change: SOU 5/11/2015 3:00:50 PM
+!     ******************************************************************
+      SUBROUTINE LNDCLC
+!-----------------------------------------------------------------------
+!     SUBROUTINE LNDCLC
+!     Created 02/21/89 by Craig W. Miller
+!
+!     This subroutine is the main program logic which makes each
+!     modification of BUDGET2 unique.  The only thing which must be
+!     modified is the order for handling land areas (this establishes
+!     priority for water deliveries) and flow logic within the program.
+!     Input and output are standardized and do not require modification
+!     by the modeler.
+!
+!     For most applications this is the only subroutine that requires
+!     modification.
+!
+!     Variables: see also each subroutine called
+!     QX(I,J,K)    - Simulation flow I for year J and month K
+!     NYRS         - Number of years in simulation
+!     NLND         - Number of land areas in each simulation
+!
+!     Subroutines called:
+!     ARSUB        - Performs water budget calculations for a land area
+!     AVCALC       - Calculates values for last page of printout
+!     Functions of the Subroutines:
+!     REINI  - With all inflows to reservoir IR calculated, call
+!              REINI(IR) to calculate reservoir evaporation, spills.
+!              REINI calculates spill down through each QX defined in
+!              the input data.
+!     ARSUB  - Performs all land area calculations as defined in the
+!              input data.  All relevant upstream QX flows must
+!              be calculated first.
+!     MUNSUB - Performs caculations for municipal areas as defined in the
+!              input data.  Shortages are not allowed in municipal areas and
+!              when needed groundwater pumping is increased to meet demands.
+!     ARLIM  - For those occasions where diversions must be limited
+!              call ARLIM(L,FMAX).  L is the land area number and
+!              FMAX represents the maximum diversion
+!     ARDEL  - For those occasions where diversions must be certain
+!              values, set diversions (QX Values) and then call ARDEL.
+!     ARBAK  - If you do iterative calcs before going back to ARSUB(L)
+!              call ARBAK(L) to reset QX'S, soil moisture and
+!              reservoirs
+!     RSBAK  - For situations where outflow, stage, and some inflow to a
+!              reservoir are known call the function RSBAK(IR) to
+!              calculate ungaged inflow.  FLOW = RESBAK(IR).
+!     RSOUT  - Like RSBAK, but calculates outflow--equivalent to -RSBAK(IR).
+!     RESR   - To call water down from a reservoir through several
+!              QX's, use RESR.  Before calling RESR, set DEM=(Demand from
+!              reservoir) and use the call RESR(IR,IQXS,NUMQX), where IR
+!              is the reservoir number, IQXS, is an INTEGER*4 array of
+!              numbers representing the QX numbers to route water through,
+!              and NUMQX in the number of QX's in the array.  After the
+!              call, QDVM is set to the amount actually called.
+!     RESRR  - Same as RESR but calls water from one reservoir to another.
+!              Call RESRR with CALL RESRR(IR,IQXS,NUMQX,IR2) where IR2 is
+!              the destination reservoir.
+!     WETLND - Calculates wetland consumptive use.  All relevant QX
+!              flows must be calculated first.
+!     WETDMD - Function to return riparian demand for riparian area ILND,
+!              called with WETDMD(ILND)
+!     ARDEM  - Function returning the total diversion demand for area.
+!              Use as follows:   DEM=ARDEM(L), where L is the land area
+!              number.
+!     DMDMD -  Function returning the total domestic diversion demand
+!              for area.  Use as follows DEM=DMDMD(L), where L is the
+!              land area number.
+!     SOLVE -  For those hard to solve iterative solutions, SOLVE works
+!              wonders.  SOLVE is a function called as follows:
+!              DIFF2 = SOLVE(DIFF,CFAC,ITER).  Before calling
+!              SOLVE the first time in an iterative loop, set ITER to 0.
+!              Solve returns the amount of correction to be given for
+!              a value DIFF where DIFF is the difference between a
+!              gaged value and a calculated value.  Often iterative
+!              solutions yield hundreds of tiny steps to reach a desired
+!              answer.  Solve increases the step size by CFAC^(ITER-1)
+!              if the step is continually in the same direction.  This
+!              increases solution efficiency tremendously.  CFAC must
+!              should be greater than 1.0 or a default of 1.5 is used.
+!-----------------------------------------------------------------------
+use PARAMDIM
+use COMMO
+use PrintStuff
+REAL (KIND=8),EXTERNAL :: ARDEM,DMDMD,WETDMD,RSBAK,RSOUT
+!-----------------------------------------------------------------------
+! SaratogaPro,AmericanPro,ProvoPro,SpanishPro,GoshenPro are the
+! Proportion of the balance flow (QX110) for Utah Lake that will be
+! assigned to each land area.
+!-----------------------------------------------------------------------
+REAL (KIND=8) :: DIFF,SaratogaPro,AmericanPro,ProvoPro,SpanishPro
+REAL (KIND=8) :: GoshenPro,BalBef,DiffBef,GoshDiff,GoshBef,GoshBalBef
+DATA AmericanPro,ProvoPro,SpanishPro,GoshenPro/.359,.056,.505,.080/
+REAL (KIND=8) :: GoshStoBef
+INTEGER (KIND=4) :: JJJ
+!-----------------------------------------------------------------------
+!     SAMPLE CODE FOR GENERAL MODEL
+!-----------------------------------------------------------------------
+IF (J+INYR.LT.2014) THEN
+  !Utah Lake System deliveries to Provo River Aqueduct are zero
+  !before 2014
+  QX(32,J,K)=0.0
+END IF
+IF (K.EQ.7) THEN
+  JJJ=1
+END IF
+
+!-----------------------------------------------------------------------
+!Saratoga Springs Land Area 04-01-10b
+!-----------------------------------------------------------------------
+!The flow to Satatoga Springs area is just the demand of the Ag
+QX(27,J,K)=ARDEM(2)
+CALL ARSUB(2)
+!Calculate the flow to riparian
+QX(108,J,K)=WETDMD(2)
+CALL WETLND(2)
+!Calculate demands and flows for municipal area 2
+!Everything is supplied by groundwater
+CALL MUNSUB(2)
+!LKSIM has a lake inflow for this land area, QIN28
+!By subtraction determine what the ungauged flow QX61 should be
+QX(61,J,K)=MAX(0.0,QIN(25,J,K)-QX(29,J,K)-QX(25,J,K)-QX(23,J,K))
+!QX20 needs to be calculated to supply QXs 42, 61 and 108
+QX(20,J,K)=QX(112,J,K)+QX(61,J,K)+QX(108,J,K)
+
+!-----------------------------------------------------------------
+!American Fork (04-01-10a) and Provo (04-01-10c) land areas
+!-----------------------------------------------------------------
+!American Fork is supplied by Provo River, American Fork, Dry Creek
+!and Fort Creek
+!Provo agriculture is supplied only by the Provo River
+!-----------------------------------------------------------------
+QX(38,J,K)=QX(37,J,K)+QX(36,J,K)
+QX(40,J,K)=QX(38,J,K)+QX(39,J,K)
+QX(45,J,K)=QX(40,J,K)+QX(32,J,K)
+QX(43,J,K)=QX(40,J,K)+QX(32,J,K)-QX(46,J,K)
+QX(44,J,K)=QX(43,J,K)-QX(47,J,K)
+!Provo municipal demands
+CALL MUNSUB(3)
+!Return flow from Muncipal Area 3 goes to Utah Lake
+!Provo area agricultural demands follow
+CALL ARSUB(3)
+QX(79,J,K)=QX(77,J,K)+QX(78,J,K)
+!American Fork agricultural demands
+CALL ARSUB(1)
+!American Fork municipal demands
+QX(80,J,K)=QX(79,J,K)-QX(70,J,K)
+QX(76,J,K)=QX(75,J,K)-QX(71,J,K)
+CALL MUNSUB(1)
+QX(62,J,K)=QX(60,J,K)-QX(64,J,K)
+
+!American Fork riparian
+CALL WETLND(1)
+!Provo area riparian
+CALL WETLND(3)
+!The remaining flow of the Provo River goes to Utah Lake
+QX(68,J,K)=QX(62,J,K)-QX(65,J,K)-QX(109,J,K)
+!American Fork ungauged flow determined from LKSIM
+QX(81,J,K)=QIN(26,J,K)-QX(80,J,K)-QX(76,J,K)-QX(73,J,K)-QX(66,J,K)- &
+ QX(68,J,K)
+!Provo ungaguged flow determined by LKSIM
+QX(45,J,K)=QIN(25,J,K)-QX(51,J,K)-QX(58,J,K)
+
+!-----------------------------------------------------------------
+!Spanish Fork (04-01-10d) land area
+!-----------------------------------------------------------------
+!Calculate balance flow for Spanish Fork at Castilla, long term gauge
+QX(42,J,K)=QX(89,J,K)-QX(31,J,K)-QX(82,J,K)-QX(84,J,K)+ &
+  QX(32,J,K)
+!Hobble Creek after CUP imports
+QX(91,J,K)=QX(74,J,K)+QX(69,J,K)
+!Sum of Spanish Fork, Summit Creek, Payson Creek, Maple Creek
+!and Hobble Creek
+!This is the flow available for ag diversion
+QX(92,J,K)=QX(87,J,K)+QX(88,J,K)+QX(89,J,K)+QX(90,J,K)+QX(91,J,K)
+!Spanish Fork area municipal
+CALL MUNSUB(4)
+QX(99,J,K)=QX(95,J,K)+QX(96,J,K)
+!Spanish Fork area agricultural demand
+CALL ARSUB(4)
+QX(104,J,K)=QX(103,J,K)+QX(102,J,K)
+!Spanish Fork area riparian
+CALL WETLND(4)
+QX(106,J,K)=QX(104,J,K)-QX(105,J,K)
+!Ungauged flow to Utah Lake is in QX107 or QIN29
+QX(107,J,K)=QIN(29,J,K)-QX(106,J,K)
+
+IF (J.EQ.6.AND.K.EQ.3) THEN
+  JJJ=1
+END IF
+!-----------------------------------------------------------------
+!Goshen (04-01-10e) land area
+!-----------------------------------------------------------------
+QX(2,J,K)=0.0
+QX(15,J,K)=0.0
+QX(3,J,K)=QX(1,J,K)+QX(2,J,K)
+GoshStoBef=STO(2)
+CALL REINI(2)
+!Goshen area municipal
+CALL MUNSUB(5)
+QX(6,J,K)=QX(4,J,K)-QX(5,J,K)
+!Goshen area agriculture
+!Much of this land is served by pumping
+CALL ARSUB(5)
+!QX17 is flow after surface demands
+QX(17,J,K)=QX(12,J,K)+QX(8,J,K)
+QX(18,J,K)=QX(14,J,K)+QX(17,J,K)
+CALL WETLND(5)
+QX(86,J,K)=QX(18,J,K)-QX(85,J,K)
+
+!Calculate the balance flow required for Utah Lake and
+!distribute among the ungauged flows around the lake
+QX(19,J,K)=0.0
+QX(110,J,K)=RSBAK(1)
+!GoshenPro,AmericanPro,ProvoPro, and SpanishPro are the proportions of the
+!balancing flows for Utah Lake that are distributed to the various land
+!areas around Utah Lake.
+
+!Not using these.  Use the assumed values instead
+!GoshenPro=QIN(26,J,K)/(QIN(23,J,K)+QIN(24,J,K)+QIN(26,J,K)+QIN(27,J,K))
+!AmericanPro=QIN(24,J,K)/(QIN(23,J,K)+QIN(24,J,K)+QIN(26,J,K)+QIN(27,J,K))
+!ProvoPro=QIN(23,J,K)/(QIN(23,J,K)+QIN(24,J,K)+QIN(26,J,K)+QIN(27,J,K))
+!SpanishPro=QIN(27,J,K)/(QIN(23,J,K)+QIN(24,J,K)+QIN(26,J,K)+QIN(27,J,K))
+
+!Distribute balance to ungauged flows in four land areas (Not Saratoga)
+QX(52,J,K)=MAX(0.0,QX(110,J,K))*SpanishPro
+QX(107,J,K)=MIN(0.0,QX(110,J,K))*SpanishPro
+QX(2,J,K)=MAX(0.0,QX(110,J,K))*GoshenPro
+QX(15,J,K)=MIN(0.0,QX(110,J,K))*GoshenPro
+!If QX107 is positive add it to the inflow to Spanish Fork land area
+!Iterate to get correct lake outflow and ungauged inflow
+IF (QX(52,J,K).GT.0.0) THEN
+  !Balance for Spanish Fork
+  QX(52,J,K)=QX(107,J,K)
+  QX(107,J,K)=0.0
+  CALL ARBAK(4)
+  QX(100,J,K)=0.0
+  QX(102,J,K)=0.0
+  CALL ARSUB(4)
+  QX(104,J,K)=QX(103,J,K)+QX(102,J,K)
+  CALL WETLND(4)
+  QX(106,J,K)=QX(104,J,K)-QX(105,J,K)
+
+  !Balance for Goshen
+  QX(3,J,K)=QX(1,J,K)+QX(2,J,K)
+  QX(4,J,K)=0.0
+  STO(2)=GoshStoBef
+  ST(2,J,K)=GoshStoBef
+  DRAWN(2)=.FALSE.
+  CALL REINI(2)
+  CALL ARBAK(5)
+  QX(6,J,K)=0.0
+  QX(10,J,K)=0.0
+  QX(12,J,K)=0.0
+  CALL MUNSUB(5)
+  CALL ARSUB(5)
+  QX(17,J,K)=QX(8,J,K)+QX(12,J,K)
+  QX(18,J,K)=QX(14,J,K)+QX(17,J,K)
+  CALL WETLND(5)
+  QX(86,J,K)=QX(18,J,K)-QX(85,J,K)
+
+  !Recalculate ungauged flow into Utah Lake
+  BalBef=QX(110,J,K)
+  QX(19,J,K)=0.0
+  QX(110,J,K)=RSBAK(1)+QX(52,J,K)+QX(86,J,K)
+  DIFF=QX(110,J,K)-BalBef
+  DiffBef=DIFF
+  IF (ABS(DIFF).GT.0.1) THEN
+    DO
+      !Recalculate Spanish Fork
+      QX(52,J,K)=MAX(0.0,QX(110,J,K)*SpanishPro)
+      QX(107,J,K)=MIN(0.0,QX(110,J,K)*SpanishPro)
+      CALL ARBAK(4)
+      QX(100,J,K)=0.0
+      QX(102,J,K)=0.0
+      CALL ARSUB(4)
+      QX(104,J,K)=QX(103,J,K)+QX(102,J,K)
+      CALL WETLND(4)
+      QX(106,J,K)=QX(104,J,K)-QX(105,J,K)
+
+      !Recalculate Goshen area
+      QX(2,J,K)=MAX(0.0,QX(110,J,K))*GoshenPro
+      QX(3,J,K)=QX(1,J,K)+QX(2,J,K)
+      QX(15,J,K)=MIN(0.0,QX(110,J,K))*GoshenPro
+      QX(4,J,K)=0.0
+      STO(2)=GoshStoBef
+      ST(2,J,K)=GoshStoBef
+      DRAWN(2)=.FALSE.
+      CALL REINI(2)
+      QX(6,J,K)=0.0
+      QX(10,J,K)=0.0
+      QX(12,J,K)=0.0
+      CALL ARBAK(5)
+      CALL MUNSUB(5)
+      CALL ARSUB(5)
+      QX(17,J,K)=QX(8,J,K)+QX(12,J,K)
+      QX(18,J,K)=QX(14,J,K)+QX(17,J,K)
+      CALL WETLND(5)
+      QX(86,J,K)=QX(18,J,K)-QX(85,J,K)
+
+      !Recalculate ungauged flow into Utah Lake
+      BalBef=QX(110,J,K)
+      QX(19,J,K)=0.0
+      QX(110,J,K)=RSBAK(1)+QX(52,J,K)+QX(86,J,K)
+      DIFF=QX(110,J,K)-BalBef
+      IF (ABS(DIFF).LT.0.1.OR.ABS(DIFF-DiffBef).LT.0.1) THEN
+        EXIT
+      END IF
+      DiffBef=DIFF
+    END DO
+  END IF
+END IF
+!Distribute Ungauged to the rest of the areas.
+QX(81,J,K)=+QX(110,J,K)*AmericanPro
+QX(45,J,K)=+QX(110,J,K)*ProvoPro
+
+!Calculate the flows to the Jordan River
+QX(21,J,K)=QX(19,J,K)+QX(61,J,K)
+QX(24,J,K)=QX(21,J,K)+QX(23,J,K)
+QX(26,J,K)=QX(24,J,K)+QX(25,J,K)
+QX(30,J,K)=QX(26,J,K)+QX(29,J,K)
+
+RETURN
+END
+
+REAL (KIND=8) FUNCTION ErrorFunc()
+ErrorFunc=0.0
+END

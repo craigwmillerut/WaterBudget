@@ -1,0 +1,3019 @@
+!-----------------------------------------------------------------------
+!
+!     PARAMETER FILE FOR DIMENSIONING THE FORTRAN PART OF THE RESERVOIR
+!     SIMULATION PROGRAM
+!
+!     MRES--------------  MAXIMUM NUMBER OF RESERVOIRS
+!     MLAND-------------  MAXIMUM NUMBER OF LAND AREAS
+!     MQX---------------  MAXIMUM NUMBER OF QX'S
+!     MYEAR ------------  MAXIMUM NUMBER OF YEARS IN THE SIMULATION
+!     MPP --------------  MAXIMUM NUMBER OF POWER PLANTS
+!     MQSTA ------------  MAXIMUM NUMBER OF INPUT STREAMFLOW STATIONS
+!     MGRN -------------  DIMENSION FOR GRNC
+!     MSPC -------------  DIMENSION FOR WINSPC
+!     MFLC -------------  DIMENSION FOR WINFLC
+!     MMIN--------------  MAXIMUM NUMBER OF MINIMUM FLOWS
+!     MCRPS-------------  MAXIMUM NUMBER OF CROPS
+!     MRIPA-------------  NUMBER OF RIPERIAN LANDS SIMULATED
+!-----------------------------------------------------------------------
+!
+Module PARAMDIM
+      INTEGER*4 MRES,MLAND,MQX,MYEAR,MPP,MQSTA,MGRN,MSPC,MFLC,MMIN
+      INTEGER*4 MCRPS,MRIPA,MPTS
+      PARAMETER (MRES=7)
+      PARAMETER (MLAND=7)
+      PARAMETER (MQX=80)
+      PARAMETER (MYEAR=60)
+      PARAMETER (MPP=5)
+      PARAMETER (MQSTA=20)
+      PARAMETER (MGRN=21)
+      PARAMETER (MSPC=10)
+      PARAMETER (MFLC=10)
+      PARAMETER (MMIN=10)
+      PARAMETER (MCRPS=60)
+      PARAMETER (MRIPA=11)
+      PARAMETER (MPTS=12*MYEAR)
+      INTEGER(KIND=4),PARAMETER:: IZERO=0
+      INTEGER (KIND=4),PARAMETER :: MIZER=MLAND*13
+      integer (KIND=4),PARAMETER :: MLTWL=MLAND*12
+End Module PARAMDIM
+
+MODULE COMMO
+use PARAMDIM
+      INTEGER*4 L,J,K,NP(MRES)
+      REAL (KIND=8) :: QX(MQX,MYEAR,13),DMD,QDVM,EVRT(MRES,13), &
+            QRMN(MRES,13),SMX(MRES),SMN(MRES),STO(MRES), &
+            RAR(MRES),REL(MRES),ST(MRES,MYEAR,13), &
+            EVAP(MRES,MYEAR,13)
+      REAL (KIND=8) :: GWUSE(MLAND,13),RTUSE(MLAND,13),SBUSE(MLAND,13)
+      REAL (KIND=8) :: V(MRES,400),A(MRES,400),E(MRES,400)
+      integer (KIND=4),PARAMETER :: QXZER=MQX*MYEAR*13
+      DATA ((GWUSE(L,K),K=1,13),L=1,MLAND)/MIZER*0.0/
+      DATA ((RTUSE(L,K),K=1,13),L=1,MLAND)/MIZER*0.0/
+      DATA ((SBUSE(L,K),K=1,13),L=1,MLAND)/MIZER*0.0/
+      DATA (((QX(L,J,K),L=1,MQX),J=1,MYEAR),K=1,13) /QXZER*0.0/
+      DATA NP/MRES*0/
+END MODULE
+
+Module PrintStuff
+!     INTEGER*4 VARIABLES
+use PARAMDIM
+use COMMO
+!     INTEGER*4 VARIABLES
+      INTEGER (KIND=4) :: NRES,INYR,NHPW,KPS,KCE,NQIN, &
+            KPE,KSS,NLND,KBS,IHS(MPP),IHP(MPP),I, &
+            IHB(MPP),IHR(MPP),IHNP(MPP),IHPQX(MPP,5), &
+            KSI(MPP),KEI(MPP),NCRP(MLAND),KSE,NYRS, &
+            KBE,NQS,KCS,LINE,NEXPO,NUNG,NOUFL,ITERMX, &
+            IQTG(MRES,19),IOFQX(MRES,19),IQXAD(MRES,19), &
+            ICKIN(MQX),ICKOU(MQX),ITYIN(MQX), &
+            ITYOU(MQX),ICKBY(MQX),ITYBY(MQX),ICKGW(MQX),ITYGW(MQX), &
+            ICKUP(MQX),ITYUP(MQX),ICKRS(MQX),ITYRS(MQX), &
+            NDEML(MLAND,MRES),LMRES(MLAND,MRES),IYEAR(MYEAR),IPQX(MQX), &
+            IPAGE,NQX,IQH(MRES),IINFL(19),NINFL,ITRIB(19),NTRIB, &
+            IIMP(19),NIMP,IEXPO(19),IUNG(19),IQXN(MQSTA), &
+            IREST(MRES),IOFBY(MRES),IOFUP(MRES),IQNUM(MMIN), &
+            IQRES(MMIN),IPH(MLAND),IPHU(MLAND),IPHD(MLAND), &
+            NQLIN(MLAND),IRV(MLAND),IFT(MLAND),IRT(MLAND), &
+            LNRS(MLAND),KI(MPP),KU(MPP),KB(MPP),IHYUP(MPP), &
+            ISEPQ(MRES), BEGDEL(MRES,11),ENDDEL(MRES,11), &
+            IUR(MLAND),NFDT
+      DATA IPAGE,NQS  /0,MQX/
+      DATA (IPQX(I),I=1,MQX) /MQX*0/
+
+      INTEGER (KIND=4) :: ITERA
+!     REAL*4 VARIABLES
+      REAL (KIND=8) :: SHORT(MLAND,MYEAR,13),CPAC(MLAND,MCRPS), &
+            CPACFT(MLAND,MYEAR,13),ELV(MRES,MYEAR,13), &
+            LGEFPRE(MLAND,13), &
+            SAR(MPP,MYEAR,13),HEAD(MPP,MYEAR,13),ENER(MPP,MYEAR,13), &
+            WETUSE(13,MYEAR,MLAND),BCS,FNYRS,HPLEN(MPP,5), &
+            HPDIA(MPP,5),HPRGH(MPP,5),QPXMI(MPP),QPMNI(MPP), &
+            HDMNI(MPP),ELTWI(MPP),E1I(MPP),CPRO(MLAND,MCRPS), &
+            PRACFT(MLAND,13),TM(MLAND,13),PR(MLAND,13),QDVR(MLAND,13), &
+            WTUS(MLAND,13),CPUS(MLAND,13),QDMI(MLAND,13), &
+            QDVRA(MLAND,13),OFMN(MRES,13),QSM(MRES,13),QTG(MRES,13), &
+            CONUSE(13,MYEAR,MLAND),HLOSS(MPP,5),WSOIL(MLAND), &
+            WMOIS(MLAND),WPRO(MLAND),CPMUL(MLAND),QIN(MQSTA,MYEAR,13), &
+            WTACFT(MLAND,MYEAR,13),ACRAG(MLAND),WACRE(MLAND), &
+            RETI(MLAND),QDMIY(MLAND),TOTSO(13),STOIC(MRES), &
+              HYHD(MPP),WSHOR(13),HYFLMN(MRES,13),LGUSE(MLAND,MYEAR,13), &
+              ACRAGR(MLAND),LGQRTF(MLAND),LGQDVA(MLAND), &
+              LGPOT(MLAND,MYEAR,13),ESEEP(10,MRES),SSEEP(10,MRES)
+      INTEGER (KIND=4),PARAMETER :: QINZER=MQSTA*MYEAR*13
+      integer (KIND=4),PARAMETER :: SHZER=MLAND*MYEAR*13
+      DATA (((SHORT(L,J,K),L=1,MLAND),J=1,MYEAR),K=1,13) /SHZER*0.0/
+      DATA (((QIN(L,J,K),L=1,MQSTA),J=1,MYEAR),K=1,13) /QINZER*0.0/
+      DATA ((QDMI(L,K),K=1,13),L=1,MLAND)/MIZER*0.0/
+!     LOGICAL*1 VARIABLES
+      LOGICAL (KIND=1) :: IOFF(MRES),IPST,IPEV,IPEL,IPAS,IPSH,IPSA,IPQIN, &
+            IREL(MRES),ISTOR(MRES),PRNRS(MRES),REVAP(MRES),ISTOP, &
+              PRNLND(MLAND),SPLOT,LCALEN(MLAND),IPQN(MRES),CALLED(MRES), &
+              DRAWN(MRES),SEEPTB(MRES),QMNLMT(MRES)
+      DATA ISTOP/.FALSE./
+      REAL (KIND=8) :: QXMN(13,MMIN)
+      INTEGER (KIND=4) :: IQXMN(20,MMIN),IDV(MLAND,40), &
+            IBY(MLAND,40),ILQIN(MLAND,40),ILUP(MLAND,40), &
+            LRES(MLAND,11)
+      REAL (KIND=8) :: FBYPS(MLAND,11,13),YIELD(13)
+      INTEGER (KIND=4) :: ILNQ(MLAND,MRES,20)
+      REAL (KIND=8) :: RELEAS(MRES,MYEAR,13)
+      REAL (KIND=8) :: RSTORE(MRES,MYEAR,13)
+      REAL (KIND=8) :: RSEVAP(MRES,MYEAR,13)
+      REAL (KIND=8) :: WCUSE(MLAND,MYEAR,13)
+      REAL (KIND=8) :: CPLOVR(MLAND,21,13)
+      REAL (KIND=8) :: WULOVR(MLAND,MRIPA,13),CEFF(MLAND)
+      INTEGER (KIND=4) :: IGRND(MLAND,12)
+      CHARACTER :: QXNAM(MQX)*75,TITLE*200,DATE2*20,PRESV(MRES)*32, &
+           PLAND(MLAND)*32,PHYPW(MPP)*32, &
+           VAR(14)*4,QFILE(MQSTA)*40,CDESCR(MQSTA)*31, &
+           QINAM(MQSTA)*80,STOFIL(MRES)*80, &
+           RELFIL(MRES)*80,EVAFIL(MRES)*80,QXFIL*80
+      REAL (KIND=8) :: PCRF(MLAND,10),SSTO(MLAND,11),LGSSTO(MLAND,11)
+      REAL (KIND=8) :: PRE(13,MYEAR),TEM(13,MYEAR),CCOEF(MCRPS,13), &
+            EFPRE(MLAND),DAYS(12),GWMI(13),EFMIP(MLAND,12),IEFF(MLAND)
+      DATA (DAYS(I),I=1,12)/31,28,31,30,31,30,31,31,30,31,30,31/
+      REAL (KIND=8) :: CRID,MOIST(MLAND),SOIL(MLAND),BEGSOL(MLAND)
+      REAL (KIND=8) :: CROPS(MCRPS,MYEAR,13),LGEFF(MLAND)
+      REAL (KIND=8) :: PERCO(13,MYEAR,MLAND),LPERCO(13,MYEAR,MLAND)
+      REAL (KIND=8) :: TDIVR(13),RZ(13),RFLO(13),EFCR(13),RSSP(13), &
+       CPCU(13),ACUSM(13),CHSM(13),CUDEF(13),CACU(13),RFGW(13), &
+       TOTRF(13),DPUM(13),DSUP(13),DRET(13),DDEF(13),WSUP(13), &
+       WPRE(13),WCONS(13),WOPN(13),TOUTF(13),CHGW(13),TGAGE(13), &
+       TMUN(13),WPCUM(13),WPCHG(13),BEFP(MLAND),DDIV(13), &
+       TSUB(13),RZSUP(13),GWLOS(13),SMSPL(13),GWRTUS(13),STDIF(MRES,13) &
+       ,RIVGW(13),TOTLS(13),ADIVR(MLAND,13),ASHOR(MLAND,13), &
+              AUSE(MLAND,13),ASOIL(MLAND,13),ARETFL(MLAND,13), &
+              LGEFPR(13),LGOUT(13),DMUSE(13),DMACU(13),WTDEP(13), &
+              CPDEP(13)
+      REAL (KIND=8) :: BUG(30,13),BUGT(30,13)
+      CHARACTER :: BUGTITL(30)*20
+      DATA (BUGTITL(I),I=1,2)/'1 QRTF','2 QDVA'/
+      DATA (QINAM(I),I=1,MQSTA) /MQSTA*' '/
+      DATA ((IGRND(I,K),I=1,MLAND),K=1,12)/MLTWL*1/
+      REAL (KIND=8) :: AGDEL(MLAND),DMDEL(MLAND),DMPUM(MLAND), &
+              DMPUMA(MLAND), &
+       AGWAT(MLAND),RETFL(MLAND),SPILL(MLAND),GWRIV(MLAND), &
+       RTSOI(MLAND),RTMOI(MLAND),GWQDU(MLAND),QDVA(MLAND), &
+       GWMIRT(MLAND),BEFM(MLAND),TEF(MLAND),DEF(MLAND,12), &
+       AGDEM(MLAND),DMDEM(MLAND),GWMOI(MLAND),QRTF(MLAND), &
+       AGOUT(MLAND), &
+       SBSOI(MLAND),SBMOI(MLAND),LGDEL(MLAND),LGRET(MLAND)
+      CHARACTER :: CPCODE(MLAND,MCRPS)*6,CPNAM(MLAND,MCRPS)*40 &
+            ,LNTYP(MLAND,MCRPS)*13,TMPFIL(MLAND)*80
+      REAL (KIND=8) :: RESCAL(MLAND,MRES)
+      LOGICAL*1 ISBY(MLAND,10)
+      LOGICAL*1 ISOL(MLAND),IRSRED(MRES,3)
+      INTEGER (KIND=4),PARAMETER :: MREAD=3*MRES
+      DATA ((IRSRED(I,J),I=1,MRES),J=1,3)/MREAD*.FALSE./
+
+END MODULE PrintStuff
+
+!-----------------------------------------------------------------------
+
+MODULE F90SQLVARIABLES
+use f90SQLConstants
+use f90SQL
+integer(SQLINTEGER_KIND),parameter:: MaxStringLen=255
+integer(SQLHSTMT_KIND):: StmtHndl
+integer(KIND=4),PARAMETER:: MAXRECORDS=20000
+integer(KIND=4):: IDFSQL(MAXRECORDS), KOUNTFSQL
+    Type TIMESTAMP_STRUCT
+        SEQUENCE
+        integer(SQLSMALLINT_KIND):: Year
+        integer(SQLUSMALLINT_KIND)::Month
+        integer(SQLUSMALLINT_KIND)::Day
+        integer(SQLUSMALLINT_KIND)::Hour
+        integer(SQLUSMALLINT_KIND)::Minute
+        integer(SQLUSMALLINT_KIND)::Second
+        integer(SQLUINTEGER_KIND):: Fraction
+    End Type TIMESTAMP_STRUCT
+END MODULE
+MODULE FSQL_DATA
+!*************************************************************************
+use f90SQLConstants
+!use f90SQLStructures
+use f90SQL
+!
+! Number of Rows affected
+INTEGER(KIND=4),PARAMETER :: Nf90sql=100
+
+!
+! Index Field
+! Index Field  Note type of this field must match Database Index (column) name.
+INTEGER(KIND=4):: IDI(Nf90sql),f90sqlIndex
+! Set NumericIndex .true. if index field is numeric not string (character)
+LOGICAL:: NumericIndex=.false.
+!   Database Field (Column) Names
+CHARACTER(LEN=10):: IDFIELD='ResID'
+!
+CHARACTER(LEN=256):: Table='StageAreaCap',fname='ReservoirData.mdb',&
+                     DefaultDir='D:\FORTRAN\F90SQL\Access'
+!
+! Double Precision Fields
+!
+! Set NDPFIELD to number of Double Precision Fields
+INTEGER(KIND=4):: NDPFIELD=3
+INTEGER(KIND=4),PARAMETER:: MDPFIELD
+INTEGER(KIND=4),PARAMETER:: MDATEFIELD
+data /MDPFIELD,MDATEFIELD/
+REAL(KIND=4):: XI(Nf90sql,MDPFIELD)
+!   Database Field (Column) Names
+CHARACTER(LEN=12):: Field(MDPFIELD)
+DATA Field /'ELEVATION','AREA','VOLUME'/
+!
+!  Date Fields
+!
+!  Set NDATEFIELD to number of Date fields
+INTEGER(KIND=4):: NDATEFIELD=0
+!   Database Field (Column) Names
+CHARACTER(LEN=12):: DATEFIELDS(MDATEFIELD)='Date'
+Type DATE_STRUCT
+        SEQUENCE
+        integer(SQLSMALLINT_KIND):: Year
+        integer(SQLUSMALLINT_KIND)::Month
+        integer(SQLUSMALLINT_KIND)::Day
+End Type DATE_STRUCT
+Type TIMESTAMP_STRUCT
+        SEQUENCE
+        integer(SQLSMALLINT_KIND):: Year
+        integer(SQLUSMALLINT_KIND)::Month
+        integer(SQLUSMALLINT_KIND)::Day
+        integer(SQLUSMALLINT_KIND)::Hour
+        integer(SQLUSMALLINT_KIND)::Minute
+        integer(SQLUSMALLINT_KIND)::Second
+        integer(SQLUINTEGER_KIND):: Fraction
+    End Type TIMESTAMP_STRUCT
+ !DATER is array to hold dates
+ !DATES is local array used for each row
+ !Choose Date Stucture (TIMESTAMP_STRUCT) for Access and Excel (DATE_STRUCT) for DBF
+TYPE (TIMESTAMP_STRUCT):: DATER(NF90sql,MDATEFIELD),DATES(NF90sql)
+!
+! String (Character) Fields
+!
+! Set NSTRINGFIELD to number or String (Character) Fields
+INTEGER(KIND=4),PARAMETER:: NSTRINGFIELD=2
+INTEGER(KIND=4),PARAMETER:: MSTRINGFIELD=MAX(NSTRINGFIELD,1)
+!   Database Field (Column) Names
+CHARACTER(LEN=10):: STRINGFIELDS(MSTRINGFIELD)=(/'Reservoir ','ResID     '/)
+CHARACTER(LEN=40):: F90SQLSTRINGS(Nf90sql,MSTRINGFIELD)
+!
+!  Logic or Integer Fields
+!  Logic or Integer Fields are treated the same and the same arrray location
+!  is used for both.
+!  F90SQLLOGIC and F90SQLINTEGER may be are used to assign values to the array
+!  F90SQLLOGIC for logical or boolean expressions
+!  F90SQLINTEGER for integer expressions
+!
+!   Set NLOGICFIELD to number or total number of logic and integer Fields
+   INTEGER(KIND=4),PARAMETER:: NLOGICFIELD=0  !
+   INTEGER(KIND=4),PARAMETER:: MLOGICFIELD=MAX(NLOGICFIELD,1)
+!   Database Field (Column) Names
+   logical (kind=1) OpenCloseConn
+   CHARACTER(LEN=10):: LOGICFIELDS(MLOGICFIELD)=(/'ID'/)
+   LOGICAL(KIND=4):: F90SQLLOGIC(NF90SQL,NLOGICFIELD)
+   INTEGER(KIND=4):: F90SQLINTEGER(NF90SQL,NLOGICFIELD)
+   EQUIVALENCE (F90SQLLOGIC,F90SQLINTEGER)
+!
+!   Error Messages and Codes Returned
+!
+    CHARACTER(LEN=255):: ERROR10,ERROR_10,ERRORNATIVE(10),MESSAGE0
+    integer(SQLSMALLINT_KIND):: iDiag
+    INTEGER:: IRETURN
+!
+   CHARACTER(LEN=15):: RESID
+   CHARACTER(LEN=20):: IndexString
+   INTEGER(KIND=4):: KOUNTFSQL
+!
+END MODULE
+
+!     Last change: CWM 4/14/2010 12:15:00 PM
+      PROGRAM BUDGET
+!NAME AAMAIN
+!-----------------------------------------------------------------------
+!
+!     GENERALIZED RESERVOIR OPERATION SIMULATION
+!
+!
+!  NOTE:
+!     THIS PROGRAM MUST BE LINKED TO USERSUBS ON SYSPAK
+!
+!     PARAMETER FILE PARAMDIM MUST BE PLACED BEFORE ANY OTHER INCLUDE
+!     FILES
+!
+!-----------------------------------------------------------------------
+      use PARAMDIM
+      use COMMO
+      use PrintStuff
+      use F90SQLConstants
+      use F90SQL
+      use F90SQLVARIABLES
+      use FSQL_DATA
+      COMMON /IARQI/IARQ(MQX)
+      INTEGER*4 IARQ,ILEN
+      COMMON /FLOW/ Y
+      INTEGER*4 NQXMN,INEW,IQTGNM,IDEG,IMIN,IY
+      INTEGER*4 ISEC,IM1,ID1,IM2,ID2,IB,IYR,IEXP,IXP
+      INTEGER*4 IFQ(15),IA,IXQX,IQXI,IQXNUM,IENYR,IFQX
+      INTEGER*4 IQXPLT(23),IRSPLT(MRES),IEVPLT(MRES),ISAPLT(MLAND)
+      INTEGER*4 ISQX(10),IQX(13),INQX,INLND,INDIV,KK
+      INTEGER*4 IX,M,N,MM,IP,IND,IN,II,KS,KE,NPTS
+      INTEGER*4 NMONTH,IFIL,IL,ISUM,IDAYS(12)
+      DATA IDAYS/31,30,31,31,28,31,30,31,30,31,31,30/
+      CHARACTER*48 TITL,COMMND*128,GETPAT*80,JUSTEM*8,PRNTIT*10
+      CHARACTER*8 QXLS,DFILE*80,OFILE*80,ANS*80,STAGFIL*80
+      CHARACTER*80 PREFIL(MLAND),MONTH(3)*4,HEADC*80,OUTVAL*10(13)
+      CHARACTER*80 TEMFIL(MLAND),PLOTFL,PLOTFL2,OUTPAT,NONULL
+      CHARACTER REC*200
+      LOGICAL*1 LAVPRE(MLAND),LAVTEM(MLAND),IANPLT,IMNPLT,IDISK
+      LOGICAL*1 ISDIV,IBUD,ISREAD(MYEAR,13)
+      REAL*4 PER(13),ROUND,TOTPRE,TOTEM,TOT,TULES(12),XMIN
+      REAL*4 MUNDEM(MLAND),QI(13),TLAT,QMR,QPMX,QPMN
+      REAL*4 HDMN,SUM,HGL,H1,H2,HA,HP1,CHP1,HMN,AH12
+      REAL*4 PRDEG(MLAND),PRMIN(MLAND),PRSEC(MLAND)
+      REAL*4 MON28(MLAND),DAY28(MLAND),MON32(MLAND),DAY32(MLAND)
+      REAL*4 BMN28(MLAND),BDY28(MLAND),FMONTH,FINYR,FYEAR
+      REAL*4 M1IRR(MLAND),VALU,DAT(13)
+      REAL*4 MBEF,MAFT,RV,RA,RE,XMAX
+      REAL*4 CN(13),PRC(13),CON(13),BEG50,FIRDAT,BEG60,BEG55
+      REAL*4 BEG45,END45,END50,BEG28,FROST28,FROST,FROST32,RM
+      REAL*4 USE,BEGSP,ENDSEA,BGSM,GBEF,GAFT,LGBEF,LGAFT
+      REAL*4 CORNC(11),STBEG(MRES),QINM(13),LPRC(13)
+!     REAL*4 CRNGFC(21),DRYPFC(21)
+      REAL*4 WBEG(MLAND),ORCHWO(12)
+      REAL*4 ICHK(MQX),IRSCK(MQX)
+      REAL*4 GRPFC(21),CRNSFC(21)
+      REAL*4 SVGFC(21),SNPBFC(21),TOMFC(21)
+!     REAL*4 GRNPFC(21),BEETC(11),SALC60(12),SALC36(12)
+!     REAL*4 ORCHW(12)
+      REAL*4 SALC12 (12)
+      REAL*4 PASC(12),POTC(11)
+      REAL*4 OWATER (12)
+      REAL*4 COTTC (12)
+      REAL*4 CEDAR (12)
+      REAL*4 GRNC(MGRN)
+      REAL*4 ALFC(12),FLODC(12)
+!     REAL*4 WINSPC (MSPC),GRES60(12),GRES36(12),GRES12(12)
+!     REAL*4 WINFLC (MFLC),SBHAYC(12),WETVC(12),FLATC(12)
+      REAL*4 QMIP(MLAND,13)
+      REAL*4 QPMXI(MPP)
+!      HYDROPOWER CONSTANT MEGAWATT-HOURS = CP1I * AC-FT/MONTH * HEAD
+      REAL*4  CP1I/.0010244/
+      REAL*4 H1I(MPP),H2I(MPP),QHPI(MPP)
+!        DIMENSIONS FOR FLOWDUR TABLES
+      REAL*4 Y(MPTS)
+      REAL*4 QQ(23)
+      REAL*4 DAYLI(8,12)
+      CHARACTER(LEN=10):: DATE9,TIME9
+      DATA ((DAYLI(IA,IB),IB=1,12),IA=1,8)  / &
+           .0698,.0685,.0835,.0885,.0980,.0982,.0999,.0941,.0836, &
+       .0785,.0693,.0681, &
+           .0692,.0682,.0834,.0887,.0985,.0989,.1005,.0944,.0837, &
+       .0783,.0688,.0674, &
+           .0687,.0679,.0833,.0889,.0990,.0996,.1011,.0947,.0837, &
+       .0780,.0683,.0668, &
+           .0681,.0675,.0833,.0891,.0995,.1003,.1016,.0951,.0838, &
+       .0778,.0678,.0661, &
+           .0675,.0672,.0832,.0893,.1001,.1009,.1022,.0955,.0839, &
+       .0775,.0673,.0654, &
+           .0668,.0668,.0831,.0896,.1007,.1016,.1029,.0959,.0839, &
+       .0772,.0668,.0647, &
+           .0661,.0665,.0830,.0899,.1013,.1024,.1035,.0962,.0840, &
+       .0770,.0662,.0639, &
+           .0655,.0661,.0830,.0902,.1019,.1031,.1042,.0966,.0840, &
+       .0767, .0656, .0631  /
+!      ALFALFA COEFICIENTS
+      DATA (ALFC (IA),IA=1,12) &
+       /   .91,.78,.64,.63,.73,.86,.99,1.08,1.13,1.11,1.06,.99    /
+!      PASTURE GRASS COEFICIENTS
+      DATA (PASC  (IA),IA=1,12) / &
+           .79,.67,.55,.49,.57,.73,.85,.90,.92,.92,.91,.87        /
+!     SPRING GRAIN COEFICIENTS
+      DATA (GRNC  (IA),IA=1,MGRN) / &
+           .28,.36,.46,.58,.71,.82,.94, 1.04,1.14,1.25,1.31,1.31, &
+        1.27, 1.18, .94, .87, .69, .50, .30, .13, 0.0 /
+!     ORCHARDS WITHOUT COVER COEFICIENTS
+      DATA (ORCHWO(IA),IA=1,12) / &
+           .30,.19,.15,.17,.25,.40,.63,.88,.96,.95,.82,.54        /
+!     GRAPE COEFICIENTS
+      DATA (GRPFC(IA),IA=1,12)/.50,.35,.23,.20,.24,.33,.50, &
+            .71,.80,.80, &
+           .76,.61/
+!     SUB IRRIGATED HAY COEFICIENTS
+!     DATA (SBHAYC(IA),IA=1,12) /
+!    * .359,.418,.535,.623,.660,.682,.682,.667,.638,.579,.491,.403/
+!     CORN SILAGE COEFFICIENTS
+      DATA (CRNSFC(IA),IA=1,21)/.44,.45,.47,.50,.54,.59,.65,.71, &
+       .80,.90,.98,1.03,1.06,1.07,1.08,1.08,1.06,1.04,1.02,1.00,.96/
+!     SMALL VEGETABLE COEFFICIENTS
+      DATA (SVGFC(IA),IA=1,21)/.29,.33,.39,.48,.56,.63,.69,.74,.78, &
+       .80,.82,.83,.83,.82,.80,.76,.72,.66,.58,.50,.38/
+!     SNAP BEAN COEFFICIENTS
+      DATA (SNPBFC(IA),IA=1,21)/.50,.52,.55,.58,.61,.64,.68,.73,.79, &
+       .84,.89,.94,.98,1.02,1.05,1.08,1.10,1.11,1.12,1.12,1.12/
+!     TOMATO FACTORS
+      DATA (TOMFC(IA),IA=1,21)/.44,.45,.46,.47,.48,.51,.57,.64,.75, &
+       .88,.96,1.01,1.03,1.02,.99,.95,.90,.85,.80,.75,.69/
+!     CORN COEFICIENTS
+      DATA (CORNC (IA),IA=1,11) / &
+           .43,.50,.58,.71,.92,1.05,1.08,1.07,1.06,1.03,1.00      /
+!     IRISH POTATOE COEFICIENTS
+      DATA (POTC  (IA),IA=1,11) / &
+           .36,.40,.45,.72,.97,1.18,1.31,1.37,1.36,1.30,1.23      /
+!     SUGAR BEET COEFICIENTS
+!     DATA (BEETC (IA),IA=1,11) /
+!    *     .45,.49,.61,.78,.95,1.10,1.20,1.25,1.22,1.11,1.04      /
+!     SALT GRASS, 36 TO 60 INCHES TO GROUND WATER
+!     DATA (SALC60(IA),IA=1,12) /
+!    *     .49,.46,.42,.35,.33,.32,.34,.38,.44,.48,.51,.51        /
+!     SALT GRASS, 12 TO 36 INCHES TO GROUND WATER
+!     DATA (SALC36(IA),IA=1,12) /
+!    *     .81,.76,.68,.56,.53,.53,.55,.62,.68,.76,.81,.83        /
+!     SALT GRASS, 0 TO 12 INCHES TO GROUND WATER
+      DATA (SALC12(IA),IA=1,12) / &
+           1.26,1.19,1.08,.88,.84,.84,.88,.95,1.07,1.20,1.28,1.29 /
+!     GREASEWOOD, 36 TO 60 INCHES TO GROUND WATER TABLE
+!     DATA (GRES60(IA),IA=1,12) /
+!    *     .48,.34,.16,.14,.15,.16,.18,.22,.34,.46,.53,.57        /
+!     GREASEWOOD, 12 TO 36 INCHES TO GROUND WATER TABLE
+!     DATA (GRES36(IA),IA=1,12) /
+!    *     1.13,.80,.44,.37,.39,.42,.46,.54,.84,1.09,1.28,1.34    /
+!     GREASEWOOD, 0 TO 12 INCHES TO GROUND WATER TABLE
+!     DATA (GRES12(IA),IA=1,12) /
+!    *     2.11,1.55,.87,.67,.70,.75,.84,.98,1.43,2.05,2.40,2.50  /
+!     WET VEGETATION ASPECT
+!     DATA (WETVC (IA),IA=1,12) /
+!    +     1.748,1.234,0.583,0.514,0.549,0.583,0.651,0.806,1.234,
+!    +     1.663,1.920,2.074 /
+!     WET FLATS
+!     DATA (FLATC (IA),IA=1,12) /
+!    +      .806,0.566,0.305,0.261,0.283,0.305,0.327,0.392,0.588,
+!    +      .762, .914, .958 /
+!     TEMPORARILY FLOODED
+      DATA (FLODC (IA),IA=1,12) / &
+            .806,0.566,0.305,0.261,0.283,0.305,0.327,0.392,0.588, &
+            .762, .914, .958 /
+!     TULES AND CATTAILS
+      DATA (TULES (IA),IA=1,12) / &
+           1.48,1.35,1.35,1.35,1.35,1.35,1.35,1.52,1.68,1.85,1.73,1.60/
+!     SALT CEDAR
+      DATA (CEDAR (IA),IA=1,12) / &
+           1.67,1.67,1.67,1.67,1.67,1.67,1.67,1.67,1.67,1.67,1.67,1.67/
+!     COTTONWOODS
+      DATA (COTTC (IA),IA=1,12) / &
+           1.25,1.04,.75,.65,.80,1.14,1.37,1.43,1.44,1.42,1.40,1.36/
+!     OPEN WATER
+      DATA (OWATER(IA),IA=1,12) / &
+           1.35,1.35,1.35,1.35,1.35,1.35,1.35,1.35,1.35,1.35,1.35,1.35/
+!
+
+integer(SQLHENV_KIND):: EnvHndl
+integer(SQLHDBC_KIND):: ConnHndl
+integer(SQLRETURN_KIND)::iRet
+character (len=5) JUSTEXT
+!---------------------------------------------------------------------------
+!  ModelBudget parameters
+integer (KIND=4) :: ModelID,EndYear,Iterations,LinesPerPage,TypeYear
+character :: ModelName*200,ProgName*50,ExeName*50,PrintName*50
+character :: FileName*100,LastUser*50,CreatedBy*50
+character (len=200) :: ALLTRIM
+logical (KIND=2) :: BegSoilMatch,PrintResData,PrintAllRes
+logical (KIND=2) :: PrintArea,PrintCapacity,PrintInflows
+logical (KIND=2) :: PrintMinFlows,PrintLandArea,PrintInOut
+logical (KIND=2) :: PrintAnnYield,PrintStage
+logical (KIND=2) :: PrintPerYield,CalcPrivDomestic,IsOpen
+integer (KIND=2) :: BegSoilMatchInt,PrintResDataInt,PrintAllResInt
+integer (KIND=2) :: PrintAreaInt,PrintCapacityInt,PrintInflowsInt
+integer (KIND=2) :: PrintMinFlowsInt,PrintLandAreaInt,PrintInOutInt
+integer (KIND=2) :: PrintAnnYieldInt,PrintStageInt
+integer (KIND=2) :: PrintPerYieldInt,CalcPrivDomesticInt,IsOpenInt
+equivalence (BegSoilMatch), (BegSoilMatchInt)
+equivalence (PrintResData), (PrintResDataInt)
+equivalence (PrintAllRes), (PrintAllResInt)
+equivalence (PrintArea), (PrintAreaInt)
+equivalence (PrintCapacity), (PrintCapacityInt)
+equivalence (PrintInflows), (PrintInflowsInt)
+equivalence (PrintMinFlows), (PrintMinFlowsInt)
+equivalence (PrintLandArea), (PrintLandAreaInt)
+equivalence (PrintInOut), (PrintInOutInt)
+equivalence (PrintAnnYield), (PrintAnnYieldInt)
+equivalence (PrintStage), (PrintStageInt)
+equivalence (PrintPerYield), (PrintPerYieldInt)
+equivalence (CalcPrivDomestic), (CalcPrivDomesticInt)
+equivalence (IsOpen), (IsOpenInt)
+type (TIMESTAMP_STRUCT) :: LastOpened,LastClosed
+character(len=MaxStringLen):: ConnStr,SQLStmtStr,ConnStrOut
+character(len=MaxStringLen):: fname='O:\DATABASE\WATBUDG\Models\ModelData.mdb'
+character(len=MaxStringLen):: tempStr,ModelWhere
+!---------------------------------------------------------------------------
+integer(SQLSMALLINT_KIND)::ColNumber,ConnStrLength
+
+!
+!     READ INPUT DATA
+!
+!   PAGE HEADING
+!     BUGTITL(1)='INFLOW'
+!     BUGTITL(2)='EVAP'
+!     BUGTITL(3)='SOIL'
+!     BUGTITL(4)='UNROUTED'
+!     BUGTITL(5)='ROUTED'
+!     BUGTITL(6)='PUMP RET'
+!     BUGTITL(7)='DOM DEL'
+!     BUGTITL(8)='UNROU ERR'
+!     BUGTITL(9)='ROUT ERR'
+!     BUGTITL(10)='RET ERR'
+CALL GETCL(COMMND)
+IF(COMMND.GT.' ')THEN
+  READ(COMMND,*,END=10)ModelID
+ELSE
+  DO WHILE (ModelID == 0)
+      WRITE(*,*)'TYPE Model ID for simulation'
+      WRITE(*,*)' '
+      READ(*,*)ModelID
+  END DO
+ENDIF
+ 10   CONTINUE
+call f90SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, EnvHndl, iRet)
+!Set ODBC version we will be using (3.x in this case)
+call f90SQLSetEnvAttr(EnvHndl, SQL_ATTR_ODBC_VERSION, &
+                      SQL_OV_ODBC3, iRet)
+
+!Allocate a connection handle
+call f90SQLAllocHandle(SQL_HANDLE_DBC,EnvHndl, ConnHndl, iRet)
+
+ConnStr='DBQ='//trim(fname)//';DRIVER={Microsoft Access Driver (*.mdb)}'
+
+call f90SQLDriverConnect(ConnHndl, f90SQL_NULL_PTR, ConnStr, &
+    ConnStrOut, ConnStrLength, SQL_DRIVER_COMPLETE,iRet)
+
+if (iRet.eq.SQL_SUCCESS .or. iRet.eq. SQL_SUCCESS_WITH_INFO) then
+
+    !Allocate statement handdle
+    call f90SQLAllocHandle(SQL_HANDLE_STMT,ConnHndl, StmtHndl, iRet)
+
+    !Create a parameterized SQL query
+    WRITE(tempStr,"(I6)")ModelID
+    SQLStmtStr="SELECT * FROM ModelBudget "// &
+               "WHERE ModelID = "// Trim(ALLTRIM(TempStr)) // ";"
+
+    call f90SQLPrepare(StmtHndl,trim(SQLStmtStr),iRet)
+
+    print *,'Query prepared',iRet
+
+    !Prepare the SQL query and execute the query (
+    call f90SQLExecute(StmtHndl,iRet) 
+    
+    if (iRet.eq.SQL_SUCCESS .or. iRet.eq.SQL_SUCCESS_WITH_INFO) then
+
+        !Retrieve data
+         KOUNTFSQL=0
+        !bind SQL statement parameters to fortran variables
+        call f90SQLBindCol (StmtHndl, int(1,SQLUSMALLINT_KIND), SQL_INTEGER, &
+            ModelID, f90SQL_NULL_PTR, iRet)
+        call f90SQLBindCol (StmtHndl, int(2,SQLUSMALLINT_KIND), SQL_CHAR,  &
+            ModelName, f90SQL_NULL_PTR, iRet)
+        call f90SQLBindCol (StmtHndl, int(3,SQLUSMALLINT_KIND), SQL_CHAR, &
+            TITLE, f90SQL_NULL_PTR, iRet)
+        call f90SQLBindCol (StmtHndl, int(4,SQLUSMALLINT_KIND), SQL_INTEGER, &
+            INYR, f90SQL_NULL_PTR, iRet)
+        call f90SQLBindCol (StmtHndl, int(5,SQLUSMALLINT_KIND), SQL_INTEGER, &
+            EndYear, f90SQL_NULL_PTR, iRet)
+        call f90SQLBindCol (StmtHndl, int(6,SQLUSMALLINT_KIND), SQL_SMALLINT, &
+            BegSoilMatchInt, f90SQL_NULL_PTR, iRet)
+        call f90SQLBindCol (StmtHndl, int(7,SQLUSMALLINT_KIND), SQL_INTEGER, &
+            Iterations, f90SQL_NULL_PTR, iRet)
+        call f90SQLBindCol (StmtHndl, int(8,SQLUSMALLINT_KIND), SQL_CHAR, &
+            ProgName, f90SQL_NULL_PTR, iRet)
+        call f90SQLBindCol (StmtHndl, int(9,SQLUSMALLINT_KIND), SQL_CHAR, &
+            ExeName, f90SQL_NULL_PTR, iRet)
+        call f90SQLBindCol (StmtHndl, int(10,SQLUSMALLINT_KIND), SQL_CHAR, &
+            PrintName, f90SQL_NULL_PTR, iRet)
+        call f90SQLBindCol (StmtHndl, int(11,SQLUSMALLINT_KIND), SQL_INTEGER, &
+            TypeYear, f90SQL_NULL_PTR, iRet)
+        call f90SQLBindCol (StmtHndl, int(12,SQLUSMALLINT_KIND), &
+            SQL_SMALLINT, PrintResDataInt, f90SQL_NULL_PTR, iRet)
+        call f90SQLBindCol (StmtHndl, int(13,SQLUSMALLINT_KIND), &
+            SQL_SMALLINT, PrintAllResInt, f90SQL_NULL_PTR, iRet)
+        call f90SQLBindCol (StmtHndl, int(14,SQLUSMALLINT_KIND), SQL_SMALLINT, &
+            PrintStageInt, f90SQL_NULL_PTR, iRet)
+        call f90SQLBindCol (StmtHndl, int(15,SQLUSMALLINT_KIND), SQL_SMALLINT, &
+            PrintAreaInt, f90SQL_NULL_PTR, iRet)
+        call f90SQLBindCol (StmtHndl, int(16,SQLUSMALLINT_KIND), SQL_SMALLINT, &
+            PrintCapacityInt, f90SQL_NULL_PTR, iRet)
+        call f90SQLBindCol (StmtHndl, int(17,SQLUSMALLINT_KIND), SQL_INTEGER, &
+            LinesPerPage, f90SQL_NULL_PTR, iRet)
+        call f90SQLBindCol (StmtHndl, int(18,SQLUSMALLINT_KIND), SQL_SMALLINT, &
+            PrintInflowsInt, f90SQL_NULL_PTR, iRet)
+        call f90SQLBindCol (StmtHndl, int(19,SQLUSMALLINT_KIND), SQL_SMALLINT, &
+            PrintMinFlowsInt, f90SQL_NULL_PTR, iRet)
+        call f90SQLBindCol (StmtHndl, int(20,SQLUSMALLINT_KIND), SQL_SMALLINT, &
+            PrintLandAreaInt, f90SQL_NULL_PTR, iRet)
+        call f90SQLBindCol (StmtHndl, int(21,SQLUSMALLINT_KIND), SQL_SMALLINT, &
+            PrintInOutInt, f90SQL_NULL_PTR, iRet)
+        call f90SQLBindCol (StmtHndl, int(22,SQLUSMALLINT_KIND), SQL_SMALLINT, &
+            PrintAnnYieldInt, f90SQL_NULL_PTR, iRet)
+        call f90SQLBindCol (StmtHndl, int(23,SQLUSMALLINT_KIND), SQL_SMALLINT, &
+            PrintPerYieldInt, f90SQL_NULL_PTR, iRet)
+        call f90SQLBindCol (StmtHndl, int(24,SQLUSMALLINT_KIND), SQL_SMALLINT, &
+            CalcPrivDomesticInt, f90SQL_NULL_PTR, iRet)
+        call f90SQLBindCol (StmtHndl, int(25,SQLUSMALLINT_KIND), SQL_SMALLINT, &
+            IsOpenInt, f90SQL_NULL_PTR, iRet)
+        call f90SQLBindCol (StmtHndl, int(26,SQLUSMALLINT_KIND), SQL_CHAR, &
+            FileName, f90SQL_NULL_PTR, iRet)
+        call f90SQLBindCol (StmtHndl, int(27,SQLUSMALLINT_KIND), SQL_CHAR, &
+            LastUser, f90SQL_NULL_PTR, iRet)
+        call f90SQLBindCol (StmtHndl, int(28,SQLUSMALLINT_KIND), SQL_CHAR, &
+            CreatedBy, f90SQL_NULL_PTR, iRet)
+        call f90SQLBindCol (StmtHndl, int(29,SQLUSMALLINT_KIND), &
+            SQL_TYPE_TIMESTAMP, LastOpened, f90SQL_NULL_PTR, iRet)
+        call f90SQLBindCol (StmtHndl, int(30,SQLUSMALLINT_KIND), &
+            SQL_TYPE_TIMESTAMP, LastClosed, f90SQL_NULL_PTR, iRet)
+         do while (.true.)
+            call f90SQLFetch(StmtHndl,iRet)
+            if (iRet.ne.SQL_SUCCESS .and. iRet.ne.SQL_SUCCESS_WITH_INFO) then
+                if (iRet.eq.SQL_NO_DATA) then
+                    print *,'End of data set reached'
+                else
+                    print *,'Error fetching data' 
+!                   call ShowDiags(SQL_HANDLE_STMT,StmtHndl)
+                endif
+                exit
+            endif
+            KOUNTFSQL=KOUNTFSQL+1
+        enddo
+    else
+        print *,'Error executing SQL query'
+!       call ShowDiags(SQL_HANDLE_STMT,StmtHndl)
+    endif
+endif
+!release connection handle
+call f90SQLFreeHandle(SQL_HANDLE_DBC,ConnHndl,iRet)
+!disconnect
+call f90SQLDisconnect(ConnHndl,iRet)
+!release environment handle 
+call f90SQLFreeHandle(SQL_HANDLE_ENV, EnvHndl, iRet) 
+OFILE=PrintName
+if (len(trim(JUSTEXT(FileName)))>0) then
+   OFILE=FileName
+else
+   OFILE=Trim(ALLTRIM(GETPAT(DFILE)))//Trim(ALLTRIM(JUSTEM(DFILE)))//'.OUT'
+end if
+NYRS=INYR - EndYear + 1
+fname=FileName
+DefaultDir=GETPAT(FileName)
+Field=" "
+Field(1:2)=(/"QXnum","theOrder"/)
+NDPFIELD=2
+ConnStr='DBQ='//trim(fname)//';DRIVER={Microsoft Access Driver (*.mdb)}'
+
+call f90SQLDriverConnect(ConnHndl, f90SQL_NULL_PTR, ConnStr, ConnStrOut, &
+    ConnStrLength, SQL_DRIVER_COMPLETE,iRet)
+
+if (iRet.eq.SQL_SUCCESS .or. iRet.eq. SQL_SUCCESS_WITH_INFO) then
+    WRITE(WhereString,"(I6)")ModelID
+    ="SELECT QXnum, theOrder, QXDesc FROM ModelQXPrint "// &
+        "WHERE ModelID=" // trim(ALLTRIM(WhereString))//";"
+    if (OpenTable(ConnHndl,SQLOpenTxt)) then
+
+    end if
+end if
+
+
+end if
+ConnStr='DBQ='//trim(FileName)//';DRIVER={Microsoft Access Driver (*.mdb)}'
+
+call f90SQLDriverConnect(ConnHndl, f90SQL_NULL_PTR, ConnStr, ConnStrOut, &
+    ConnStrLength, SQL_DRIVER_COMPLETE,iRet)
+
+if (iRet.eq.SQL_SUCCESS .or. iRet.eq. SQL_SUCCESS_WITH_INFO) then
+
+    !Allocate statement handdle
+    call f90SQLAllocHandle(SQL_HANDLE_STMT,ConnHndl, StmtHndl, iRet)
+
+    !Create a parameterized SQL query
+    WRITE(tempStr,"(I6)")ModelID
+    SQLStmtStr="SELECT * FROM ModelQIN "// &
+               "WHERE ModelID = "// Trim(ALLTRIM(TempStr)) // ";"
+
+    call f90SQLPrepare(StmtHndl,trim(SQLStmtStr),iRet)
+
+    print *,'Query prepared',iRet
+
+    !Prepare the SQL query and execute the query (
+    call f90SQLExecute(StmtHndl,iRet) 
+    
+    if (iRet.eq.SQL_SUCCESS .or. iRet.eq.SQL_SUCCESS_WITH_INFO) then
+
+      READ(5,"(7I5,11L1,I3,I5,I3,I2,L1)")NYRS, &
+            INYR,NRES,NLND,NQIN,NHPW,NFDT, &
+            IPSH,IPST,IPEV,IPEL,IPSA,IPAS, &
+            IANPLT,IMNPLT, IDISK,IPQIN,IBUD,NQXMN,ITERMX,NQX, &
+            INEW,SPLOT
+      DO WHILE(IANPLT.AND.PLOTFL.LE.' ')
+      WRITE(*,*)'Please Input Plot File Name'
+      WRITE(*,*)' '
+      READ(*,*)PLOTFL
+      ENDDO
+      DO WHILE(IMNPLT.AND.PLOTFL2.LE.' ')
+      WRITE(*,*)'Please Input Plot File Name'
+      WRITE(*,*)' '
+      READ(*,*)PLOTFL2
+      ENDDO
+      NYRS=MAX(1,NYRS)
+      INYR=MAX(1,INYR)
+!
+      IF(NRES .GT. MRES .OR. NLND .GT. MLAND .OR. NQX .GT. MQX .OR. &
+        NYRS .GT. MYEAR .OR. NHPW .GT. MPP .OR. NQIN .GT. MQSTA)THEN
+      IF(NRES .GT. MRES)THEN
+          WRITE(0,701)
+  701       FORMAT(' INCREASE FORTRAN DIMENSIONS', &
+                  ' FOR NUMBER OF RESERVOIRS')
+      ENDIF
+      IF(NLND .GT. MLAND)THEN
+          WRITE(0,702)
+  702       FORMAT(' INCREASE FORTRAN DIMENSIONS FOR', &
+                  ' NUMBER OF LAND AREAS')
+      ENDIF
+      IF(NQX .GT. MQX)THEN
+          WRITE(0,703)
+  703       FORMAT(' INCREASE FORTRAN DIMENSIONS FOR', &
+                  ' NUMBER OF QX''S')
+      ENDIF
+      IF(NYRS .GT. MYEAR)THEN
+          WRITE(0,704)
+  704       FORMAT(' INCREASE FORTRAN DIMENSIONS FOR', &
+                  ' NUMBER OF YEARS')
+      ENDIF
+      IF(NHPW .GT. MPP)THEN
+          WRITE(0,705)
+  705       FORMAT(' INCREASE FORTRAN DIMENSIONS FOR', &
+                  ' NUMBER OF HYDRO STA.')
+      ENDIF
+      IF(NQIN .GT. MQSTA)THEN
+          WRITE(0,706)
+  706       FORMAT(' INCREASE FORTRAN DIMENSIONS FOR', &
+                  ' NUMBER OF STREAMFLOW STATIONS')
+      ENDIF
+      WRITE(0,707)
+  707   FORMAT(/' PRESS INTER TO STOP')
+      READ(0,*)
+      STOP
+      ENDIF
+!
+!   VARIABLES:
+!              NYRS - NUMBER OF YEARS
+!              INYR - INITIAL YEAR
+!              NRES - NUMBER OF RESERVOIRS
+!              NLND - NUMBER OF LAND AREAS
+!              NHPW - NUMBER OF HYD POWR S
+!              NFDT - NUMBER OF FLOW DUR QS
+!              NQX  - NUMBER OF QX'S
+!   LOGIC VARIABLES SET EQUAL TO 1 TO:
+!              IPQN - USE RESRVR TARGET VAL
+!              IPSH - PRINT LAND AREA MONTH SHORTGS
+!              IPST - PRINT EOM STORAGE
+!              IPEV - PRINT MONTH EVAP
+!              IPEL - PRINT EOM ELEVATIONS
+!              IPSA - PRINT EOM SURF AREA
+!              IPAS - PRINT ANNUAL LAND AREA SHORTAGES
+!              IQMN - MINIMUM FLOW IN RIVER
+!              IANPLT - CREATE ANNUAL PLOT
+!              IMNPLT - CREATE MONTHLY PLOT
+!              IQMNL - LIMIT MIN REL TO INF
+!              IDISK - SAVE QX'S ON DISK
+!              IQIFLV - READ QIN NAMES FROM DISK
+!              IPQIN - WRITE OUT QIN'S
+!
+!-----------------------------------------------------------------------
+!
+!     VARIABLES USED IN THE INITIALIZATION SECTION:
+!
+!     IYEAR   - ARRAY CONTAINING THE YEARS OF THE SIMULATION
+!     FNYEARS - NUMBER OF YEARS IN THE SIMULATION (NYRS FLOATED)
+!     STO     - ARRAY WITH THE INITIAL STORAGE IN THE RESERVOIRS
+!     REL     - ARRAY WITH THE INITIAL RESERVOIR ELEVATIONS
+!     RAR     - ARRAY WITH THE INITIAL RESERVOIR SURFACE AREAS
+!     H1I     - ARRAY WITH INITIAL HEAD (ELEVATION-TAIL WATER ELEVATION)
+!     EF      - ARRAY WITH PERCENT OF DIVERTED IRRIGATION WATER
+!               RETURNING TO THE STREAM
+!     EFM     - ARRAY WITH RETURN PERCENTAGE OF M AMD I WATER
+!     QDVRA   - ARRAY WITH VOLUME OF WATER NEEDED AT DIVERSION TO LAND
+!               AREAS BY MONTH
+!     QDMI    - ARRAY WITH M AND I DEMAND BY MONTH IN THE LAND AREAS
+!     QDVR    - ARRAY WITH TOTAL DIVERSION REQUIREMENT FOR THE LAND
+!               AREAS (QDVRA+QDMI)
+!
+!-----------------------------------------------------------------------
+!
+!
+!        READ DATE AND VARIABLES
+!
+!      CALL DATE(DATE2)
+      DATE2=' '
+      CALL DATE_AND_TIME(DATE9,TIME9)
+      DATE9=DATE9(5:6)//'-'//DATE9(7:8)//'-'//DATE9(1:4)
+      TIME9=TIME9(1:2)//':'//TIME9(3:4)//':'//TIME9(5:6)
+      WRITE(DATE2,'(A,2X,A)') TRIM(DATE9),TRIM(TIME9)
+!
+!     READ FILE WITH NAMES OF QX'S
+!
+      READ(5,'(A8)')QXFIL
+      IF(QXFIL.GT.' ')THEN
+       QXFIL='O:\DATABASE\DEDIT\NAMES\'//CHARNB(QXFIL)
+       OPEN(UNIT=7,FILE=QXFIL,STATUS='OLD',ERR=105)
+       GO TO 104
+ 105        CONTINUE
+          WRITE(6,*)'CANNOT OPEN QX NAMES FILE '//QXFIL
+          WRITE(0,*)'CANNOT OPEN QX NAMES FILE '//QXFIL
+          ISTOP=.TRUE.
+ 104     CONTINUE
+       I=1
+       DO WHILE(I.LE.MQX)
+          READ(7,'(A)',END=101)QXNAM(I)
+          I=I+1
+       ENDDO
+ 101     CONTINUE
+       CLOSE(UNIT=7)
+      ENDIF
+!
+!     READ IN QX NUMBERS
+!
+      READ (5,"(16I5)") (IPQX(I),I=1,NQX)
+      READ (5,"(14A4)") VAR
+!
+      IF(NQIN.GT.0)THEN
+       DO L=1,NQIN
+          READ(5,"(A40,I2,A31)")QFILE(L),IQXN(L),CDESCR(L)
+          IF(IQXN(L).GT.0)THEN
+             ICHK(IQXN(L))=L
+          ENDIF
+       ENDDO
+       CALL GETQIN
+      END IF
+!
+      DO M=1,NRES
+         READ (5,"(A32,2L1,I5,16F8.2,A80)",ERR=354,END=354) &
+                  PRESV(M),QMNLMT(M), &
+                  SEEPTB(M),ISEPQ(M),(ESEEP(I,M),SSEEP(I,M), &
+                  I=1,8),STAGFIL
+ 354     READ (5,"(I5,3F10.0)") NP(M),SMX(M),SMN(M),STOIC(M)
+         READ (5,"(13F5.2)") (EVRT(M,K),K=1,13)
+         IPQN(M)=.FALSE.
+         READ (5,"(13F5.2,L1)",ERR=9021) (QSM(M,K),K=1,13),IPQN(M)
+9021         READ (5,"(13F5.2)") (QRMN(M,K),K=1,13)
+         IF(NP(M).GT.0)THEN
+            READ (5,"(10F8.0)") (E(M,N),N=1,NP(M))
+!           DO L= 1,NP(M),10
+            READ (5,"(10F8.0)") (A(M,N),N=1,NP(M))
+!           ENDDO
+            READ (5,"(10G8.0)") (V(M,N),N=1,NP(M))
+         ENDIF
+         IF(LEN(CHARNB(STAGFIL)).GT.0)THEN
+            OPEN(UNIT=8,FILE=STAGFIL,STATUS='OLD',ERR=466)
+            N=1
+            DO
+               READ(8,*,END=467,ERR=467)E(M,N),A(M,N),V(M,N)
+               NP(M)=N
+               N=N+1
+            ENDDO
+ 467        CLOSE(UNIT=8)
+         ENDIF
+ 466     READ (5,"(12F6.0,F8.0)") (QTG(M,K),K=1,13)
+!     READ IN THE OUTFLOW QX'S FROM THE RESERVOIR
+         READ (5,'(19I3)')(IQTG(M,I),I=1,19)
+         DO I=1,19
+            IF(IQTG(M,I).GT.0)CALL IOU(IQTG(M,I),2,M)
+         ENDDO
+         DO I=1,19
+            IF(IQTG(M,I).GT.0)THEN
+               IQTGNM=IQTG(M,I)
+               IF(ICHK(IQTGNM).GT.0)THEN
+               WRITE(6,*)'CANNOT ASSIGN QIN(',ICHK(IQTGNM),') TO ', &
+               'QX(',IQTGNM,') BECAUSE IT IS A RELEASE ', &
+               'QX FOR RESERVOIR ',M,' - IQXN ZEROED OUT'
+               WRITE(0,*)'CANNOT ASSIGN QIN(',ICHK(IQTGNM),') TO ', &
+               'QX(',IQTGNM,') BECAUSE IT IS A RELEASE ', &
+               'QX FOR RESERVOIR ',M,' - IQXN ZEROED OUT'
+               IQXN(ICHK(IQTGNM))=0
+               IRSCK(IQTGNM)=M
+               ENDIF
+            ENDIF
+         ENDDO
+         READ(5,"(I2,L1,19I3,2I3)")IREST(M)
+!        IF(IOFF(M))THEN
+!        DO I=1,19
+!           IF(IOFQX(M,I).GT.0)CALL INQ(IOFQX(M,I),2,M)
+!        ENDDO
+!        IF(IOFBY(M).GT.0)CALL CBY(IOFBY(M),2,M)
+!        IF(IOFUP(M).GT.0)CALL INQ(IOFUP(M),2,M)
+!        ENDIF
+         READ(5,'(12F5.0,F6.0)')(OFMN(M,I),I=1,13)
+         READ(5,"(19I3)")(IQXAD(M,I),I=1,19)
+         DO I=1,19
+            IF(IQXAD(M,I).GT.0)CALL INQ(IQXAD(M,I),2,M)
+         ENDDO
+         READ(5,"(4L1)")ISTOR(M),IREL(M),REVAP(M),PRNRS(M)
+         READ(5,'(A80)')STOFIL(M)
+         READ(5,'(A80)')RELFIL(M)
+         READ(5,'(A80)')EVAFIL(M)
+      ENDDO
+      IF(NQXMN.GT.0)THEN
+       DO I=1,NQXMN
+          READ(5,'(I3,9F8.1/3F8.1,F10.1)')IQNUM(I), &
+                  (QXMN(K,I),K=1,13)
+          READ(5,'(I3,20I3)')IQRES(I),(IQXMN(J,I),J=1,20)
+       ENDDO
+      ENDIF
+      DO L=1,NLND
+       READ(5,"(A32,2L1,F3.0,2F2.0,F5.1,6F2.0,2F5.1,2L1)")PLAND(L), &
+                  LAVPRE(L),LAVTEM(L),PRDEG(L),PRMIN(L),PRSEC(L), &
+                  EFPRE(L),BMN28(L),BDY28(L),MON28(L),DAY28(L), &
+               MON32(L),DAY32(L),CEFF(L),IEFF(L),PRNLND(L), &
+               LCALEN(L)
+       READ(5,"(A80)")PREFIL(L)
+       READ(5,"(A80)")TEMFIL(L)
+       LGEFF(L)=100.00
+       READ(5,"(12F6.4,F6.1)",ERR=1010)(EFMIP(L,K),K=1,12),LGEFF(L)
+       IF(LGEFF(L).LE..00001)LGEFF(L)=100.
+1010   READ(5,"(F9.1,16X,F6.4,L1,2F5.2)") &
+               MUNDEM(L),RETI(L), &
+               ISOL(L),SOIL(L),BEGSOL(L)
+       SOIL(L)=MAX(SOIL(L),BEGSOL(L),0.0)
+       READ(5,"(12F6.4)")(QMIP(L,I),I=1,12)
+       READ(5,"(12F5.2,4I2)")(PR(L,I),I=1,12),IPH(L),IPHU(L), &
+               IPHD(L),NQLIN(L)
+       IF(IPH(L).GT.0.0)THEN
+          IF(IPHU(L).LE.0)THEN
+             WRITE(6,*)'Upstream QX to serve wetlands in area ',L, &
+                  ' not specified, program terminated.'
+             WRITE(0,*)'Upstream QX to serve wetlands in area ',L, &
+                  ' not specified, program terminated.'
+             ISTOP=.TRUE.
+          ENDIF
+          IF(IPHD(L).LE.0)THEN
+             WRITE(6,*)'Downstream QX to serve wetlands in area ',L, &
+                  ' not specified, program terminated.'
+             WRITE(0,*)'Downstream QX to serve wetlands in area ',L, &
+                  ' not specified, program terminated.'
+             ISTOP=.TRUE.
+          ENDIF
+       ENDIF
+       READ(5,"(12F5.1,6X,4I3)")(TM(L,IA),IA=1,12),IRV(L), &
+               IFT(L),IRT(L),IUR(L)
+       IF(IRT(L).LE.0)THEN
+          WRITE(6,*)'Return Flow QX for Land Area ',L,' is 0 or less'
+          WRITE(0,*)'Return Flow QX for Land Area ',L,' is 0 or less'
+          ISTOP=.TRUE.
+       ENDIF
+       IF(IRV(L).GT.0.AND.IFT(L).LE.0)THEN
+          WRITE(6,*)'Bypass for irrigated wet pasture, Area ',L, &
+               ' is 0 or less'
+          WRITE(0,*)'Bypass for irrigated wet pasture, Area ',L, &
+               ' is 0 or less'
+          ISTOP=.TRUE.
+       ENDIF
+       IF(IRV(L).GT.0.AND.IUR(L).LE.0)THEN
+          WRITE(6,*)'Upstream QX for irrigated wet pasture, Area ',L, &
+               ' is 0 or less'
+          WRITE(0,*)'Upstream QX for irrigated wet pasture, Area ',L, &
+               ' is 0 or less'
+          ISTOP=.TRUE.
+       ENDIF
+       CALL IOU(IRT(L),1,L)
+       IF(IUR(L).GT.0)CALL INQ(IUR(L),1,L)
+       IF(IRV(L).GT.0)CALL CGW(IRV(L),1,L)
+       IF(IFT(L).GT.0)CALL CBY(IFT(L),1,L)
+       DO I=1,NQLIN(L)
+          READ(5,"(4I3,L1)")IDV(L,I),IBY(L,I),ILQIN(L,I),ILUP(L,I), &
+               ISBY(L,I)
+          IF(IDV(L,I).GT.0)THEN
+             IARQ(IDV(L,I))=ILQIN(L,I)
+          ENDIF
+          IF(IDV(L,I).LE.0)THEN
+             WRITE(6,*)'Diversion ',I,' for Land Area',L, &
+                     ' is 0 or less'
+             WRITE(0,*)'Diversion ',I,' for Land Area',L, &
+                     ' is 0 or less'
+             ISTOP=.TRUE.
+          ENDIF
+          CALL INQ(IDV(L,I),1,L)
+          IF(IBY(L,I).GT.0)CALL CBY(IBY(L,I),1,L)
+          IF(ILUP(L,I).GT.0)CALL UPC(ILUP(L,I),1,L)
+          IF(ILQIN(L,I).GT.0)THEN
+             IXQX=IQXN(ILQIN(L,I))
+             IF(IXQX.GT.0)THEN
+                 IF(IDV(L,I).NE.IXQX)THEN
+                  WRITE(6,*)'QIN(',ILQIN(L,I), &
+                              ') is assigned to ', &
+                              'diversion ',I,' of land area ',L, &
+                              ' and cannot ', &
+                        'be assinged QX ',IXQX
+                  WRITE(0,*)'QIN(',ILQIN(L,I), &
+                              ') is assigned to ', &
+                              'diversion ',I,' of land area ',L, &
+                              ' and cannot ', &
+                        'be assinged QX ',IXQX
+                  ISTOP=.TRUE.
+                 ENDIF
+              ENDIF
+             ENDIF
+          IF(IDV(L,I).GT.0)THEN
+             IF(IRSCK(IDV(L,I)).GT.0)THEN
+              WRITE(6,*)'Diversion ',I,' for Land Area',L, &
+                        ' is an outlet' &
+                     ,' QX for reservoir ',IRSCK(IDV(L,I))
+              WRITE(0,*)'Diversion ',I,' for Land Area', &
+                        L,' is an outlet' &
+                     ,' QX for reservoir ',IRSCK(IDV(L,I))
+              ISTOP=.TRUE.
+             ENDIF
+             IF(ILUP(L,I).LE.0)THEN
+              IF(ILQIN(L,I).GT.0)THEN
+                 WRITE(6,*)'Warning, No upstream QX', &
+                           ' number for diversion ' &
+                           ,I,' of land area ',L
+                 WRITE(0,*)'Warning, No upstream QX ', &
+                           'number for diversion ' &
+                           ,I,' of land area ',L
+              ELSE
+                 WRITE(6,*)'Warning, No upstream QX ', &
+                           'number for diversion ' &
+                           ,I,' of land area ',L, &
+                           ', Not defined by QIN'
+                 WRITE(0,*)'Warning, No upstream QX ', &
+                           'number for diversion ' &
+                           ,I,' of land area ',L, &
+                           ', Not defined by QIN'
+              ENDIF
+             ENDIF
+          ENDIF
+       ENDDO
+       READ(5,'(12F6.0,F7.0)')((FBYPS(L,I,K),K=1,13),I=1,NQLIN(L))
+       READ(5,'(A)')REC
+       READ(REC,"(10F4.2,6X,I3,I3)",ERR=434,END=434) &
+              (PCRF(L,I),I=1,10), &
+              IGRND(L,1),LNRS(L),NCRP(L)
+       DO K=2,12
+          IGRND(L,K)=IGRND(L,1)
+       ENDDO
+       GOTO 435
+ 434       READ(REC,"(10F4.2,6X,I3,I3,12F7.4)")(PCRF(L,I),I=1,10), &
+              LNRS(L),NCRP(L),(IGRND(L,K),K=1,12)
+ 435   CONTINUE
+       DO I=1,NCRP(L)
+          READ(5,"(A6,F10.1,F6.2,A40,A13)")CPCODE(L,I),CPAC(L,I), &
+                  CPRO(L,I),CPNAM(L,I),LNTYP(L,I)
+          READ(5,"(12F7.3)")(CPLOVR(L,I,K),K=1,12)
+       ENDDO
+       IF(LNRS(L).GT.0)THEN
+              READ(5,"(33I3)")(LRES(L,I),I=1,11), &
+                      (BEGDEL(L,I),I=1,11),(ENDDEL(L,I),I=1,11)
+              READ(5,'(20I3)')((ILNQ(L,MM,M),M=1,20),MM=1,LNRS(L))
+              DO MM=1,LNRS(L)
+                  DO M=1,20
+                        IF(ILNQ(L,MM,M).GT.0)CALL RCK(ILNQ(L,MM,M),2, &
+                            LRES(L,MM))
+                  ENDDO
+                  ISDIV=.FALSE.
+                  DO M=1,20
+                        IF(ILNQ(L,MM,M).GT.0)THEN
+                            INQX=ILNQ(L,MM,M)
+                            INLND=ITYOU(INQX)
+                            INDIV=ICKOU(INQX)
+                            IF(INLND.EQ.2.AND.INDIV.EQ.LRES(L,MM))THEN
+                                  ISDIV=.TRUE.
+!-----------------------------------------------------------------------
+!     NDEML - ARRAY OF VALUES HOLDING THE QX NUMBER OF THE DIVERSION
+!     INTO LAND AREA L FROM RESERVOIR ICKRS(INQX)
+!-----------------------------------------------------------------------
+                                  NDEML(L,LRES(L,MM))=INQX
+!-----------------------------------------------------------------------
+!     LMRES - ARRAY OF VALUES HOLDING THE SUBCRIPT NUMBER OF THE
+!     RESERVOIR ICKRS(INQX)
+!-----------------------------------------------------------------------
+                                  LMRES(L,LRES(L,MM))=MM
+                            ENDIF
+                          ENDIF
+                  ENDDO
+                  IF(.NOT.ISDIV)THEN
+                        WRITE(6,*)'Call from land area ',L, &
+                                  ' to reservoir ',MM, &
+                                  ' has no connection to a diversion', &
+                                  ' from the land area'
+                        WRITE(0,*)'Call from land area ',L, &
+                                  ' to reservoir ',MM, &
+                                  ' has no connection to a diversion', &
+                                  ' from the land area'
+                        ISTOP=.TRUE.
+                  ENDIF
+                ENDDO
+          ENDIF
+      ENDDO
+      IF (NHPW.GT.0)THEN
+      DO J=1,NHPW
+       READ(5,"(A32,5I3)") PHYPW(J),IHS(J),IHP(J), &
+               IHB(J),IHR(J),IHNP(J)
+       IF(IHS(J).LE.0)THEN
+          WRITE(6,*)'Upstream QX for power plant ',J,' is zero'
+          WRITE(0,*)'Upstream QX for power plant ',J,' is zero'
+          ISTOP=.TRUE.
+       ENDIF
+       CALL INQ(KU(J),3,J)
+!        IF(KI(J).GT.0)CALL UPC(KI(J),3,J)
+!        IF(KB(J).GT.0)CALL CBY(KB(J),3,J)
+       IF(IHNP(J).GT.0) THEN
+          DO I=1,IHNP(J)
+             READ(5,'(I5,3F10.0)') IHPQX(J,I),HPLEN(J,I), &
+                  HPDIA(J,I),HPRGH(J,I)
+          ENDDO
+       ENDIF
+       IF(J.EQ.1 .AND. IHS(J).EQ.0) THEN
+          IHS(J)= 3
+          IHP(J)= 9
+          IHB(J)=10
+          IHR(J)= 1
+       ENDIF
+       READ(5,'(5F10.0,10X,2I10)') QPMXI(J),QPMNI(J), &
+               HDMNI(J),ELTWI(J),E1I(J),KSI(J),KEI(J)
+      ENDDO
+      ENDIF
+      READ(5,'(I3)')NOUFL
+      READ(5,'(19I3)')(IINFL(I),I=1,19)
+      READ(5,'(19I3)')(ITRIB(I),I=1,19)
+      READ(5,'(19I3)')( IIMP(I),I=1,19)
+      READ(5,'(19I3)')(IEXPO(I),I=1,19)
+      READ(5,'(19I3)')( IUNG(I),I=1,19)
+      IF (NFDT.GT.0) READ(5,"(16I5)") IFQ
+      IF(.NOT.IANPLT .AND. .NOT.IMNPLT) GOTO  22
+      READ(5,123) IQXPLT
+      READ(5,123) IRSPLT
+      READ(5,123) IEVPLT
+      READ(5,123) ISAPLT
+  123 FORMAT(23I3)
+!        PLOT FILE VARIABLES
+!        IQXPLT - QX'S TO BE PLOTTED  IRSPLT - RES EOM STORAGES
+!        IEVPLT - RESERVOIR EVAPOR    ISAPLT - SERVICE AREA DEMANDS
+   22 CONTINUE
+!        IF POSITIVE ARRAY SUBSCRIPT FOR SAVING QX IF NEGATIVE SAVES
+!        SHORTAGES
+      IF(IDISK)THEN
+       READ(5,"(16I5)") ISQX
+       READ(5,'(A)')OUTPAT
+      ENDIF
+      CALL ARRANG(IINFL,NINFL)
+      CALL ARRANG(ITRIB,NTRIB)
+      CALL ARRANG(IIMP,NIMP)
+      CALL ARRANG(IEXPO,NEXPO)
+      CALL ARRANG(IUNG,NUNG)
+
+!-----------------------------------------------------------------------
+!        PRINT INPUT DATA
+!-----------------------------------------------------------------------
+!     PRINT OUT RESERVOIR AND LAND USE DATA
+!-----------------------------------------------------------------------
+      IF(NRES.GT.0)THEN
+      CALL HEADIN
+      WRITE (6,"(/30X,'RESERVOIR SIMULATION INPUT DATA')")
+      CLOSE(UNIT=5)
+      WRITE(6,"(//10X,'DATA FILE : ',A)") DFILE
+  202 FORMAT (6X,A4,12(4X,A4,1X),5X,A4,/)
+   60 WRITE (6,211)
+  211 FORMAT (////,30X,'RESERVOIR PARAMETERS')
+      LINE = LINE + 10
+      DO 62 M=1,NRES
+         IF(LINE + 3*NP(M)/10 + 17 .GT.  35) CALL HEADIN
+         WRITE (6,"(//,10X,A32)") PRESV(M)
+         WRITE (6,"(10X,'NP,SMX ...',I10,3F10.0)") &
+               NP(M),SMX(M),SMN(M),STOIC(M)
+         WRITE (6,"(10X,'EVRT WY   ',12F8.2,F10.2)") &
+               (EVRT(M,K),K=1,13)
+         WRITE (6,"(10X,'SEEPAGE   ',12F8.0,F10.0)") &
+               (QSM(M,K),K=1,13)
+         WRITE (6,215) (QRMN(M,K),K=1,13)
+         LINE = LINE + 7
+  215    FORMAT (10X,'QRMN WY   ',12F8.0,F10.0)
+         WRITE (6,333)
+  333    FORMAT (/,10X,'ELEVATION-AREA-CAPACITY TABLE')
+         WRITE (6,334) (E(M,N),N=1,NP(M))
+         WRITE (6,334) (A(M,N),N=1,NP(M))
+         WRITE (6,334) (V(M,N),N=1,NP(M))
+         IF(LEN(CHARNB(STAGFIL)).GT.0)THEN
+            WRITE(6,"(10X,'Stage/Area/Volume File',A80)")STAGFIL
+            LINE=LINE+1
+         ENDIF
+  334    FORMAT (10X,10F11.1)
+         LINE = LINE + 3*NP(M)/10 + 5
+         IF (IPQN(M)) THEN
+            WRITE (6,229) (QTG(M,K),K=1,13)
+ 229           FORMAT (10X,'QTG  WY   ',12F8.0,F10.0)
+            LINE=LINE+1
+         ENDIF
+         WRITE(6,"(/12X,'RELEASE WATER FROM RESERVOIR THROUGH"// &
+         " QX NUMBERS',19I3)")(IQTG(M,I),I=1,19)
+         LINE=LINE+2
+         WRITE(6,"(12X,'IQXAD(',I2,')',2X,19I3)")M,(IQXAD(M,I),I=1,19)
+ 127     FORMAT(' IQXAD(',I2,')',2X,19I3)
+         IF(SEEPTB(M))THEN
+            WRITE(6,"(12X,'Seepage Routed Through QX(',I3,')')") &
+                  ISEPQ(M)
+            WRITE(6,"(12X,'Seepage Table Values')")
+            WRITE(6,"(12X,'Resr Elev.     ',8F9.2)")(ESEEP(I,M),I=1,8)
+            WRITE(6,"(12X,'Resr Seep (cfs)',8F9.2)")(SSEEP(I,M),I=1,8)
+            LINE=LINE+4
+         ENDIF
+         WRITE(6,128)ISTOR(M),STOFIL(M), &
+            IREL(M),RELFIL(M),REVAP(M), &
+            EVAFIL(M),PRNRS(M)
+ 128     FORMAT(/12X,'ISTOR ',L1,' STOFIL,',A/ &
+            12X,'IREL  ',L1,' RELFIL,',A/ &
+               12X,'REVAP ',L1,' EVAFIL,',A/ &
+               12X,'Print Data Files? ',L1)
+         LINE=LINE+4
+   62 CONTINUE
+      ENDIF
+!-----------------------------------------------------------------------
+!     MINIMUM FLOW DATA
+!-----------------------------------------------------------------------
+      IF(NQXMN.GT.0)THEN
+       CALL HEADIN
+       WRITE(6,'(/'' MINIMUM FLOW REQUIREMENTS FOR VARIOUS QX S'')')
+       WRITE(6,"( '  MIN QX  UPSTREAM QX-S'"// &
+                    "'  UP RES  FLOWS')")
+       LINE=LINE+3
+       DO 122 I=1,NQXMN
+          WRITE(6,'(1X,I3,3X,20I3/1X,I3,13F9.1)')IQNUM(I), &
+               (IQXMN(J,I),J=1,20),IQRES(I),(QXMN(K,I),K=1,13)
+ 122     CONTINUE
+      ENDIF
+      IF(NLND.GT.0)THEN
+       CALL HEADIN
+       WRITE (6,"(/,30X,'LAND USE PARAMETERS',/)")
+      ENDIF
+      DO L=1,NLND
+       IF(L.NE.1)CALL HEADIN
+       WRITE(6,400)PLAND(L)
+  400    FORMAT(25X,'SUMMARY OF WATER USE DATA FOR LAND AREA ',A32)
+ 1600    FORMAT(12X,'USE AVERAGE PRECIPITATION ',L1)
+       IF((.NOT.LAVPRE(L).OR..NOT.LAVTEM(L)).AND.PRNLND(L))THEN
+          WRITE(6,'(12X,"Print Climate Files? T")')
+       ENDIF
+       WRITE(6,1600)LAVPRE(L)
+       IF(LAVPRE(L))THEN
+          WRITE(6,"(/33X,'MONTH    OCT   NOV   DEC   JAN   FEB   MAR   A"// &
+      "PR   MAY   JUN   JUL   AUG   SEP    ANN')")
+          TOTPRE = 0.0
+          DO IA=1,12
+             TOTPRE = TOTPRE + PR(L,IA)
+          ENDDO
+          WRITE(6,4000)(PR(L,IA),IA=1,12),TOTPRE
+ 4000       FORMAT(/12X,'AVERAGE MON. PRECIPITATION ',12F6.2,F7.2)
+       ELSE
+          WRITE(6,6400)PREFIL(L)
+ 6400       FORMAT(12X,'PRECIPITATION IN FILE ',A)
+       END IF
+       WRITE(6,11700)LAVTEM(L)
+11700    FORMAT(\12X,'USE AVERAGE TEMPERATURE   ',L1)
+       IF(LAVTEM(L))THEN
+          WRITE(6,'(A)')' '
+          WRITE(6,"(33X,'MONTH    OCT   NOV   DEC   JAN   FEB   MAR   AP"// &
+      "R   MAY   JUN   JUL   AUG   SEP    ANN')")
+          TOTEM = 0.0
+          DO IA= 1,12
+             TOTEM = TOTEM + TM (L,IA) /12.
+          ENDDO
+          WRITE(6,"(12X,'AVERAGE MON. TEMPERATURE   ',12F6.1,F7.1)" &
+                  )(TM(L,IA),IA=1,12),TOTEM
+ 9300       FORMAT(12X,'AVERAGE MON. TEMPERATURE   ',12F6.1,F7.1)
+       ELSE
+          WRITE(6,6401)TEMFIL(L)
+ 6401       FORMAT(12X,'TEMPERATURE IN FILE ',A)
+       END IF
+       IDEG=PRDEG(L)
+       IMIN=PRMIN(L)
+       ISEC=PRSEC(L)
+       WRITE(6,"(/12X,'PROJECT LATITUDE ',I3,' DEG ',"// &
+               "I2,' MIN ',I2,' SEC ')")IDEG,IMIN,ISEC
+14600    FORMAT(/23X,'FROST DATES (MONTH/DAY)'/ &
+               15X,'SPRING         FALL')
+       WRITE(6,14600)
+16800    FORMAT(12X,'28 DEGREE ',I3,' / ',I2,7X,I2,' / ',I2)
+       IM1=BMN28(L)
+       ID1=BDY28(L)
+       IM2=MON28(L)
+       ID2=DAY28(L)
+       WRITE(6,16800)IM1,ID1,IM2,ID2
+18400    FORMAT(12X,'32 DEGREE',16X,I2,' / 'I2)
+       IM1=MON32(L)
+       ID1=DAY32(L)
+       WRITE(6,18400)IM1,ID1
+       WRITE(6,108)IRV(L),IFT(L),IRT(L)
+ 108     FORMAT(10X,' GW QX NUMBER FOR PASTURE ',I3, &
+               ' DOWNSTREAM ',I3, &
+            ' TOTAL RETURN FLOW ',I3/)
+       ACRAG(L)=0.0
+       ACRAGR(L)=0.0
+       M1IRR(L)=0.0
+       WACRE(L)=0.0
+       WRITE(6,"(15X,'IRRIGATED CROPLAND ACREAGES')")
+       WRITE(6,"(15X,'Use',58X,'Pro. Use Fr'"// &
+          "15X,'Code   Land Use Description',25X,'Acreage  ',"// &
+               "'Groundwater   Land Type')")
+       DO I=1,NCRP(L)
+          WRITE(6,"(15X,A6,1X,A40,1X,F10.1,1X,F6.2,10X,A13)") &
+                  CPCODE(L,I),CPNAM(L,I), &
+                  CPAC(L,I),CPRO(L,I),LNTYP(L,I)
+          IF(INDEX(LNTYP(L,I),'Crop').GT.0)THEN
+             ACRAG(L)=ACRAG(L)+CPAC(L,I)
+          ELSE IF(INDEX(LNTYP(L,I),'Lawn').GT.0)THEN
+             ACRAGR(L)=ACRAGR(L)+CPAC(L,I)
+          ELSE IF(INDEX(LNTYP(L,I),'Phrea').GT.0)THEN
+             WACRE(L)=WACRE(L)+CPAC(L,I)
+          ELSE IF(INDEX(LNTYP(L,I),'Sub').GT.0)THEN
+             M1IRR(L)=M1IRR(L)+CPAC(L,I)
+             ACRAG(L)=ACRAG(L)+CPAC(L,I)
+          ENDIF
+       ENDDO
+       WRITE(6,'(39X," TOTAL CROPLAND ACRES=",F12.1)')ACRAG(L)
+       WRITE(6,'(39X," LAWN & GARDEN ACRES =",F12.1)')ACRAGR(L)
+       WRITE(6,'(39X," TOTAL WETLAND ACRES =",F12.1)')WACRE(L)
+       IF(ACRAG(L).GT.0.0)THEN
+!-------------------------------------------------------------------
+!     DO NOT INCLUDE LAWN AND GARDEN ACREAGES INTO PROPORTION WPRO
+!-------------------------------------------------------------------
+          WPRO(L)=M1IRR(L)/ACRAG(L)
+       ELSE
+          WPRO(L)=0.0
+       ENDIF
+       WRITE(6,"(/12X,'  LAWN & GARD EFFICIENCY (PERCENT)"// &
+               " ',F5.1,'%')")LGEFF(L)
+       WRITE(6,"(12X,'  CONVEYANCE EFFICIENCY (PERCENT)"// &
+               "  ',F5.1,'%')")CEFF(L)
+       WRITE(6,"(12X,'  IRRIGATION EFFICIENCY"// &
+               " (PERCENT)  ',F5.1,'%')")IEFF(L)
+       WRITE(6,"(12X,'  EFFECTIVE PRECIPITATION"// &
+               "          ',F5.1,'%')")EFPRE(L)
+       WRITE(6,"(12X,'  PROP. OF "// &
+               "DEEP PERC. RETURNING    ',F5.3)")RETI(L)
+       WRITE(6,"(12X,'  USE SOIL MOISTURE "// &
+               "STORAGE            ',L1)")ISOL(L)
+       IF(ISOL(L))WRITE(6,"(12X,'  SOIL MOISTURE "// &
+               "HOLDING CAPACITY   ',F5.2)")SOIL(L)
+       TOT=0.0
+       DO I=1,10
+          TOT = TOT + PCRF(L,I)
+       ENDDO
+       IF(TOT.GT.0.0)THEN
+          DO I=1,10
+             PCRF(L,I)=PCRF(L,I)/TOT
+          ENDDO
+       END IF
+       WRITE (6,28021)(PCRF(L,KK),KK=1,10),TOT
+28021    FORMAT(12X,'AGRICULTURAL RETURN FLOW FACTORS'/ &
+               12X,'LAG  0    1    2    3    4    5', &
+               '    6    7    8    9   TOT'/ &
+               14X,11F5.2)
+       WRITE(6,"(/14X,'MUNICIPAL DEMAND DATA')")
+       WRITE(6,"(12X,'TOTAL MUNICPAL DEMAND',2X,F9.1,"// &
+               "/12X,'PRO. DEM. FRM"// &
+               " GROUNDWATER ',12F7.4)") &
+               MUNDEM(L),(IGRND(L,K),K=1,12)
+       WRITE(6,"(12X,'EFMIP (1-12) ',12F6.2)")(EFMIP(L,K),K=1,12)
+       WRITE(6,"(12X,'DEMAND FACTORS BY MONTH')")
+       WRITE(6,"(/12X,12(2X,A4),3X,A4)")(VAR(IA),IA=2,14)
+       TOT=0.0
+       DO K=1,12
+          TOT=TOT+QMIP(L,K)
+       ENDDO
+       WRITE(6,"(12X,13F6.3)")(QMIP(L,IA),IA=1,12),TOT
+       IF(LNRS(L).GT.0)THEN
+          WRITE(6,109)LNRS(L)
+109         FORMAT('0',12X,'NUMBER OF RESERVOIRS FOR THIS ', &
+                  'LAND AREA TO CALL ',I3/ &
+                  12X,' RES. NO.   QX''S FOR ROUTE')
+          LINE=LINE+2
+          DO I=1,LNRS(L)
+             WRITE(6,"(12X,I5,2X,20I3,' Begin Month ',I3," &
+                  //"' End Month ',I3)")LRES(L,I), &
+                     (ILNQ(L,I,M),M=1,20),BEGDEL(L,I),ENDDEL(L,I)
+             LINE=LINE+1
+             IF(LINE.GT.60)CALL HEADIN
+          ENDDO
+       ENDIF
+       IF(NQLIN(L).GT.0)THEN
+          WRITE(6,"('0',12X,'DIVERSION    BYPASS   "// &
+                  "QIN NO.   UPST QX  BYPASS')")
+          LINE=LINE+2
+          DO I=1,NQLIN(L)
+             WRITE(6,"(12X,I4,I10,I10,I12,L6)") &
+                     IDV(L,I),IBY(L,I),ILQIN(L,I),ILUP(L,I), &
+                     ISBY(L,I)
+             LINE=LINE+1
+             IF(ISBY(L,I))THEN
+              WRITE(6,"(12X,' BYPASS FLOWS '/12X,12F8.0,F9.0)") &
+                     (FBYPS(L,I,K),K=1,13)
+              LINE=LINE+1
+             ENDIF
+          ENDDO
+       ENDIF
+      ENDDO
+      CALL HEADIN
+      WRITE(6,236) NYRS,INYR,NRES,NLND,NQIN,NHPW,NFDT,     IPSH, &
+               IPST,IPEV,IPEL,IPSA,IPAS,IANPLT,IMNPLT,IDISK, &
+               IPQIN,IBUD,NQXMN,ITERMX,NQX,INEW,SPLOT
+  236 FORMAT(//10X,'NYRS,INYR,NRES,NLND,NQIN,NHPW,NFDT,IPSH,', &
+              'IPST,IPEV,IPEL,IPSA,IPAS,IANPLT,IMNPLT,IDISK,', &
+              'IPQIN,IBUD,NQXMN,'/10X,' ITERMX,NQX,INEW,SPLOT' &
+              / 8X,7I5,6L5,2L7,2L6,L5,I7/10X,I6,I5,I5,L6)
+   63 CONTINUE
+      WRITE(6,"(/10X,'DATA FILE  , ',A)")DFILE
+      WRITE(6, "(10X,'OUTPUT FILE, ',A)")OFILE
+      IF (NHPW.GT.0) THEN
+       CALL HEADIN
+       DO IP=1,NHPW
+          WRITE(6,"(///30X,'Hydropower Data For ',A32/)") &
+                  PHYPW(IP)
+          WRITE(6,"(10X,'QPMX,QPMN,HDMN,ELTW,E1,CP1,KS,KE')")
+          WRITE(6,"(10X,2F10.0,2F10.1,F10.2,F10.5,2I10)") &
+                  QPMXI(IP),QPMNI(IP),HDMNI(IP),ELTWI(IP), &
+                  E1I(IP),CP1I,KSI(IP),KEI(IP)
+          WRITE(6,"(10X,'IHS,IHP,IHB,IHR,IHNP')")
+          WRITE(6,"(10X,5I4)") &
+                  IHS(IP),IHP(IP),IHB(IP),IHR(IP),IHNP(IP)
+          IF(IHNP(IP).GT.0) THEN
+             WRITE(6,"(10X,' PIPE      QX"// &
+                     "    LENGTH  DIAMETER ROUGHNESS')")
+             DO I=1,IHNP(IP)
+              WRITE(6,'(10X,I5,I8,F10.1,F10.4,F10.7)') I, &
+                     IHPQX(IP,I),HPLEN(IP,I),HPDIA(IP,I),HPRGH(IP,I)
+             ENDDO
+          ENDIF
+       END DO
+      ENDIF
+      CALL HEADIN
+      IF(NOUFL.GT.0)THEN
+         WRITE(6,"(10X,' NOUFL ',I3)")NOUFL
+      ELSE
+         WRITE(6,"(10X,' WARNING, NOUFL (OUTFLOW QX) NOT DEFINED')")
+      ENDIF
+      WRITE(6,"(10X,' IINFL ',19I3)")IINFL
+      WRITE(6,"(10X,' ITRIB ',19I3)")ITRIB
+      WRITE(6,"(10X,'  IIMP ',19I3)")IIMP
+      WRITE(6,"(10X,' IEXPO ',19I3)")IEXPO
+      WRITE(6,"(10X,'  IUNG ',19I3)")IUNG
+      IF(IANPLT.OR.IMNPLT)WRITE(6,245)IANPLT,IMNPLT,IQXPLT,IRSPLT, &
+         IEVPLT,ISAPLT
+  245 FORMAT(/10X,'PLOTS:  IANPLT,IMNPLT',2L5/10X,'IQXPLT',23I5 &
+             /10X,'IRSPLT',7I5/10X,'IEVPLT',7I5/ &
+             /10X,'ISAPLT',7I5)
+!
+!     PRINT NAMES OF QIN FILES
+!
+      IF(NQIN.GT.0)THEN
+       WRITE(6,"(////10X,'QIN FILE',32X,' QX NO.  DESCRIPTION')")
+       DO I=1,NQIN
+          WRITE(6,"(10X,A40,1X,I7,1X,A31)") &
+                  QFILE(I),IQXN(I),CDESCR(I)
+       ENDDO
+      ENDIF
+!
+!     INITIALIZATION
+!
+      DO K=1,13
+         EFCR   (K)=0.0
+         LGEFPR (K)=0.0
+         WPRE   (K)=0.0
+         WOPN   (K)=0.0
+         DO I=1,MLAND
+            LGEFPRE(I,K)=0.0
+            GWUSE(I,K)=0.0
+            RTUSE(I,K)=0.0
+            SBUSE(I,K)=0.0
+         ENDDO
+      ENDDO
+      DO J=1,NYRS
+         IYEAR(J)=INYR+J-1
+      ENDDO
+      FNYRS=NYRS
+      DO M=1,NRES
+         RV = STOIC(M)
+         STO(M) = RV
+         CALL RACE (M,RV,RA,RE)
+         REL(M)= RE
+         RAR(M)= RA
+         H1I(M)=REL(M)-ELTWI(M)
+      ENDDO
+      DO L=1,NLND
+         DO K=1,13
+            DO J=1,NYRS
+            CPACFT(L,J,K)=0.0
+            CONUSE(K,J,L)=0.0
+            LGUSE(L,J,K)=0.0
+            LGPOT(L,J,K)=0.0
+            WCUSE(L,J,K)=0.0
+            PERCO (K,J,L)=0.0
+            LPERCO(K,J,L)=0.0
+            WETUSE(K,J,L)=0.0
+            ENDDO
+         ENDDO
+      ENDDO
+      DO L=1,NLND
+       TEF(L)=CEFF(L)*IEFF(L)/10000.
+       DO K=1,12
+          DEF(L,K)=EFMIP(L,K)
+       ENDDO
+       IF(LAVPRE(L))THEN
+          PR(L,13)=0.0
+          DO IB = 1,12
+             PR(L,13)=PR(L,13)+PR(L,IB)
+             DO IA = 1,MYEAR
+              PRE(IB,IA)=PR(L,IB)
+             ENDDO
+          ENDDO
+       ELSE
+          OPEN(UNIT=8,FILE=PREFIL(L),STATUS='OLD')
+          READ(8,'(A)')HEADC
+          DO K=1,13
+             PR(L,K)=0.0
+          ENDDO
+ 1025       READ(8,"(8X,I4,I2,12F5.0)",END=1020) &
+                  IYR,IEXP,(QI(IB),IB=1,12)
+          IF(LCALEN(L))THEN
+             IF(IYR.LT.INYR-1.OR.IYR.GT.INYR+NYRS-1) GO TO 1025
+          ELSE
+             IF(IYR.LT.INYR.OR.IYR.GT.INYR+NYRS-1) GO TO 1025
+          ENDIF
+          DO IB=1,12
+             IF(LCALEN(L))THEN
+              IF(IB.GE.10)THEN
+                 IND=IYR-INYR+2
+              ELSE
+                 IND=IYR-INYR+1
+              ENDIF
+              NMONTH=MOD(IB+2,12)+1
+              IF(IND.GT.0.AND.IND.LE.NYRS)THEN
+                 PRE(NMONTH,IND)=QI(IB)*10.**IEXP
+              ELSE
+                 CYCLE
+              ENDIF
+             ELSE
+              IND=IYR-INYR+1
+              NMONTH=IB
+              PRE(NMONTH,IND)=QI(IB)*10.**IEXP
+             ENDIF
+             IF(NYRS.GT.0)THEN
+              PR(L,NMONTH)=PR(L,NMONTH)+PRE(NMONTH,IND) &
+                        /FLOAT(NYRS)
+              PR(L,13)=PR(L,13)+PRE(NMONTH,IND)/FLOAT(NYRS)
+             ENDIF
+          ENDDO
+          GOTO 1025
+ 1020       CONTINUE
+          CLOSE(UNIT=8)
+       END IF
+       IF(LAVTEM(L))THEN
+          TM(L,13)=0.0
+          DO IB = 1,12
+             TM(L,13)=TM(L,13)+TM(L,IB)/12.
+             DO IA = 1,MYEAR
+              TEM(IB,IA)=TM(L,IB)
+             ENDDO
+          ENDDO
+       ELSE
+          OPEN(UNIT=8,FILE=TEMFIL(L),STATUS='OLD')
+          READ(8,*)HEADC
+          DO K=1,12
+             TM(L,K)=0.0
+          ENDDO
+ 1125       READ(8,"(8X,I4,I2,12F5.0)",END=1021) &
+                  IYR,IEXP,(QI(IB),IB=1,12)
+          IF(LCALEN(L))THEN
+             IF(IYR.LT.INYR-1.OR.IYR.GT.INYR+NYRS-1) GO TO 1125
+          ELSE
+             IF(IYR.LT.INYR.OR.IYR.GT.INYR+NYRS-1) GO TO 1125
+          ENDIF
+          DO IB=1,12
+             IF(LCALEN(L))THEN
+              IF(IB.GE.10)THEN
+                 IND=IYR-INYR+2
+              ELSE
+                 IND=IYR-INYR+1
+              ENDIF
+              NMONTH=MOD(IB+2,12)+1
+              IF(IND.GT.0.AND.IND.LE.NYRS)THEN
+                 TEM(NMONTH,IND)=QI(IB)*10.**IEXP
+              ELSE
+                 CYCLE
+              ENDIF
+             ELSE
+              IND=IYR-INYR+1
+              NMONTH=IB
+              TEM(IB,IYR-INYR+1)=QI(IB)*10.**IEXP
+             ENDIF
+             IF(NYRS.GT.0)THEN
+              TM(L,NMONTH)=TM(L,NMONTH)+TEM(NMONTH,IND)/ &
+                        FLOAT(NYRS)
+              TM(L,13)=TM(L,13)+TEM(NMONTH,IND)/ &
+                        (FLOAT(NYRS)*12)
+             ENDIF
+          ENDDO
+          GOTO 1125
+ 1021       CONTINUE
+          CLOSE(UNIT=8)
+       END IF
+       TLAT = PRDEG(L) + PRMIN(L)/60. + PRSEC(L)/3600.
+       IND = TLAT - 35.
+       IF(IND.LT.1.OR.IND.GT.8)THEN
+          WRITE(*,*)'Incorrect Latitude for land area ',L
+          WRITE(6,*)'Incorrect Latitude for land area ',L
+       ENDIF
+       DO IA = 1 , 12
+          IN=MOD(IA+2,12) + 1
+          PER(IN) = (TLAT - INT(TLAT))* &
+                  (DAYLI(IND+1,IA) - DAYLI(IND,IA)) &
+                  + DAYLI(IND,IA)
+       ENDDO
+       CALL FZER(CN)
+       CALL FZER(PRC)
+       CALL FZER(CON)
+       DO K=1,13
+          DO I=1,30
+             CCOEF(I,K)=0.0
+             DO J=1,NYRS
+              CROPS(I,J,K)=0.0
+             ENDDO
+          ENDDO
+       ENDDO
+!-----------------------------------------------------------------------
+!     BEGIN CROP LOOP
+!-----------------------------------------------------------------------
+       DO J = 1, NYRS
+!           DETERMINE THE FIRST DATE OF THE MEAN 50 DEG TEMP
+          BEG50=FIRDAT(50.,1)
+!           DETERMINE THE FIRST DATE OF THE MEAN 60 DEG TEMP
+          BEG60=FIRDAT(60.,1)
+!           DETERMINE THE FIRST DATE OF THE MEAN 55 DEG TEMP
+          BEG55=FIRDAT(55.,1)
+!           DETERMINE THE FIRST DATE OF THE MEAN 45 DEG TEMP
+          BEG45=FIRDAT(45.,1)
+!           DETERMINE THE DATE OF THE LAST MEAN 45 DEGREE TEMP
+          END45=FIRDAT(45.,2)
+!           DETERMINE THE DATE OF THE LAST MEAN 50 DEGREE TEMP
+          END50=FIRDAT(50.,2)
+!           DETERMINE DATE OF THE LAST 28 DEGREE FROST (SPRING)
+          BEG28=FROST(BMN28(L),BDY28(L))
+!           DETERMINE DATE OF THE FIRST 28 DEGREE FROST (FALL)
+          FROST28=FROST(MON28(L),DAY28(L))
+!           DETERMINE DATE OF THE FIRST 28 DEGREE FROST (FALL)
+          FROST32=FROST(MON32(L),DAY32(L))
+!
+!           BEGIN MONTH LOOP
+!
+          DO K = 1,12
+             CALL FAVER(EFCR,ACRAG(L)*PRE(K,J)*EFPRE(L)/ &
+                     (FLOAT(NYRS)*100*12) &
+               ,1.,1.,K)
+             CALL FAVER(LGEFPR,ACRAGR(L)*PRE(K,J)*EFPRE(L)/ &
+                     (FLOAT(NYRS)*100.*12.) &
+                  ,1.,1.,K)
+             LGEFPRE(L,K)=LGEFPRE(L,K)+ACRAGR(L)*PRE(K,J)*EFPRE(L)/ &
+                  (FLOAT(NYRS)*100.*12.)
+             LGEFPRE(L,13)=LGEFPRE(L,13)+ACRAGR(L)*PRE(K,J)*EFPRE(L)/ &
+                  (FLOAT(NYRS)*100.*12.)
+             CALL FAVER(WPRE,WACRE(L)*PRE(K,J)/ &
+                     (FLOAT(NYRS)*12.),1.,1.,K)
+             RM = MOD ( K + 8, 12) + 1
+             IN = RM
+             IF(TEM(K,J).GE.35.5)THEN
+              CRID = (.0173 * TEM(K,J) - .314) * TEM(K,J) * PER(K)
+             ELSE
+              CRID = .3
+             END IF
+             DO M=1,NCRP(L)
+              SELECT CASE (CPCODE(L,M))
+            CASE('Gr')
+!                    LAWN AND GARDEN
+                 CALL USECAL(BEG45,END45,PASC,CPAC(L,M),1, &
+                           USE,M,1.,EFPRE(L),CPCODE(L,M))
+              CASE ('IA3a')
+!                    CONSUMPTIVE USE FOR ALFALFA
+                 CALL USECAL(BEG50,FROST28,ALFC,CPAC(L,M),1, &
+                           USE,M,1.-CPRO(L,M),EFPRE(L),CPCODE(L,M))
+                 CALL AVER2(L,MLAND,RTUSE,MAX(USE,0.0)*CPRO(L,M))
+              CASE('IA3b','IA3d','IA3c')
+!                    PASTURE
+                 CALL USECAL(BEG45,END45,PASC,CPAC(L,M),1, &
+                           USE,M,1.-CPRO(L,M),EFPRE(L),CPCODE(L,M))
+                 CALL AVER2(L,MLAND,RTUSE,MAX(USE,0.0)*CPRO(L,M))
+              CASE('IA1a','IA1b','IA1f')
+!                    ORCHARD WITHOUT COVER
+                 CALL USECAL(BEG50,END45,ORCHWO, &
+                           CPAC(L,M),1,USE,M,1.,EFPRE(L),CPCODE(L,M))
+              CASE('IA1c')
+!                    GRAPES
+                 CALL USECAL(BEG55,END50,GRPFC, &
+                           CPAC(L,M),1,USE,M,1.,EFPRE(L),CPCODE(L,M))
+              CASE('IA2a')
+!                    WINTERWHEAT
+!                    SPGRAIN
+                 BEGSP=BEG45
+                 IF(INT(BEGSP).LE.3)THEN
+                  BEGSP=BEG50
+                 ENDIF
+                 IF(INT(BEGSP).LE.2)THEN
+                  BEGSP=BEG55
+                 ENDIF
+                 ENDSEA=MIN(BEGSP+4.27397,FROST32)
+!----------------------------------------------------------------------
+                 CALL USECAL(BEGSP,ENDSEA,GRNC,CPAC(L,M),MGRN, &
+                           USE,M,1.,EFPRE(L),CPCODE(L,M))
+              CASE('IA2a1')
+!                    CORN GRAIN
+                 CALL USECAL(BEG55,FROST32,CRNSFC,CPAC(L,M), &
+                           21,USE,M,1.,EFPRE(L),CPCODE(L,M))
+              CASE('IA2a2')
+!                    SORGHUM - USE CORN GRAIN
+                 CALL USECAL(BEG55,FROST32,CRNSFC,CPAC(L,M), &
+                           21,USE,M,1.,EFPRE(L),CPCODE(L,M))
+              CASE('IA2b1')
+!                    POTATOES
+                  CALL USECAL(BEG60,FROST32,POTC,CPAC(L,M), &
+                              11,USE,M,1.,EFPRE(L),CPCODE(L,M))
+              CASE('IA2b3')
+!                    SNAP BEANS
+                 CALL USECAL(BEG60,MIN(BEG60+3.33,FROST32), &
+                           SNPBFC,CPAC(L,M),21,USE,M,1.,EFPRE(L), &
+                          CPCODE(L,M))
+              CASE('IA2b5')
+!                    CORN
+                 CALL USECAL(BEG55,FROST32,CORNC,CPAC(L,M), &
+                           11,USE,M,1.,EFPRE(L),CPCODE(L,M))
+              CASE('IA2b6')
+!                    SMALL VEGETABLES
+                 CALL USECAL(BEG28,FROST32,SVGFC,CPAC(L,M), &
+                           21,USE,M,1.,EFPRE(L),CPCODE(L,M))
+              CASE('IA2b4')
+!                    TOMATO
+                 CALL USECAL(BEG28,FROST32,TOMFC,CPAC(L,M), &
+                           21,USE,M,1.,EFPRE(L),CPCODE(L,M))
+              CASE('IIA2a1')
+!                    SUBIRRIGATED PASTURE
+                 CALL USECAL(0.,13.,SALC12,CPAC(L,M),1,USE,M, &
+                           1.-CPRO(L,M),EFPRE(L),CPCODE(L,M))
+                 CALL AVER2(L,MLAND,GWUSE,MAX(USE,0.0)*CPRO(L,M))
+              CASE('IIA2a2','IIA1a','IIA1b')
+!                    SUBIRRIGATED PASTURE
+                 CALL USECAL(BEG45,END45,PASC,CPAC(L,M),1,USE,M, &
+                           1.-CPRO(L,M),EFPRE(L),CPCODE(L,M))
+                 CALL AVER2(L,MLAND,GWUSE,MAX(USE,0.0)*CPRO(L,M))
+              CASE('IIA2b1','IIA2b2','IIA2a','IIA2b')
+!                    NONIRRIGATED PASTURE, HAYLAND
+                 CALL USECAL(BEG45,END45,PASC,CPAC(L,M),1,USE,M, &
+                           0.00,EFPRE(L),CPCODE(L,M))
+                 CALL AVER2(L,MLAND,GWUSE,MAX(USE,0.0))
+!**********************************************************************
+!              WETLANDS
+!**********************************************************************
+              CASE('IID')
+!                    SALTCEDAR
+!                    GREASEWOOD60
+!                    GREASEWOOD36
+!                    GREASEWOOD12
+                 CALL USECAL(0.,13.,CEDAR,CPAC(L,M),2,USE,M,1., &
+                           EFPRE(L),CPCODE(L,M))
+              CASE('IIB')
+!                    CATTAILS
+                 CALL USECAL(0.,13.,TULES,CPAC(L,M),2,USE,M,1. &
+                           ,EFPRE(L),CPCODE(L,M))
+              CASE('IIE1','IIE2')
+!                    COTTONWOOD
+                 CALL USECAL(0.,13.,COTTC,CPAC(L,M),2,USE,M,1. &
+                           ,EFPRE(L),CPCODE(L,M))
+              CASE('IIF1','IIF2','IIF3','IIF4','IIF4c','IIF','IIF4b')
+!                    OPEN WATER
+                 CALL USECAL(0.,13.,OWATER,CPAC(L,M),2,USE,M,1., &
+                           100.,CPCODE(L,M))
+              CASE('IIC','IIF4A')
+!                    TEMPORARILY FLOODED
+                 CALL USECAL(0.,13.,FLODC,CPAC(L,M),2,USE,M,1., &
+                           100.0,CPCODE(L,M))
+              END SELECT
+             ENDDO
+             CALL FAVER(WOPN,USE/FNYRS,1.,1.,K)
+             QDMI(L,K)=MUNDEM(L)*QMIP(L,K)
+             QDMI(L,13)=QDMI(L,13)+MUNDEM(L)*QMIP(L,K)
+          ENDDO
+       ENDDO
+       IF(IBUD)THEN
+          CALL HEADIN
+          WRITE(6,7048)PLAND(L)
+ 7048       FORMAT(/' CROP BUDGET FOR ',A)
+          WRITE(6,7045)(VAR(I),I=2,14),(PER(I),I=1,12)
+ 7045       FORMAT(19X,12(A4,4X),3X,A4/' PDL',11X,12F8.3)
+          WRITE(6,7047)(TM(L,K),K=1,13),(PR(L,K),K=1,13)
+ 7047       FORMAT(/' TEMPERATURE',3X,12F8.1,2X,F8.1/ &
+                  ' PRECIPITATION ',12F8.2,2X,F8.2)
+          LINE = LINE+5
+          DO M=1,NCRP(L)
+             CALL LNDPRT(M,CPNAM(L,M),CPAC(L,M),CPCODE(L,M))
+          ENDDO
+          DO K=1,13
+             CN(K)=0.0
+             PRC(K)=0.0
+             LPRC(K)=0.0
+          ENDDO
+          DO J=1,NYRS
+             DO K=1,12
+                  IF(NYRS.GT.0)THEN
+                     CN(K)=CN(K)+(CONUSE(K,J,L)+WCUSE(L,J,K))/ &
+                                 FLOAT(NYRS)
+                     PRC(K)=PRC(K)+PERCO(K,J,L)/FLOAT(NYRS)
+                  LPRC(K)=LPRC(K)+LPERCO(K,J,L)/FLOAT(NYRS)
+                     CN(13)=CN(13)+(CONUSE(K,J,L)+WCUSE(L,J,K))/ &
+                                 FLOAT(NYRS)
+                     PRC(13)=PRC(13)+PERCO(K,J,L)/FLOAT(NYRS)
+                  LPRC(13)=LPRC(13)+LPERCO(K,J,L)/FLOAT(NYRS)
+                  ENDIF
+             ENDDO
+          ENDDO
+          IF(LINE.GT.53)CALL HEADIN
+          WRITE(6,"(/' ROOT ZONE REQ.',12F8.1,F10.1)") &
+                  (CN(K),K=1,13)
+          WRITE(6,"(' EXCESS RAIN   ',12F8.1,F10.1)") &
+                  (PRC(K)+LPRC(K),K=1,13)
+       END IF
+       DO J=1,NYRS
+          DO K=1,12
+             IF(CEFF(L)*IEFF(L).GT.0)THEN
+              CONUSE(K,J,L) = CONUSE(K,J,L)*100*100/ &
+                        (CEFF(L)*IEFF(L))
+              WCUSE(L,J,K)=WCUSE(L,J,K)*100*100/ &
+                  (CEFF(L)*IEFF(L))
+            IF(LGEFF(L).LE..00001)LGEFF(L)=100.00
+            LGUSE(L,J,K)=LGUSE(L,J,K)*100./LGEFF(L)
+             ENDIF
+             IF(NYRS.GT.0)THEN
+              CON(K)=CON(K)+(CONUSE(K,J,L)+ &
+                        WCUSE(L,J,K))/FLOAT(NYRS)
+              CON(13)=CON(13)+(CONUSE(K,J,L)+ &
+                        WCUSE(L,J,K))/FLOAT(NYRS)
+             ENDIF
+          ENDDO
+       ENDDO
+       IF(IBUD)WRITE(6,"(' DIVERSION REQ.',12F8.1,F10.1)") &
+               (CON(K),K=1,13)
+!---------------------------------------------------------------------
+!     DO NOT INCLUDE LAWN AND GARDEN ACREAGES (ACRAGR) INTO ACRAG
+!---------------------------------------------------------------------
+       WSOIL(L)=SOIL(L)/12.*ACRAG(L)*WPRO(L)
+       SOIL(L)=SOIL(L)/12.*ACRAG(L)*(1.-WPRO(L))
+       BGSM=BEGSOL(L)/12.*ACRAG(L)
+       BEGSOL(L)=BGSM*(1.-WPRO(L))
+       WBEG(L)=BGSM*WPRO(L)
+       MOIST(L)=MIN(BEGSOL(L),SOIL(L))
+       WMOIS(L)=MIN(WBEG(L),WSOIL(L))
+       QDVR(L,13)=0.0
+       QDVRA(L,13)=0.0
+       QDMI(L,13)=0.0
+       DO K=1,12
+          QDVRA(L,K)=CON(K)
+          QDVR(L,K)=QDVRA(L,K)+QDMI(L,K)
+          QDVRA(L,13)=QDVRA(L,13)+QDVRA(L,K)
+          QDVR(L,13)=QDVR(L,13)+QDVR(L,K)
+          QDMI(L,13)=QDMI(L,13)+QDMI(L,K)
+       ENDDO
+       IF(.NOT.ISOL(L))THEN
+          SOIL(L)=0.0
+          MOIST(L)=0.0
+          WSOIL(L)=0.0
+          WMOIS(L)=0.0
+       END IF
+      ENDDO
+      IF(ISTOP)STOP
+      DO M=1,NRES
+       DO K=1,12
+          QRMN(M,K)=QRMN(M,K)+QSM(M,K)*FLOAT(IDAYS(K))*1.983471074
+       ENDDO
+       QRMN(M,K)=0.0
+       QSM(M,K)=0.0
+       DO K=1,12
+          QSM(M,13)=QSM(M,13)+QSM(M,K)
+          QRMN(M,13)=QRMN(M,13)+QRMN(M,K)+QSM(M,K)*FLOAT( &
+            IDAYS(K))*1.983471074
+       ENDDO
+      ENDDO
+      FNYRS=FLOAT(NYRS)
+!
+!     PRINT QIN'S
+!
+      IF(IPQIN)CALL PRNTQI
+!
+!     READ RESERVOIR INPUT FILES, IF ANY
+!     PRINT INPUT FILES IF NEEDED
+!
+      DO M=1,NRES
+       IF(IREL(M))THEN
+          IF(.NOT.IRSRED(M,1))THEN
+             IF(RELFIL(M).NE.' ')THEN
+              OPEN(UNIT=5,FILE=RELFIL(M),STATUS='OLD')
+              READ(5,'(A80)')HEADC
+              DO WHILE (.TRUE.)
+                 READ(5,'(8X,I4,I2,12F5.0)',END=11) &
+                        IY,IXP,(DAT(KK),KK=1,12)
+                 IND=IY-INYR+1
+                 IF(IND.LT.1.OR.IND.GT.NYRS)CYCLE
+                 RELEAS(M,IND,13)=0.0
+                 DO KK=1,12
+                  VALU=DAT(KK)*10.**IXP
+                  RELEAS(M,IND,KK)=VALU
+                  RELEAS(M,IND,13)=RELEAS(M,IND,13)+VALU
+                 ENDDO
+              ENDDO
+ 11               IRSRED(M,1)=.TRUE.
+              CLOSE(UNIT=5)
+             ENDIF
+          ENDIF
+       ENDIF
+       IF(IREL(M).AND..NOT.IRSRED(M,1))THEN
+          WRITE(0,*)'NEED TO SPECIFY RESERVOIR RELEASE ', &
+                  'FILE FOR RES ',M
+          WRITE(0,*)'PRESS ENTER TO TERMINATE'
+          READ(0,*)
+          STOP
+       ENDIF
+       IF(PRNRS(M).AND.IRSRED(M,1))THEN
+!           COMPUTE MONTHLY AND ANNUAL MEANS
+          DO K=1,13
+             SUM=0.
+             DO J=1,NYRS
+              SUM=SUM+RELEAS(M,J,K)
+             ENDDO
+             QINM(K)=ROUND(SUM/FNYRS,0)
+          ENDDO
+!           PRINT RELEASE FILES
+          CALL HEADIN
+          WRITE (6,"(/10X,'RESERVOIR(',I2,')  RELEASE "// &
+                  "ACRE-FT',2X,A70/)")M,HEADC
+          WRITE (6,"(6X,A4,12(4X,A4,1X),5X,A4/)") VAR
+          DO J=1,NYRS
+             WRITE (6,"(6X,I4,12F9.0,F10.0)") &
+                     IYEAR(J),(RELEAS(M,J,K),K=1,13)
+          ENDDO
+          WRITE (6,"(/,6X,'MEAN',12F9.0,F10.0)") &
+                  (QINM(K),K=1,13)
+       ENDIF
+       IF(ISTOR(M))THEN
+          IF(.NOT.IRSRED(M,2))THEN
+             OPEN(UNIT=5,FILE=STOFIL(M),STATUS='OLD')
+             READ(5,'(A80)')HEADC
+             DO WHILE (.TRUE.)
+              READ(5,'(8X,I4,I2,12F5.0)',END=41) &
+                     IY,IXP,(DAT(KK),KK=1,12)
+              IND=IY-INYR+1
+              IF(IND.LT.1.OR.IND.GT.NYRS)CYCLE
+              RSTORE(M,IND,13)=0.0
+              DO KK=1,12
+                 VALU=DAT(KK)*10.**IXP
+                 RSTORE(M,IND,KK)=VALU
+                 RSTORE(M,IND,13)=RSTORE(M,IND,13)+VALU
+              ENDDO
+             ENDDO
+ 41            IRSRED(M,2)=.TRUE.
+             CLOSE(UNIT=5)
+          ENDIF
+       ENDIF
+       IF(ISTOR(M).AND..NOT.IRSRED(M,2))THEN
+          WRITE(0,*)'NEED TO SPECIFY RESERVOIR VOLUMES ', &
+                  'FILE FOR RES ',M
+          WRITE(0,*)'PRESS ENTER TO TERMINATE'
+          READ(0,*)
+          STOP
+       ENDIF
+       IF(PRNRS(M).AND.IRSRED(M,2))THEN
+!           COMPUTE MONTHLY AND ANNUAL MEANS
+          DO K=1,13
+             SUM=0.
+             DO J=1,NYRS
+              SUM=SUM+RSTORE(M,J,K)
+             ENDDO
+             QINM(K)=ROUND(SUM/FNYRS,0)
+          ENDDO
+!           PRINT STOREAGE FILES
+          CALL HEADIN
+          WRITE (6,"(/10X,'RESERVOIR(',I2,')  STORAGE "// &
+                  "ACRE-FT',2X,A70/)")M,HEADC
+          WRITE (6,"(6X,A4,12(4X,A4,1X),5X,A4/)") VAR
+          DO J=1,NYRS
+             WRITE (6,"(6X,I4,12F9.0,F10.0)") &
+                     IYEAR(J),(RSTORE(M,J,K),K=1,13)
+          ENDDO
+          WRITE (6,"(/,6X,'MEAN',12F9.0,F10.0)") &
+                  (QINM(K),K=1,13)
+       ENDIF
+       IF(REVAP(M))THEN
+          IF(.NOT.IRSRED(M,3))THEN
+             OPEN(UNIT=5,FILE=EVAFIL(M),STATUS='OLD')
+             READ(5,'(A80)')HEADC
+             HEADC=HEADC
+             DO WHILE (.TRUE.)
+              READ(5,'(8X,I4,I2,12F5.0)',END=51) &
+                    IY,IXP,(DAT(KK),KK=1,12)
+              IND=IY-INYR+1
+              IF(IND.LT.1.OR.IND.GT.NYRS)CYCLE
+              RSEVAP(M,IND,13)=0.0
+              DO KK=1,12
+                 VALU=DAT(KK)*10.**IXP
+                 RSEVAP(M,IND,KK)=VALU
+                 RSEVAP(M,IND,13)=RSEVAP(M,IND,13)+VALU
+              ENDDO
+             ENDDO
+ 51            IRSRED(M,3)=.TRUE.
+             CLOSE(UNIT=5)
+          ENDIF
+       ENDIF
+       IF(REVAP(M).AND..NOT.IRSRED(M,3))THEN
+          WRITE(0,*)'NEED TO SPECIFY RESERVOIR EVAPORATION FILE ', &
+                  'FOR RES ',M
+          WRITE(0,*)'PRESS ENTER TO TERMINATE'
+          READ(0,*)
+          STOP
+       ENDIF
+       IF(PRNRS(M).AND.IRSRED(M,3))THEN
+!           COMPUTE MONTHLY AND ANNUAL MEANS
+          DO K=1,13
+             SUM=0.
+             DO J=1,NYRS
+              SUM=SUM+RSEVAP(M,J,K)
+             ENDDO
+             QINM(K)=ROUND(SUM/FNYRS,3)
+          ENDDO
+!           PRINT EVAPORATION FILES
+          CALL HEADIN
+          WRITE (6,"(/10X,'RESERVOIR(',I2,')  EVAPORATION "// &
+                  "(INCHES)',2X,A70/)")M,HEADC
+          WRITE (6,"(6X,A4,12(4X,A4,1X),5X,A4/)") VAR
+          DO J=1,NYRS
+             WRITE (6,"(6X,I4,12F9.3,F10.3)") &
+                     IYEAR(J),(RSEVAP(M,J,K),K=1,13)
+          ENDDO
+          WRITE (6,"(/,6X,'MEAN',12F9.3,F10.3)") &
+                  (QINM(K),K=1,13)
+       ENDIF
+      ENDDO
+      DO L=1,NLND
+       IF(.NOT.LAVPRE(L).AND.PRNLND(L))THEN
+!           READ PRECIPITATION FILE
+          OPEN(UNIT=8,FILE=PREFIL(L),STATUS='OLD')
+          DO J=1,NYRS
+             DO K=1,13
+              PRE(K,J)=0.0
+              ISREAD(J,K)=.FALSE.
+             ENDDO
+          ENDDO
+          READ(8,*)HEADC
+          DO WHILE(.TRUE.)
+             READ(8,"(8X,I4,I2,12F5.0)",END=1221) &
+                     IYR,IEXP,(QI(K),K=1,12)
+             IF(LCALEN(L))THEN
+              IF(IYR.LT.INYR-1.OR.IYR.GT.INYR+NYRS-1)CYCLE
+             ELSE
+              IF(IYR.LT.INYR.OR.IYR.GT.INYR+NYRS-1)CYCLE
+             ENDIF
+             DO K=1,12
+              IF(LCALEN(L))THEN
+                 IF(K.GE.10)THEN
+                  IND=IYR-INYR+2
+                 ELSE
+                  IND=IYR-INYR+1
+                 ENDIF
+                 NMONTH=MOD(K+2,12)+1
+                 IF(IND.GT.0.AND.IND.LE.NYRS)THEN
+                  PRE(NMONTH,IND)=QI(K)*10.**IEXP
+                  ISREAD(IND,NMONTH)=.TRUE.
+                  ISREAD(IND,13)=.TRUE.
+                 ELSE
+                  CYCLE
+                 ENDIF
+              ELSE
+                 IND=IYR-INYR+1
+                 NMONTH=K
+                 PRE(NMONTH,IND)=QI(K)*10.**IEXP
+                 ISREAD(IND,NMONTH)=.TRUE.
+                 ISREAD(IND,13)=.TRUE.
+              ENDIF
+              PRE(13,IND)=PRE(13,IND)+ &
+                        PRE(NMONTH,IND)
+             ENDDO
+          ENDDO
+ 1221       CONTINUE
+!           COMPUTE MONTHLY AND ANNUAL MEANS
+          DO K=1,13
+             SUM=0.
+             DO J=1,NYRS
+              SUM=SUM+PRE(K,J)
+             ENDDO
+             QINM(K)=ROUND(SUM/FNYRS,2)
+          ENDDO
+          CALL HEADIN
+!           PRINT PRECIPITATION FILES
+          WRITE (6,"(/10X,'LAND AREA(',I2,') PRECIPITATION "// &
+                  "INCHES',2X,A70/)")L,HEADC
+          WRITE (6,"(6X,A4,12(4X,A4,1X),5X,A4/)") VAR
+          DO J=1,NYRS
+             DO K=1,12
+              OUTVAL(K)=PRNTIT(PRE(K,J),ISREAD(J,K),9,2)
+             ENDDO
+             OUTVAL(13)=PRNTIT(PRE(13,J),ISREAD(J,13),10,2)
+             WRITE (6,"(6X,I4,12A9,A10)") &
+                     IYEAR(J),(OUTVAL(K),K=1,13)
+          ENDDO
+          WRITE (6,"(/,6X,'MEAN',12F9.2,F10.2)") &
+                  (QINM(K),K=1,13)
+       ENDIF
+       IF(.NOT.LAVTEM(L).AND.PRNLND(L))THEN
+!           READ TEMPERATURE FILE
+          OPEN(UNIT=8,FILE=TEMFIL(L),STATUS='OLD')
+          READ(8,*)HEADC
+          DO J=1,NYRS
+             DO K=1,13
+              TEM(K,J)=0.0
+              ISREAD(J,K)=.FALSE.
+             ENDDO
+          ENDDO
+          DO WHILE(.TRUE.)
+             READ(8,"(8X,I4,I2,12F5.0)",END=1321) &
+                     IYR,IEXP,(QI(K),K=1,12)
+             IF(IYR.LT.INYR.OR.IYR.GT.INYR+NYRS-1)CYCLE
+             DO K=1,12
+              IF(LCALEN(L))THEN
+                 IF(K.GE.10)THEN
+                  IND=IYR-INYR+2
+                 ELSE
+                  IND=IYR-INYR+1
+                 ENDIF
+                 NMONTH=MOD(K+2,12)+1
+                 IF(IND.GT.0.AND.IND.LE.NYRS)THEN
+                  TEM(NMONTH,IND)=QI(K)*10.**IEXP
+                  ISREAD(IND,NMONTH)=.TRUE.
+                  ISREAD(IND,13)=.TRUE.
+                 ELSE
+                  CYCLE
+                 ENDIF
+              ELSE
+                 IND=IYR-INYR+1
+                 NMONTH=K
+                 TEM(NMONTH,IND)=QI(K)*10.**IEXP
+                 ISREAD(IND,NMONTH)=.TRUE.
+                 ISREAD(IND,13)=.TRUE.
+              ENDIF
+              TEM(13,IND)=TEM(13,IND)+ &
+                        TEM(NMONTH,IND)
+             ENDDO
+          ENDDO
+ 1321       CONTINUE
+!           COMPUTE MONTHLY AND ANNUAL MEANS
+          DO K=1,13
+             SUM=0.
+             DO J=1,NYRS
+              SUM=SUM+TEM(K,J)
+             ENDDO
+             QINM(K)=ROUND(SUM/FNYRS,2)
+          ENDDO
+          CALL HEADIN
+!           PRINT TEMPERATURE FILES
+          WRITE (6,"(/10X,'LAND AREA(',I2,') TEMPERATURE "// &
+                  "DEG F.',2X,A70/)")L,HEADC
+          WRITE (6,"(6X,A4,12(4X,A4,1X),5X,A4/)") VAR
+          DO J=1,NYRS
+             DO K=1,12
+              OUTVAL(K)=PRNTIT(TEM(K,J),ISREAD(J,K),9,2)
+             ENDDO
+             OUTVAL(13)=PRNTIT(TEM(13,J)/12.0,ISREAD(J,13),10,2)
+             WRITE (6,"(6X,I4,12A9,A10)") &
+                     IYEAR(J),(OUTVAL(K),K=1,13)
+          ENDDO
+          WRITE (6,"(/,6X,'MEAN',12F9.2,F10.2)") &
+                  (QINM(K),K=1,13)
+       ENDIF
+      ENDDO
+!
+!     INITILIZE GROUNDWATER AND SOIL MOISTURE STORAGE
+!
+      GBEF = 0.0
+      LGBEF= 0.0
+      MBEF = 0.0
+      DO I = 1,NLND
+       MBEF = MBEF + MOIST(I)
+       DO II = 1,10
+          LGBEF= LGBEF + LGSSTO(I,II)
+          GBEF = GBEF + SSTO(I,II)
+       ENDDO
+      ENDDO
+      GOTO 40
+ 38   CONTINUE
+      GAFT = 0.0
+      LGAFT=0.0
+      MAFT = 0.0
+      DO I = 1,NLND
+       LGDEL(I)=0.0
+       LGRET(I)=0.0
+       MAFT = MAFT + MOIST(I)
+       DO II = 1,10
+          LGAFT= LGAFT + LGSSTO(I,II)
+          GAFT = GAFT + SSTO(I,II)
+       ENDDO
+      ENDDO
+      IF (ABS (MBEF - MAFT) + ABS (GBEF - GAFT) + ABS(LGBEF-LGAFT) &
+              .LT. 10) GOTO 37
+      FNYRS=FLOAT(NYRS)
+!     START MONTHLY AND YEARLY OPERATION
+!
+      MBEF = MAFT
+      GBEF = GAFT
+      LGBEF=LGAFT
+ 40   CONTINUE
+      DO M=1,NRES
+       STO(M)=STOIC(M)
+      ENDDO
+      DO L=1,NLND
+       DO K=1,13
+          ACUSM  (K)=0.0
+          CACU   (K)=0.0
+          CHGW   (K)=0.0
+          CHSM   (K)=0.0
+          CPCU   (K)=0.0
+          CUDEF  (K)=0.0
+          DDIV   (K)=0.0
+          DPUM   (K)=0.0
+          DRET   (K)=0.0
+          LGOUT  (K)=0.0
+          DMUSE  (K)=0.0
+          DSUP   (K)=0.0
+          DMACU  (K)=0.0
+          GWLOS  (K)=0.0
+          GWMI   (K)=0.0
+          RFGW   (K)=0.0
+          RIVGW  (K)=0.0
+          RFLO   (K)=0.0
+          RSSP   (K)=0.0
+          RZ     (K)=0.0
+          RZSUP  (K)=0.0
+          SMSPL  (K)=0.0
+          TDIVR  (K)=0.0
+          TGAGE  (K)=0.0
+          TMUN   (K)=0.0
+          TOTRF  (K)=0.0
+          WCONS  (K)=WPRE(K)
+          WPCUM  (K)=0.0
+          WPCHG  (K)=0.0
+          WSHOR  (K)=0.0
+          WSUP   (K)=0.0
+       ENDDO
+      ENDDO
+      DO L=1,NQX
+       IQXI=IPQX(L)
+       IF(IQXI.GT.0)THEN
+          DO J=1,NYRS
+             DO K=1,13
+              QX(IQXI,J,K)=0.0
+             ENDDO
+          ENDDO
+       ENDIF
+      ENDDO
+      DO L=1,NQIN
+          IQXNUM=ABS(IQXN(L))
+          IF(IQXNUM.GT.0)THEN
+          DO J=1,NYRS
+             DO K=1,13
+               IF(IQXN(L).LT.0)THEN
+                     QX(IQXNUM,J,K) = -QIN(L,J,K)
+               ELSE
+                     QX(IQXNUM,J,K) = QIN(L,J,K)
+               ENDIF
+             ENDDO
+          ENDDO
+          ENDIF
+      ENDDO
+      DO M=1,NRES
+         DO K=1,13
+            STDIF  (M,K)=0.0
+         ENDDO
+         RV=STO(M)
+         CALL RACE(M,RV,RA,RE)
+         RAR(M)=RA
+         REL(M)=RE
+      ENDDO
+      LINE=100
+      DO J=1,NYRS
+       DO K=1,12
+          DO M=1,NRES
+             STBEG(M)=STO(M)
+          ENDDO
+          ITERA=0
+          ITERA=ITERA
+          CALL LNDCLC
+!         BUG(1,K)=QX(12,J,K)+QX(14,J,K)
+!         BUG(2,K)=(CONUSE(K,J,1)+WCUSE(1,J,K))*TEF(1)
+!         BUG(3,K)=MOIST(1)+WMOIS(1)
+!         BUG(4,K)=QDVA(1)
+!         BUG(5,K)=QRTF(1)
+!         BUG(6,K)=DMPUM(1)*DEF(1,K)
+!         BUG(7,K)=DMDEL(1)
+!         IF(K.GT.1)THEN
+!           BUG(8,K)=BUG(1,K)-BUG(2,K)+BUG(3,K)-BUG(3,K-1)-BUG(4,K)
+!           BUG(9,K)=BUG(4,K-1)*.15+BUG(4,K)*.85-BUG(5,K)
+!           BUG(10,K)=QX(16,J,K)-BUG(5,K)-BUG(6,K)-BUG(7,K)*DEF(1,K)
+!         ELSE
+!           BUG(8,K)=0.0
+!           BUG(9,K)=0.0
+!           BUG(10,K)=0.0
+!         ENDIF
+!         IF(K.EQ.1)THEN
+!           DO JJ=1,10
+!              BUG(JJ,13)=BUG(JJ,K)
+!           ENDDO
+!         ELSE
+!           DO JJ=1,10
+!              BUG(JJ,13)=BUG(JJ,K)+BUG(JJ,13)
+!           ENDDO
+!         ENDIF
+!         IF(K.EQ.12)THEN
+!           BUG(3,13)=BUG(3,13)/12.
+!           WRITE(6,'(5X,"YEAR = ",I4)')IYEAR(J)
+!           DO I=1,10
+!              WRITE(6,'(5X,A10,12F8.1,F9.1)')BUGTITL(I),
+!    +               (BUG(I,KK),KK=1,13)
+!           ENDDO
+!         ENDIF
+          CALL AVCLC
+          DO M=1,NRES
+             CALLED(M)=.FALSE.
+             DRAWN(M)=.FALSE.
+             STDIF(M,K)=STDIF(M,K)+(STBEG(M)-STO(M))/FNYRS
+          ENDDO
+!
+!     CALCULATE AVERAGE VALUES FOR TABLE
+!
+!           MAKE TARGET RELEASES
+!
+          DO M=1,NRES
+              IF (IPQN(M))THEN
+                    QMR = MAX(QTG(M,13) - QX(IQTG(M,1),J,K),0.0)
+                    DMD = MAX(0.0,MIN(STO(M)-QTG(M,K),QMR))
+                    IF (DMD.GT.0.0) THEN
+                        CALL RESREL(M)
+                    END IF
+              END IF
+          ENDDO
+!
+!              COMPUTE AND SAVE RESERVOIR AREAS AND ELEVATIONS
+!
+          DO M=1,NRES
+             RV=STO(M)
+             CALL RACE(M,RV,RA,RE)
+             RAR(M)=RA
+             REL(M)=RE
+             ELV(M,J,K)=RE
+             SAR(M,J,K)=RA
+          ENDDO
+!
+!        HYDROPOWER SECTION
+!
+!        Variables:
+!        QPMXI(IP)  - Maximum Flow in CFS through Plant
+!        QPMNI(IP)  - Minimum Flow in CFS
+!        HDMNI(IP)  - Minimum pressure head required
+!        KSI(IP)    - Beginning month of power generation
+!        KEI(IP)    - Ending month of power generation
+!        KI(IP)     - QX number into power plant
+!        KU(IP)     - QX number upstream of the power plant
+!        KB(IP)     - QX number bypassing the power plant
+!        REL(IP)    - ARRAY WITH THE INITIAL RESERVOIR ELEVATIONS
+!        H1I(IP)    - ARRAY WITH INITIAL HEAD (ELEVATION-TAIL WATER
+!                    ELEVATION) - updated each time period
+!
+!        Variables used:
+!        H2I(IP)      - Power head available, end of this time period
+!        HEAD(IP,J,K) - The average of the power head available at the
+!                       beginning and end of the time period.
+!        ENER(IP,J,K) - Total energy in KWH produced during the month
+!-----------------------------------------------------------------------
+          IF (NHPW.GT.0) THEN
+             DO IP=1,NHPW
+              QPMX=QPMXI(IP)*60.
+              QPMN=QPMNI(IP)*60.
+              HDMN=HDMNI(IP)
+              KS=KSI(IP)
+              KE=KEI(IP)
+              QX(IHP(IP),J,K)=QX(IHS(IP),J,K)
+              IF (K.LT.KS.OR.K.GT.KE)  QX(IHP(IP),J,K)=0.0
+              QX(IHP(IP),J,K)=MIN(QX(IHP(IP),J,K), QPMX)
+              IF (QX(IHP(IP),J,K).LT.QPMN) QX(IHP(IP),J,K)=0.0
+              QX(IHB(IP),J,K)=QX(IHS(IP),J,K)-QX(IHP(IP),J,K)
+              QHPI(IP)=QX(IHP(IP),J,K)
+              SUM=0.
+              DO I=1,IHNP(IP)
+                 SUM=SUM+HLOSS(IP,I)
+              END DO
+              HGL=REL(IHR(IP))-SUM
+              H2I(IP)=HGL-ELTWI(IP)
+              H1 = H1I(IP)
+              H2 = H2I(IP)
+              HA=0.5*(H1+H2)
+              HP1=CP1I*HA*QHPI(IP)*E1I(IP)
+              CHP1=1.0
+              HMN=AMIN1(H1,H2)
+              IF (HMN.LE.HDMN) THEN
+              AH12 = ABS(H1-H2)
+              AH12=MAX(AH12, 0.0001)
+              CHP1 = 1.0-(HDMN-HMN)/AH12
+              CHP1=MAX(CHP1,0.)
+              CHP1=MIN(CHP1,1.)
+              END IF
+              H1I(IP)=H2I(IP)
+              HEAD(IP,J,K)=HA
+              ENER(IP,J,K)=CHP1*HP1
+             END DO
+          ENDIF
+          IF(NOUFL.GT.0)THEN
+            CALL FAVER(TGAGE,QX(NOUFL,J,K)/FNYRS,1.,1.,K)
+          ELSE
+            WRITE(6,"(12X,'Warning, NOUFL (Outflow QX) Undefined')")
+          ENDIF
+       ENDDO
+      ENDDO
+      GO TO 38
+   37 CONTINUE
+!
+!     PRINT SIMULATION OUTPUT
+!
+      CALL PRINTR
+!
+!        PRINT FLOW DURATION CURVES
+!
+      IF(NFDT.LE.0) GOTO 94
+!
+!      FLOW DURATION TABLE COMPUTATIONS
+!
+      MONTH(1)='  AN'
+      MONTH(2)='NUAL'
+      MONTH(3)='    '
+      IENYR=INYR+NYRS -1
+      DO 9020 L=1,NFDT
+      IFQX=IFQ(L)
+      IF(IFQX.LE.0) GO TO 9020
+      N=0
+      DO 9010 J=1,NYRS
+      DO 9010 K=1,12
+      N=N+1
+ 9010 Y(N)=QX(IFQX,J,K) / 60.
+      TITL=QXNAM(IFQX)
+      CALL FLOWDR(N,MONTH,TITL,INYR,IENYR,IFQX)
+ 9020 CONTINUE
+   94 CONTINUE
+!
+!        WRITE PLOT FILES
+!
+!        ANNUAL PLOTS
+      IF(IANPLT)THEN
+       DO J=1,NYRS
+          NPTS=0
+          CALL PLTPTS (23,MQX,NPTS,J,IQXPLT,QX,QQ,.FALSE.)
+          IF(NPTS.LE.23)THEN
+             CALL PLTPTS (7,MRES,NPTS,J,IRSPLT,ST,QQ,.FALSE.)
+             IF(NPTS.LE.23)THEN
+              CALL PLTPTS (7,MRES,NPTS,J,IEVPLT,EVAP,QQ,.FALSE.)
+              IF(NPTS.LE.23)THEN
+                 CALL PLTLPT (7,MLAND,NPTS,ISAPLT,QDVR,QQ)
+              ENDIF
+             ENDIF
+          ENDIF
+          IF(J.EQ.1)THEN
+             OPEN(7,FILE=PLOTFL,STATUS='UNKNOWN')
+             WRITE(7,"(1X,A76,'01',I2)")TITLE(1:76),NPTS
+          ENDIF
+          WRITE(7,"(I10,23F10.1)") IYEAR(J),(QQ(I),I=1,NPTS)
+       ENDDO
+      ENDIF
+!        MONTHLY PLOTS
+      IF(IMNPLT)THEN
+       NMONTH=0
+       DO J=1,NYRS
+          DO K=1,12
+             NPTS=0
+             CALL PLTMPT (23,MQX,NPTS,J,K,IQXPLT,QX,QQ)
+!                 CONVERT TO AC-FT/MONTH TO CFS
+             IF(NPTS.GE.23) GOTO 96
+             CALL PLTMPT (7,MRES,NPTS,J,K,IRSPLT,ST,QQ)
+             IF(NPTS.GE.23) GOTO 96
+             CALL PLTMPT (7,MRES,NPTS,J,K,IEVPLT,EVAP,QQ)
+             IF(NPTS.GE.23) GOTO 96
+             CALL PLMLPT (7,MLAND,NPTS,K,ISAPLT,QDVR,QQ)
+!                 WRITE PLOT DATA FOR MONTH
+   96        CONTINUE
+             IF(J.EQ.1.AND.K.EQ.1)THEN
+                  OPEN(8,FILE=PLOTFL2,STATUS='UNKNOWN')
+                  WRITE(8,"(1X,A76,'01',I2)")TITLE(1:76),NPTS
+             ENDIF
+             NMONTH=NMONTH+1
+             FMONTH=NMONTH
+             FINYR=INYR
+             FYEAR = FINYR + FMONTH / 12.
+             WRITE(8,210) FYEAR,(QQ(I),I=1,NPTS)
+  210          FORMAT(F10.3,23F11.1)
+          ENDDO
+       ENDDO
+      ENDIF
+      IF(IDISK)THEN
+!        CREATE DISK FILES FOR QX'S
+!        IF ISQX(I) IS NEGATIVE DO LAND AREA SHORTAGES INSTEAD
+       IFIL=10
+       DO I=1,10
+          L=ISQX(I)
+          IF(L.EQ.0) CYCLE
+          IF(L.GT.0)THEN
+          QXLS='QX'
+          ELSE
+          QXLS='LS'
+          END IF
+          WRITE(QXLS(3:),'(I2.2)')ABS(L)
+          ILEN=NBLANK(NONULL(OUTPAT))
+          IF(OUTPAT(ILEN:ILEN).NE.'\')THEN
+             OUTPAT=CHARNB(NONULL(OUTPAT))//'\'
+          ENDIF
+          IF(QXLS(3:3).EQ.' ')QXLS(3:3)='0'
+          IF(OUTPAT.GT.' ')THEN
+             OPEN(IFIL,FILE=CHARNB(OUTPAT)//'\'//QXLS, &
+                     STATUS='UNKNOWN')
+          ELSE
+             OPEN(IFIL,FILE=QXLS,STATUS='UNKNOWN')
+          ENDIF
+          IL=IABS(L)
+          IF (L.GT.0) THEN
+             WRITE(IFIL,"(12X,'QX(',I2,')',2X,A48)") L,QXNAM(L)
+          ELSE
+             IL=IABS(L)
+             WRITE(IFIL,"(12X,'SHORTAGE LAND AREA ',I2,2X,A32,5X)") &
+                     IL,PLAND(IL)
+          END IF
+          DO J=1,NYRS
+             XMAX = 0.0
+             XMIN = 0.0
+             DO K=1,12
+              IF(L.GT.0) THEN
+                 XMAX=MAX(XMAX,QX(L,J,K))
+                 XMIN=MIN(XMIN,QX(L,J,K))
+              ELSE
+                 XMAX=MAX(XMAX,SHORT(IL,J,K))
+                 XMIN=MIN(XMIN,SHORT(IL,J,K))
+              ENDIF
+             ENDDO
+             IF(XMAX.GT.0)THEN
+              XMAX=LOG10(XMAX)
+             ELSE IF(XMAX.LT.0)THEN
+              XMAX=LOG10(ABS(XMAX))+1
+             ELSE
+              XMAX=0
+             END IF
+             IF(XMIN.GT.0)THEN
+              XMIN=LOG10(XMIN)
+             ELSE IF(XMIN.LT.0)THEN
+              XMIN=LOG10(ABS(XMIN))+1
+             ELSE
+              XMIN=0
+             END IF
+             XMAX=MAX(XMAX,XMIN)
+             IEXP = INT(XMAX)-4
+             ISUM=0
+             DO K=1,12
+              IF(L.GT.0) THEN
+                 IQX(K)=ROUND( QX(L,J,K)/10.**IEXP ,0)
+              ELSE
+                 IQX(K)=ROUND(SHORT(IL,J,K)/10.**IEXP ,0)
+              END IF
+              ISUM=ISUM+IQX(K)
+             ENDDO
+             IQX(13)=ISUM
+             WRITE(IFIL,"(8X,I4,I2,12I5,I6)")IYEAR(J),IEXP,IQX
+          ENDDO
+          CLOSE (IFIL)
+       ENDDO
+      ENDIF
+!     IF(SPLOT)CALL GRAPH90(JUSTEM(DFILE))
+      STOP
+      END
+!-----------------------------------------------------------------------
+!     SUBROUTINE INQ
+!     PURPOSE : CHECKS INPUT DATA FOR ERRORS
+!
+!     *************************
+!     Input Variable Definition
+!     *************************
+!
+!     INP - QX NUMBER OR OTHER DATA ITEM TO BE CHECKED
+!
+!     MEANING OF ITY
+!     1  -  QX for Land Area
+!     2  -  QX for Reservoir
+!     3  -  QX for Hydropower Plant
+!
+!     INUM - LAND AREA OR RESERVOIR ASSOCIATED WITH DATA
+!
+!     ******************
+!     ARRAY DEFINITIONS:
+!
+!     ****************
+!     QX Number Arrays
+!     ****************
+!
+!     ICKIN - IFLOW ARRAY, FOR EVERY QX NUMBER ASSIGNED AS AN ARRAY
+!           ICKIN RECORDS LAND AREA NUMBER OR RESERVOIR NUMBER
+!     ICKOU - OUTFLOW ARRAY
+!     ICKBY - BYPASS ARRAY
+!     ICKUP - UPSTREAM (BEFORE DIVERSION) ARRAY
+!     ICKRS - ARRAY OF QX'S USED TO CONNECT LAND AREAS TO RESERVOIRS
+!           HOLDS RESERVOIR NUMBER WHICH IS CONNECTED TO LAND AREA
+!
+!     **************
+!     QX Type Arrays
+!     **************
+!
+!     ITYUP - ARRAY OF TYPES OF USES FOR UPSTREAM QX'S
+!           1-RESERVOIR,2-LANDAREA, ETC.
+!     ITYGW - ARRAY OF TYPES OF USES FOR GROUNDWATER QX'S
+!     ITYBY - ARRAY OF TYPES OF USES FOR BYPASS QX'S
+!     ITYIN - ARRAY OF TYPES OF USES FOR INFLOW QX'S
+!
+!     ***********
+!     Subroutines
+!     ***********
+!
+!
+!     INQ - Fills Array for Inflow QX (ICKIN, ITYIN)
+!           (IOPT=1)
+!
+!     IOU - Fills Array for Outflow QX (ICKOU, ITYOU)
+!           (IOPT=2)
+!
+!     CBY - Fills Array for Bypass QX (ICKBY, ITYOU)
+!           (IOPT=3)
+!
+!     CGW - Fills Array for Groundwater QX (ICKGW, ITYGW)
+!           (IOPT=4)
+!
+!     UPC - Fills Array for Upstream QXs (ICKUP, ITYUP)
+!           (IOPT=5)
+!
+!     RCK - Fills Array to Connect Land Areas to Reservoirs
+!           (ICKRS, ITYUP)
+!           (IOPT=6)
+!----------------------------------------------------------------------
+      SUBROUTINE INQ(INP,ITY,INUM)
+      use PARAMDIM
+      use PrintStuff
+      INTEGER*4 IOPT,INP,ITY,INUM
+      IOPT=1
+      GOTO 10
+      ENTRY IOU(INP,ITY,INUM)
+      IOPT=2
+      GOTO 10
+      ENTRY CBY(INP,ITY,INUM)
+      IOPT=3
+      GOTO 10
+      ENTRY CGW(INP,ITY,INUM)
+      IOPT=4
+      GO TO 10
+      ENTRY UPC(INP,ITY,INUM)
+      IOPT=5
+      GOTO 10
+      ENTRY RCK(INP,ITY,INUM)
+      IOPT=6
+ 10   CONTINUE
+      IF(INP.LE.0)RETURN
+      IF(ICKIN(INP).GT.0.AND.IOPT.NE.2.AND.IOPT.NE.3.AND.IOPT.NE.6) &
+         CALL ERRPRT(INP,ITYIN(INP),ICKIN(INP),ITY,INUM,IOPT,1)
+      IF(ICKOU(INP).GT.0.AND.(IOPT.EQ.4.OR.IOPT.EQ.2)) &
+       CALL ERRPRT(INP,ITYOU(INP),ICKOU(INP),ITY,INUM,IOPT,2)
+      IF(ICKGW(INP).GT.0) &
+            CALL ERRPRT(INP,ITYGW(INP),ICKGW(INP),ITY,INUM,IOPT,3)
+      IF(ICKBY(INP).GT.0.AND.IOPT.NE.2.AND.IOPT.NE.1.AND.IOPT.NE.6) &
+            CALL ERRPRT(INP,ITYBY(INP),ICKBY(INP),ITY,INUM,IOPT,4)
+      IF(ICKUP(INP).GT.0.AND.IOPT.NE.2.AND.IOPT.NE.3.AND.IOPT.NE.6) &
+            CALL ERRPRT(INP,ITYUP(INP),ICKUP(INP),ITY,INUM,IOPT,5)
+      IF(ICKRS(INP).GT.0.AND.IOPT.NE.2.AND.IOPT.NE.3.AND.IOPT.NE.5 &
+       .AND.IOPT.NE.6) &
+            CALL ERRPRT(INP,ITYRS(INP),ICKRS(INP),ITY,INUM,IOPT,6)
+      IF(IOPT.EQ.1)THEN
+       ICKIN(INP)=INUM
+       ITYIN(INP)=ITY
+      ELSE IF(IOPT.EQ.2)THEN
+       ICKOU(INP)=INUM
+       ITYOU(INP)=ITY
+      ELSE IF(IOPT.EQ.3)THEN
+       ICKBY(INP)=INUM
+       ITYBY(INP)=ITY
+      ELSE IF(IOPT.EQ.4)THEN
+       ICKGW(INP)=INUM
+       ITYGW(INP)=ITY
+      ELSE IF(IOPT.EQ.5)THEN
+       ICKUP(INP)=INUM
+       ITYUP(INP)=ITY
+      ELSE IF(IOPT.EQ.6)THEN
+       ICKRS(INP)=INUM
+       ITYUP(INP)=ITY
+      ENDIF
+      RETURN
+      END
+      SUBROUTINE ERRPRT(INP,ITYI,IOUT,ITY,INUM,IOPT,I1)
+      use PARAMDIM
+      use PrintStuff
+       INTEGER*4 LMES(3),LFLO(6),L1,I1,ITYI,L3,L4,IOPT,ITY
+      INTEGER*4 L2,INP,IOUT,INUM
+      CHARACTER UTYPE(3)*20,UOPT(6)*20,MES1*20,MES2*20,MES3*20,MES4*20
+      DATA UTYPE/'land area ','reservoir ','hydropower plant '/
+      DATA UOPT/ ' inflow to ',' outflow from ',' groundwater to ', &
+       ' bypass by ',' upstream flow of ',' outflow from '/
+      DATA LMES/11,11,17/LFLO/11,14,16,11,17,14/
+      L1=LFLO(I1)
+      L2=LMES(ITYI)
+      L3=LFLO(IOPT)
+      L4=LMES(ITY)
+      MES1=UOPT(I1)
+      MES2=UTYPE(ITYI)
+      MES3=UOPT(IOPT)
+      MES4=UTYPE(ITY)
+      WRITE(6,*)'QX(',INP,') is assigned to', &
+       MES1(1:L1),MES2(1:L2),IOUT, &
+       'and cannot be also be assigned to', &
+       MES3(1:L3),MES4(1:L4),INUM
+      WRITE(0,*)'QX(',INP,') is assigned to', &
+       MES1(1:L1),MES2(1:L2),IOUT, &
+       'and cannot be also be assigned to', &
+       MES3(1:L3),MES4(1:L4),INUM
+      ISTOP=.TRUE.
+      END
+      CHARACTER*80 FUNCTION GETPAT(FILE)
+!***********************************************************************
+!
+!     UTAH DIVISION OF WATER RESOURCES
+!
+!     WRITTEN:  10-21-1992  BY: CWM
+!     MODIFIED: 10-21-1992  BY: CWM
+!
+!     DESCRIPTION:
+!        Returns the path of a file name FILE.
+!***********************************************************************
+      CHARACTER*(*) FILE
+      INTEGER*4 IPOS,IBAR
+      IPOS=1
+ 10   IF(IPOS.GT.NBLANK(FILE))THEN
+       GETPAT=FILE
+       RETURN
+      ENDIF
+      IBAR=MAX(INDEX(FILE(IPOS:),':'),INDEX(FILE(IPOS:),'\'))
+      IF(IBAR.GT.0)THEN
+       IPOS=IPOS+IBAR
+       GOTO 10
+      ENDIF
+      IF(IPOS.EQ.1)THEN
+       GETPAT=' '
+      ELSE
+       GETPAT=FILE(1:IPOS-1)
+      ENDIF
+      RETURN
+      END
+!----------------------------------------------------------------------
+!     JUSTEM
+!----------------------------------------------------------------------
+      CHARACTER*8 FUNCTION JUSTEM(FILENM)
+      INTEGER*4 NLEN,NDOT,NBAR,I
+      CHARACTER FILENM*(*),RET*8
+      NLEN=LEN(CHARNB(FILENM))
+      NDOT=0
+      DO I=NLEN,MAX(1,NLEN-3),-1
+          IF(FILENM(I:I).EQ.'.')THEN
+              NDOT=I
+              EXIT
+          ENDIF
+      ENDDO
+      IF(NDOT.GT.0)THEN
+       RET=FILENM(NDOT-8:NDOT-1)
+      ELSE
+       RET=FILENM(NLEN-7:NLEN)
+      ENDIF
+      NBAR=MAX(INDEX(RET,':'),INDEX(RET,'\'))
+      IF(NBAR.GT.0)THEN
+       RET=RET(NBAR+1:)
+      ENDIF
+      JUSTEM=RET
+      RETURN
+      END
+!***********************************************************************
+!     NONULL
+!***********************************************************************
+      CHARACTER*80 FUNCTION NONULL(STRING)
+      CHARACTER*(*) STRING,RET*80
+      INTEGER*2 ILEN,I
+      RET=' '
+      ILEN=MIN(80,LEN(STRING))
+      DO I=1,ILEN
+       IF(ICHAR(STRING(I:I)).EQ.0)THEN
+          RET(I:I)=' '
+       ELSE
+          RET(I:I)=STRING(I:I)
+       ENDIF
+      ENDDO
+      NONULL=RET
+      RETURN
+      END
+!-----------------------------------------------------------------------
+      CHARACTER*10 FUNCTION PRNTIT(VAL,LVAL,ILEN,IDEC)
+!***********************************************************************
+!
+!     UTAH DIVISION OF WATER RESOURCES
+!
+!     WRITTEN:  10-20-1994  BY: CWM
+!     MODIFIED: 10-20-1994  BY: CWM
+!
+!     DESCRIPTION:
+!        Returns a five character string to be printed
+!     VARIABLES:
+!
+!***********************************************************************
+      CHARACTER*40 FMT
+      REAL*4 VAL
+      INTEGER*4 IDEC,IVAL,ILEN
+      LOGICAL*1 LVAL
+      IF(LVAL)THEN
+       IF(IDEC.GT.0)THEN
+          WRITE(FMT,"('(F',I2.2,'.',I2.2,')')")ILEN,IDEC
+          WRITE(PRNTIT(1:ILEN),FMT)VAL
+       ELSE
+          WRITE(FMT,"('(I',I2.2,')')")ILEN
+          IVAL=NINT(VAL)
+          WRITE(PRNTIT(1:ILEN),FMT)IVAL
+       ENDIF
+      ELSE
+       PRNTIT='     '
+      ENDIF
+      RETURN
+      END
+
+REAL (KIND=8) FUNCTION ROUND(X,IX)
+    REAL (KIND=8),INTENT(IN) :: X
+    INTEGER (KIND=4),INTENT(IN) :: IX
+    ROUND = JIDINT( ABS(X)*10.**IX + 0.5 ) / 10.**IX * SIGN(1.,X)
+RETURN
+END
+
+!----------------------------------------------------------------------
+!     ALLTRIM is a character function used to trim leading and trailing
+!     blanks.
+!----------------------------------------------------------------------
+  CHARACTER*200 FUNCTION ALLTRIM(CHARIN)
+  CHARACTER*(*) CHARIN
+  INTEGER*4 SM,BG
+  DATA SM,BG/32,127/
+  INTEGER*4 I,ILEN,IBEG
+  CHARACTER*200 RES
+  RES=TRIM(CHARIN)
+  ILEN=LEN(RES)
+  IBEG=1
+  DO I=1,ILEN
+     IF (IACHAR(RES(I:I)).GT.SM .AND.IACHAR(RES(I:I)).LT.BG) THEN
+        EXIT
+     ELSE
+        IBEG=MIN(I+1,ILEN)
+     END IF
+  ENDDO
+  ALLTRIM=RES(IBEG:)
+  RETURN
+  END
+
+      CHARACTER*5 FUNCTION JUSTEXT(FILE)
+!***********************************************************************
+!
+!     UTAH DIVISION OF WATER RESOURCES
+!
+!     WRITTEN:  12-30-1992  BY: CWM
+!     MODIFIED: 12-30-1992  BY: CWM
+!
+!     DESCRIPTION:
+!        Given a filename, returns the extension
+!***********************************************************************
+  CHARACTER*(*) FILE
+  INTEGER*4 NDOT
+  CHARACTER*200 ALLTRIM
+  NDOT=INDEX(FILE,'.')
+  IF(NDOT.GT.0)THEN
+     JUSTEXT=TRIM(ALLTRIM(FILE(NDOT+1:)))
+  ELSE
+     JUSTEXT=' '
+  ENDIF
+  RETURN
+  END
+
+  LOGICAL (KIND=1) FUNCTION StrComp(Str1,Str2)
+  IMPLICIT NONE
+  INTEGER (KIND=4) :: i
+  CHARACTER*(*) Str1
+  CHARACTER*(*) Str2
+  character (len=len(Str1)) :: Str1a
+  character (len=len(Str2)) :: Str2a
+  Str1a=Str1
+  Str2a=Str2
+  do i=1, LEN(str1a)
+    IF (Str1a(i:i) >='a' .AND. Str1a(i:i)<='z') THEN
+        Str1a(i:i) = achar(iachar(Str1a(i:i))-32)
+    END IF
+  end do
+  do i=1, LEN(str2a)
+    IF (Str2a(i:i) >='a' .AND. Str2a(i:i)<='z') THEN
+        Str2a(i:i) = achar(iachar(Str2a(i:i))-32)
+    END IF
+  end do
+  IF (Str1a==Str2a) THEN
+     StrComp=.TRUE.
+  ELSE
+     StrComp=.FALSE.
+  END IF
+  RETURN
+  END
+
+!-------------------------------------------------------------------------
+! Function to open a table in a specified connection
+! ConnHndl - Already established, connection handle for f90SQL
+! FileMDB - the ACCESS database where the table is located
+! SQLOpenTxt - the SQL query to open the table and retrieve data
+! Written by Craig Miller April 8, 2009
+!-------------------------------------------------------------------------
+!     Last change: CWM 4/8/2010 1:08:14 PM
+
+LOGICAL (KIND=1) FUNCTION OpenTable(ConnHndl,FileMDB,SQLOpenTxt)
+use F90SQLVARIABLES
+integer(SQLHDBC_KIND):: ConnHndl
+character (len=*),intent(in) :: FileMDB
+character (len=MaxStringLen) :: ConnStr,SQLOpenTxt
+character (len=MaxStringLen) :: SQLState, MessageText
+integer (SQLINTEGER_KIND) :: NativeError
+integer(SQLHDBC_KIND),intent(inout) :: ConnHndl
+character (len=MaxStringLen) :: ConnStrOut
+integer(SQLSMALLINT_KIND)::ColNumber,ConnStrLength,MessageTextStrLength,i
+integer(SQLRETURN_KIND) :: iRet,rC2
+
+OpenTable=.FALSE.
+
+    !Allocate statement handdle
+    call f90SQLAllocHandle(SQL_HANDLE_STMT,ConnHndl, StmtHndl, iRet)
+    if (.not.(iRet.eq.SQL_SUCCESS .or. iRet.eq. SQL_SUCCESS_WITH_INFO)) then
+        RETURN
+    end if
+
+    !Create a parameterized SQL query
+
+    call f90SQLPrepare(StmtHndl,trim(SQLOpenTxt),iRet)
+    if (.not.(iRet.eq.SQL_SUCCESS .or. iRet.eq. SQL_SUCCESS_WITH_INFO)) then
+        PrintSQLErrors(SQL_HANDLE_STMT,StmtHandle)
+        RETURN
+    end if
+
+    print *,'Query prepared',iRet
+
+    !Prepare the SQL query and execute the query (
+    call f90SQLExecute(StmtHndl,iRet) 
+        if (.not.(iRet.eq.SQL_SUCCESS .or. iRet.eq. SQL_SUCCESS_WITH_INFO)) then
+        PrintSQLErrors(SQL_HANDLE_STMT,StmtHandle)
+        RETURN
+    else
+        OpenTable=.TRUE.
+    end if
+  end if
+  RETURN
+  END
+
+!-------------------------------------------------------------------------
+! Function to print errors
+! HandleType - Can be either SQL_HANDLE_ENV, SQL_HANDLE_DBC, SQL_HANDLE_STMT,
+!               or SQL_HANDLE_DESC
+! Handle - the Handle
+!-------------------------------------------------------------------------
+!     Last change: CWM 4/8/2010 6:08:14 AM
+subroutine PrintSQLErrors(HandleType,Handle)
+integer(SQLSMALLINT_KIND),intent(in)::HandleType,MessageTextStrLength
+integer(SQLHANDLE_KIND),intent(in)::  Handle
+integer(SQLRETURN_KIND):: iRet,rC2
+integer(SQLINTEGER_KIND)::NativeError
+character(len=MaxStringLen) :: SQLState,MessageText
+f90SQLGetDIagRec(SQL_HANDLE_STMT, StmtHndl, int(1,SQLSMALLINT_KIND), &
+    SQlState, NativeError, MessageText, MessageStrLength, rC2)
+print *,MessageText
+if (rC2.eq.SQL_NO_DATA) RETURN
+    DO
+        i=rC2
+        f90SQLGetDIagRec(SQL_HANDLE_STMT, StmtHndl, i, &
+            SQlState, NativeError, MessageText, MessageStrLength, rC2)
+        print *,MessageText
+        if (rC2.eq.SQL_NO_DATA) RETURN
+    END DO
+end if
+end subroutine
+

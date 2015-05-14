@@ -1,0 +1,33 @@
+#=========================================================================
+#  Sample AUTOMAKE configuration file (Lf95)
+#  (lines beginning with a # are comments)
+#=========================================================================
+#  A simple case consists of 3 lines
+#
+#    Lf95     specifies that we are using Lahey's Lf95 (3.50 or later)
+#             AUTOMAKE will expect to find an Lf95 generated module
+#             definition file (modtable.txt)
+#    FILES=   to specify the source files (using wild-cards)
+#    TARGET=  to specify the executable file name
+#=========================================================================
+LF95
+MODULE=C:\INT\Mod95
+INCLUDE=.;P:\ACCEPTIN
+FILES=BUDGET.f90
+and
+FILES=ARSUB.F90
+and
+FILES=BUDSUB.F90
+and
+FILES=AccessSubs.F90
+and
+FILES=Ferron.F90
+TARGET=Ferron.exe
+#=========================================================================
+#  If you use the Lf95 keyword, the following COMPILE= and LINK= commands
+#  are assumed.  They may be over-ridden as required (by specifying
+#  COMPILE= and/or LINK= explicitly).
+#  
+ COMPILE=@LF95 -c -g -stchk -chk -nfix %fi -mod .\MODS;"C:\CanaimaSoft\Include" -lib "C:\CanaimaSoft\Library\f90sql.lib"
+#COMPILE=@lf95 -c -f95 %fi .\mods;C:\CanaimaSoft\Include -ZERO -i %include -g -SAV -PCA
+ LINK=@lf95 -map ferron.map -mod .\mods;C:\CanaimaSoft\Include Ferron.OBJ BUDGET.obj AccessSubs.OBJ ARSUB.OBJ BUDSUB.OBJ -win -ZERO -lib "C:\CanaimaSoft\Library\f90sql.lib"  -lib winspool  gdi32.lib -G -SAV -WINCONSOLE

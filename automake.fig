@@ -1,0 +1,23 @@
+#=========================================================================
+#  Sample AUTOMAKE configuration file (Lf95)
+#  (lines beginning with a # are comments)
+#=========================================================================
+#  A simple case consists of 3 lines
+#
+#    Lf95     specifies that we are using Lahey's Lf95 (3.50 or later)
+#             AUTOMAKE will expect to find an Lf95 generated module
+#             definition file (modtable.txt)
+#    FILES=   to specify the source files (using wild-cards)
+#    TARGET=  to specify the executable file name
+#=========================================================================
+LF95
+MODULE=.\Mods
+FILES=Tremonton.F90
+TARGET=..\Executable\Tremonton.exe
+#=========================================================================
+#  If you use the Lf95 keyword, the following COMPILE= and LINK= commands
+#  are assumed.  They may be over-ridden as required (by specifying
+#  COMPILE= and/or LINK= explicitly).
+#  
+ COMPILE=@LF95 -c -zero -g -stchk -chk -nfix %fi -mod .\MODS;"C:\CanaimaSoft\Include" -lib "C:\CanaimaSoft\Library\f90sql.lib"
+ LINK=@lf95 -map Tremonton.map -mod .\mods Tremonton.OBJ BUDGET.obj AccessSubs.OBJ ARSUB.OBJ BUDSUB.OBJ -out ..\Executable\Tremonton.exe -win -ZERO -lib "C:\CanaimaSoft\Library\f90sql.lib"  -lib winspool  gdi32.lib -G -SAV -WINCONSOLE
