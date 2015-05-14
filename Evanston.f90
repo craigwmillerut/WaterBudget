@@ -1,0 +1,207 @@
+!     ******************************************************************
+!     LNDCLC.F90
+!     Copyright(c) Utah Division of Water Resources 2000
+!
+!     Created: 2/29/2012 8:26:35 AM
+!     Author : STATE OF UTAH
+!     Last change: BJP 11/18/2014 3:41:13 PM
+!     ******************************************************************
+      SUBROUTINE LNDCLC
+!-----------------------------------------------------------------------
+!     SUBROUTINE LNDCLC
+!     Created 02/21/89 by Craig W. Miller
+!
+!     This subroutine is the main program logic which makes each
+!     modification of BUDGET2 unique.  The only thing which must be
+!     modified is the order for handling land areas (this establishes
+!     priority for water deliveries) and flow logic within the program.
+!     Input and output are standardized and do not require modification
+!     by the modeler.
+!
+!     For most applications this is the only subroutine that requires
+!     modification.
+!
+!     Variables: see also each subroutine called
+!     QX(I,J,K)    - Simulation flow I for year J and month K
+!     NYRS         - Number of years in simulation
+!     NLND         - Number of land areas in each simulation
+!
+!     Subroutines called:
+!     ARSUB        - Performs water budget calculations for a land area
+!     AVCALC       - Calculates values for last page of printout
+!     Functions of the Subroutines:
+!     REINI  - With all inflows to reservoir IR calculated, call
+!              REINI(IR) to calculate reservoir evaporation, spills.
+!              REINI calculates spill down through each QX defined in
+!              the input data.
+!     ARSUB  - Performs all land area calculations as defined in the
+!              input data.  All relevant upstream QX flows must
+!              be calculated first.
+!     MUNSUB - Performs caculations for municipal areas as defined in the
+!              input data.  Shortages are not allowed in municipal areas and
+!              when needed groundwater pumping is increased to meet demands.
+!     ARLIM  - For those occasions where diversions must be limited
+!              call ARLIM(L,FMAX).  L is the land area number and
+!              FMAX represents the maximum diversion
+!     ARDEL  - For those occasions where diversions must be certain
+!              values, set diversions (QX Values) and then call ARDEL.
+!     ARBAK  - If you do iterative calcs before going back to ARSUB(L)
+!              call ARBAK(L) to reset QX'S, soil moisture and
+!              reservoirs
+!     RSBAK  - For situations where outflow, stage, and some inflow to a
+!              reservoir are known call the function RSBAK(IR) to
+!              calculate ungaged inflow.  FLOW = RESBAK(IR).  REINI
+!              must be called later to do reservoir initialization.
+!     RSOUT  - Like RSBAK, but calculates outflow.
+!     RESR   - To call water down from a reservoir through several
+!              QX's, use RESR.  Before calling RESR, set DEM=(Demand from
+!              reservoir) and use the call RESR(IR,IQXS,NUMQX), where IR
+!              is the reservoir number, IQXS, is an INTEGER*4 array of
+!              numbers representing the QX numbers to route water through,
+!              and NUMQX in the number of QX's in the array.  After the
+!              call, QDVM is set to the amount actually called.
+!     RESRR  - Same as RESR but calls water from one reservoir to another.
+!              Call RESRR with CALL RESRR(IR,IQXS,NUMQX,IR2) where IR2 is
+!              the destination reservoir.
+!     WETLND - Calculates wetland consumptive use.  All relevant QX
+!              flows must be calculated first.
+!     WETDMD - Function to return riparian demand for riparian area ILND,
+!		   called with WETDMD(ILND)
+!     ARDEM  - Function returning the total diversion demand for area.
+!              Use as follows:   DEM=ARDEM(L), where L is the land area
+!              number.
+!     DMDMD -  Function returning the total domestic diversion demand
+!              for area.  Use as follows DEM=DMDMD(L), where L is the
+!              land area number.
+!     SOLVE -  For those hard to solve iterative solutions, SOLVE works
+!              wonders.  SOLVE is a function called as follows:
+!              DIFF2 = SOLVE(DIFF,CFAC,ITER).  Before calling
+!              SOLVE the first time in an iterative loop, set ITER to 0.
+!              Solve returns the amount of correction to be given for
+!              a value DIFF where DIFF is the difference between a
+!              gaged value and a calculated value.  Often iterative
+!              solutions yield hundreds of tiny steps to reach a desired
+!              answer.  Solve increases the step size by CFAC^(ITER-1)
+!              if the step is continually in the same direction.  This
+!              increases solution efficiency tremendously.  CFAC must
+!              should be greater than 1.0 or a default of 1.5 is used.
+!-----------------------------------------------------------------------
+use PARAMDIM
+use COMMO
+use PrintStuff
+REAL (KIND=8),EXTERNAL :: ARDEM,DMDMD,WETDMD,RSBAK,RSOUT
+REAL (KIND=8) :: DIFF,DIFFBEF
+!-----------------------------------------------------------------------
+!     SAMPLE CODE FOR GENERAL MODEL
+!-----------------------------------------------------------------------
+
+QX(1,J,K)=QX(22,J,K)*.5
+QX(7,J,K)=0
+QX(16,J,K)=QX(19,J,K)-QX(15,J,K)+QX(17,J,K)
+QX(18,J,K)=QX(16,J,K)-QX(17,J,K)
+QX(11,J,K)=QX(13,J,K)
+CALL ARSUB(1)
+CALL MUNSUB(1)
+QX(9,J,K)=QX(7,J,K)-QX(8,J,K)
+QX(4,J,K)=QX(1,J,K)-QX(2,J,K)
+QX(6,J,K)=QX(5,J,K)+QX(4,J,K)
+QX(10,J,K)=QX(9,J,K)+QX(6,J,K)
+QX(20,J,K)=QX(19,J,K)+QX(10,J,K)
+DIFF = QX(22,J,K,)-(QX(20,J,K,)+QX(21,J,K,))
+DIFFBEF = DIFF
+IF (ABS(DIFF) .gt. 0.3) THEN
+        DO
+        CALL ARBAK(1)
+        QX(8,J,K)= 0.0
+        QX(9,J,K)= 0.0
+        QX(10,J,K)= 0.0
+        QX(20,J,K)= 0.0
+        QX(7,J,K,)=MAX(0,QX(7,J,K,)+DIFF)
+        CALL ARSUB(1)
+        QX(9,J,K)=QX(7,J,K)-QX(8,J,K)
+        QX(10,J,K)=QX(9,J,K)+QX(6,J,K)
+        QX(20,J,K)=QX(19,J,K)+QX(10,J,K)
+        DIFF = QX(22,J,K,)-(QX(20,J,K,)+QX(21,J,K,))
+        IF (ABS(DIFF) .LT. 1 .OR. DIFF .EQ. DIFFBEF) Exit
+        DIFFBEF=DIFF
+        END DO
+END IF
+QX(66,J,K)=0
+QX(67,J,K)=QX(66,J,K)+QX(22,J,K)
+QX(23,J,K)=QX(67,J,K)+QX(13,J,K)
+CALL REINI(2)
+QX(38,J,K)=QX(37,J,K)+QX(23,J,K)
+CALL MUNSUB(2)
+QX(40,J,K)=QX(38,J,K)-QX(39,J,K)
+QX(43,J,K)=QX(40,J,K)+QX(42,J,K)
+CALL ARSUB(3)
+QX(45,J,K)=QX(43,J,K)-QX(44,J,K)
+DIFF = QX(50,J,K,)-(QX(47,J,K,)+QX(49,J,K,))
+DIFFBEF=DIFF
+IF (abs(Diff) .gt. 3) then
+        Do
+        CALL ARBAK(3)
+        QX(39,J,K) = 0.0
+        QX(40,J,K) = 0.0
+        QX(42,J,K) = 0.0
+        QX(45,J,K) = 0.0
+        QX(47,J,K) = 0.0
+        QX(66,J,K)=MAX(0,QX(66,J,K)+DIFF)
+        QX(67,J,K)=QX(66,J,K)+QX(22,J,K)
+        QX(23,J,K)=QX(67,J,K)+QX(13,J,K)
+        QX(38,J,K)=QX(37,J,K)+QX(23,J,K)
+        CALL MUNSUB(2)
+        QX(40,J,K)=QX(38,J,K)-QX(39,J,K)
+        QX(43,J,K)=QX(40,J,K)+QX(42,J,K)
+        CALL ARSUB(3)
+        QX(45,J,K)=QX(43,J,K)-QX(44,J,K)
+        Diff = QX(50,J,K,)-(QX(47,J,K,)+QX(49,J,K,))
+        IF (ABS(DIFF) .lt. 1 .OR. DIFF .EQ. DIFFBEF) Exit
+        DIFFBEF=DIFF
+        END DO
+END IF
+
+QX(25,J,K)=QX(24,J,K)+QX(17,J,K)
+CALL REINI(1)
+CALL ARSUB(3)
+QX(28,J,K)=QX(26,J,K)-QX(27,J,K)
+QX(33,J,K)=QX(30,J,K)+QX(32,J,K)
+QX(34,J,K) = 0
+QX(35,J,K)=QX(34,J,K)+QX(33,J,K)
+QX(51,J,K)=QX(35,J,K)+QX(50,J,K)
+CALL ARSUB(4)
+QX(53,J,K)=QX(51,J,K)-QX(52,J,K)
+QX(58,J,K)=QX(55,J,K)+QX(57,J,K)
+QX(60,J,K)=QX(58,J,K)-QX(59,J,K)
+CALL WETLND(1)
+QX(62,J,K)=QX(60,J,K)-QX(61,J,K)
+DIFF = QX(64,J,K)-QX(62,J,K)
+DIFFBEF = DIFF
+IF (ABS(DIFF) .GT. 3) THEN
+        DO
+        CALL ARBAK(4)
+        QX(53,J,K) = 0.0
+        QX(55,J,K) = 0.0
+        QX(61,J,K) = 0.0
+        QX(34,J,K) = MAX(0, QX(45,J,K) = 0.0+DIFF)
+        QX(35,J,K)=QX(34,J,K)+QX(33,J,K)
+        QX(51,J,K)=QX(35,J,K)+QX(50,J,K)
+        CALL ARSUB(4)
+        QX(53,J,K)=QX(51,J,K)-QX(52,J,K)
+        QX(58,J,K)=QX(55,J,K)+QX(57,J,K)
+        QX(60,J,K)=QX(58,J,K)-QX(59,J,K)
+        CALL WETLND(1)
+        QX(62,J,K)=QX(60,J,K)-QX(61,J,K)
+        DIFF = QX(64,J,K)-QX(62,J,K)
+        IF (ABS(DIFF) .LT. 1 .OR. DIFF .EQ. DIFFBEF) EXIT
+        DIFFBEF = DIFF
+END IF
+CALL REINI(3)
+
+
+RETURN
+END
+
+REAL (KIND=8) FUNCTION ErrorFunc()
+ErrorFunc=0.0
+END
